@@ -9,7 +9,7 @@ export default function NavBar() {
     return (
         <Navbar className="is-shblue sticky-top">
             <Container fluid className="d-flex justify-content-between">
-                <Navbar.Brand className="col-2 float-start">
+                <Navbar.Brand>
                     <Link to="/">
                         <img
                             src="../smarthub-logo.png"
@@ -19,14 +19,14 @@ export default function NavBar() {
                         />
                     </Link>
                 </Navbar.Brand>
-                <div className="col-2">
+                <div>
                     <Nav className="me-auto">
                         <Nav.Link><Link to="/about" className="link">About</Link></Nav.Link>
                         <Nav.Link><Link to="/courses" className="link">Courses</Link></Nav.Link>
                         <Nav.Link><Link to="/contact-us" className="link">Contact Us</Link></Nav.Link>
                     </Nav>
                 </div>
-                <div className="col-2 mr-5">
+                <div>
                     {currentUser ?
                     <Nav className="me-auto float-end">
                         <Nav.Link><Link to="/dashboard" className="link">My Profile</Link></Nav.Link>

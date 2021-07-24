@@ -1,41 +1,17 @@
+/* General */
 * {
-  text-align: center;
   font-family: "Open Sans", sans-serif;
 }
 
 h1,
-h5 {
+h5,
+h3 {
   font-family: "Open Sans", sans-serif;
   font-weight: 800 !important;
 }
 
 p {
   margin-bottom: 0;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.link {
-  text-decoration: none;
-  color: #fff;
-}
-
-.iconstext {
-  font-size: 10px;
-}
-
-.nounder {
-  text-decoration: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite
-      20s linear;
-  }
 }
 
 .is-shblue {
@@ -54,17 +30,27 @@ p {
   border: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Navbar & Footer */
+.link {
+  text-decoration: none;
+  color: #fff;
 }
 
+.iconstext {
+  font-size: 10px;
+}
+
+.nounder {
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #fe5c36;
+}
+
+/* About Us */
+
+/* Default React Stylings */
 .App-link {
   color: #61dafb;
 }
@@ -78,6 +64,24 @@ p {
   }
 }
 
-/* General */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
 
-/* About Us */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite
+      20s linear;
+  }
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
