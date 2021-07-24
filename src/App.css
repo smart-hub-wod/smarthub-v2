@@ -1,5 +1,16 @@
-.App {
+* {
   text-align: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h5 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800 !important;
+}
+
+p {
+  margin-bottom: 0;
 }
 
 .App-logo {
@@ -7,10 +18,40 @@
   pointer-events: none;
 }
 
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.iconstext {
+  font-size: 10px;
+}
+
+.nounder {
+  text-decoration: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite
+      20s linear;
   }
+}
+
+.is-shblue {
+  background-color: #0b3f84;
+}
+
+.text-shblue {
+  color: #0b3f84;
+}
+
+.button-sh {
+  background-color: #fe5c36;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: none;
 }
 
 .App-header {
@@ -36,3 +77,7 @@
     transform: rotate(360deg);
   }
 }
+
+/* General */
+
+/* About Us */
