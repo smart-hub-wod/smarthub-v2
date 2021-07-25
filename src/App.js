@@ -37,7 +37,7 @@ function App() {
               <Route path="/home" component={Home} />
               <Route path="/terms-and-conditions" component={Terms} />
               <Route path="/privacy-policy" component={Privacy} />
-              <Route path="/listing" component={Listing} />
+              <Route path="/course-listing/:id" component={Listing} />
               <Route path="*" component={Page404} />
               {/* Add Routes Here! */}
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import firebase from './firebase'
 import { Card, Button } from 'react-bootstrap'
 import { Search } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom'
 
 export default function Courses() {
     const [courses, setCourses] = useState([]);
@@ -71,6 +72,7 @@ export default function Courses() {
                         <div key={course.id}>
                             <h2>{course.title}</h2>
                             <p>{course.description}</p>
+                            <Link to={`/course-listing/${course.id}`}><Button bsPrefix="button-sh">View Course</Button></Link>
                         </div>
                     </Card>
                     
@@ -80,6 +82,7 @@ export default function Courses() {
                         <div key={course.id}>
                             <h2>{course.title}</h2>
                             <p>{course.description}</p>
+                            <Link to={`/course-listing/${course.id}`}><Button bsPrefix="button-sh">View Course</Button></Link>
                         </div>
                     </Card>
                     
