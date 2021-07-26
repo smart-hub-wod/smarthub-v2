@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "./contexts/AuthContext.js"
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 export default function Dashboard() {
     // https://www.youtube.com/watch?v=PKwu15ldZ7k (Update User Profile happens at 38:43)
@@ -23,7 +23,8 @@ export default function Dashboard() {
         <>
             <Card className="card m-5 p-5">
                 <Card.Body>
-                    <h1 className="text-center">Profile</h1>
+                    <Link to="/settings"><Button bsPrefix="button-sh" className="float-end">Settings</Button></Link>
+                    <h1 className="text-center text-shblue">Profile</h1>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <strong>Email: </strong>{currentUser.email}
                 </Card.Body>

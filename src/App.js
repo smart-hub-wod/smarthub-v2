@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import firebase from './firebase'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from "./login"
 import Signup from "./signup"
@@ -15,6 +14,7 @@ import Privacy from "./privacy";
 import Terms from "./terms";
 import Page404 from "./404";
 import Listing from "./listing";
+import Settings from "./settings";
 // Add pages here!
 
 import { AuthProvider } from "./contexts/AuthContext"
@@ -28,6 +28,7 @@ function App() {
         <NavBar />
           <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/settings" component={Settings} />
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />

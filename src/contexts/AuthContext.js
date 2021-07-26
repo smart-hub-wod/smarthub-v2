@@ -23,8 +23,12 @@ export function AuthProvider({ children }) {
         return auth.signOut()
     }
 
-    function isLoggedIn() {
-       return currentUser ? true : false
+    function updateEmail(email) {
+        return currentUser.updateEmail(email)
+    }
+
+    function updatePassword(password) {
+        return currentUser.updatePassword(password)
     }
 
     useEffect(() => {
@@ -41,7 +45,8 @@ export function AuthProvider({ children }) {
         login,
         signup, 
         logout,
-        isLoggedIn
+        updateEmail,
+        updatePassword
     }
 
     return (
