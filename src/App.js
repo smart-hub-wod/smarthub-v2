@@ -15,6 +15,7 @@ import Terms from "./terms";
 import Page404 from "./404";
 import Listing from "./listing";
 import Settings from "./settings";
+import AddCourse from "./add-course";
 // Add pages here!
 
 import { AuthProvider } from "./contexts/AuthContext"
@@ -29,6 +30,7 @@ function App() {
           <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/settings" component={Settings} />
+              <PrivateRoute exact path="/add-course" component={AddCourse} />
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />

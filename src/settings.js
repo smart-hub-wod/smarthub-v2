@@ -62,7 +62,7 @@ export default function Settings() {
                             <Form.Control type="password" ref={passwordConfirmRef} className="form-control" placeholder="Confirm Password" id="InputPasswordConfirm" aria-describedby="password confirm"/>
                             <Form.Label for="InputPasswordConfirm" className="form-label floatingInput">New Password Confirmation</Form.Label>
                         </Form.Group>
-                        <Button  bsPrefix="button-sh" className="w-100" type="submit">Update Profile</Button>
+                        <Button  bsPrefix="button-sh" className="w-100" type="submit" disabled={loading}>Update Profile</Button>
                     </Form>
                 </Card.Body>
             </Card>

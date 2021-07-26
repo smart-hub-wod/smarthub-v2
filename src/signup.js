@@ -2,11 +2,13 @@ import React, {useRef, useState} from "react"
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from "./contexts/AuthContext.js"
+import firebase from './firebase'
 
 export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
+    const nameRef = useRef()
     const { signup } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -14,6 +16,8 @@ export default function Signup() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        const email = emailRef.current.value
+        const pw = passwordRef.current.value
         
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError('Passwords do not match')
@@ -22,12 +26,20 @@ export default function Signup() {
         try {
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value)
+            await signup(email, pw)
+            addUser(email, nameRef.current.value)            
             history.push("/dashboard")
         } catch {
             setError('Failed to create an account')
         }
         setLoading(false)
+    }
+
+    function addUser(email, username) {
+        firebase.firestore().collection("users").doc(email).set({
+            name: username,
+            children: {}
+        })
     }
 
     return (
@@ -37,9 +49,13 @@ export default function Signup() {
                     <h1 className="text-center text-shblue">SIGN UP</h1>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
+                        <Form.Group id="name" className="mb-3 form-floating">
+                            <Form.Control type="text" ref={nameRef} className="form-control" placeholder="Your Name" id="InputName" aria-describedby="name" required/>
+                            <Form.Label for="InputName" className="form-label floatingInput">Parent's Name</Form.Label>
+                        </Form.Group>
                         <Form.Group id="email" className="mb-3 form-floating">
                             <Form.Control type="email" ref={emailRef} className="form-control" placeholder="name@example.com" id="InputEmail" aria-describedby="email" required/>
-                            <Form.Label for="InputEmail" className="form-label floatingInput">Email address</Form.Label>
+                            <Form.Label for="InputEmail" className="form-label floatingInput">Parent's Email address</Form.Label>
                         </Form.Group>
                         <Form.Group id="password" className="mb-3 form-floating">
                             <Form.Control type="password" ref={passwordRef} className="form-control" placeholder="Password" id="InputPassword" aria-describedby="password" required/>
