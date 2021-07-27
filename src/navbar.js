@@ -23,7 +23,8 @@ export default function NavBar() {
                     <Nav className="me-auto">
                         <Nav.Link><Link to="/about" className="link">About</Link></Nav.Link>
                         <Nav.Link><Link to="/courses" className="link">Courses</Link></Nav.Link>
-                        <Nav.Link><Link to="/contact-us" className="link">Contact Us</Link></Nav.Link>
+                        <Nav.Link><Link to="/meet-the-team" className="link">Meet the Team</Link></Nav.Link>
+                        <Nav.Link><Link to="/parent-faq" className="link">For Parents</Link></Nav.Link>
                     </Nav>
                 </div>
                 <div>

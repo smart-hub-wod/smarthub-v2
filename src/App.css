@@ -50,6 +50,19 @@ p {
 
 /* About Us */
 
+/* Parent Page */
+.sh-link {
+  color: #0b3f84;
+  border: none;
+  font-weight: 800;
+  background-color: transparent;
+}
+
+/* Courses */
+.active {
+  color: #fe5c36;
+}
+
 /* Default React Stylings */
 .App-link {
   color: #61dafb;

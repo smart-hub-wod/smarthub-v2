@@ -16,6 +16,8 @@ import Page404 from "./404";
 import Listing from "./listing";
 import Settings from "./settings";
 import AddCourse from "./add-course";
+import ParentFAQ from "./parentfaq";
+import Lesson from "./lesson-module";
 // Add pages here!
 
 import { AuthProvider } from "./contexts/AuthContext"
@@ -31,16 +33,18 @@ function App() {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/settings" component={Settings} />
               <PrivateRoute exact path="/add-course" component={AddCourse} />
+              <PrivateRoute exact path="/lesson/:id" component={Lesson} />
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/about" component={About} />
-              <Route path="/contact-us" component={ContactUs} />
+              <Route path="/meet-the-team" component={ContactUs} />
               <Route path="/courses" component={Courses} />
               <Route path="/home" component={Home} />
               <Route path="/terms-and-conditions" component={Terms} />
               <Route path="/privacy-policy" component={Privacy} />
               <Route path="/course-listing/:id" component={Listing} />
+              <Route path="/parent-faq" component={ParentFAQ} />
               <Route path="*" component={Page404} />
               {/* Add Routes Here! */}
 

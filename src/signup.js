@@ -9,6 +9,7 @@ export default function Signup() {
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
     const nameRef = useRef()
+    const termsRef = useRef()
     const { signup } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -21,6 +22,9 @@ export default function Signup() {
         
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError('Passwords do not match')
+        }
+        if (!termsRef.current.checked) {
+            return setError('Please agree to the terms and conditions')
         }
 
         try {
@@ -65,11 +69,17 @@ export default function Signup() {
                             <Form.Control type="password" ref={passwordConfirmRef} className="form-control" placeholder="PasswordConfirm" id="InputPasswordConfirm" aria-describedby="confirmpassword" required/>
                             <Form.Label for="InputPasswordConfirm" className="form-label floatingInput">Confirm Password</Form.Label>
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="termsCheckbox">
+                            <div className="d-flex flex-row justify-content-start">
+                                    <Form.Check type="checkbox" ref={termsRef} id="InputCheckbox" />
+                                    <Form.Check.Label for="InputCheckbox" className="form-label">I agree to the <Link to="/terms-and-conditions">Terms and Conditions</Link></Form.Check.Label>
+                            </div>
+                        </Form.Group>
                         <Button  bsPrefix="button-sh" className="w-100" type="submit" disabled={loading}>Sign Up</Button>
                     </Form>
                 </Card.Body>
             </Card>
-            <div className="w-100 text-center mt-2">
+            <div className="w-100 text-center my-2">
                 Already have an account? <Link to="../login">Log In</Link>
             </div>
         </>

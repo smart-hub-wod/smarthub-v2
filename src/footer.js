@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom'
 export default function Footer() {
     return (
         <footer>
-            <Container fluid className="is-shblue text-white d-flex row justify-content-center py-3 position-sticky bottom-0 end-0 text-center">
+            <Container fluid className="is-shblue text-white d-flex row justify-content-center py-3 position-sticky bottom-0 end-0 text-center mt-5">
                 <div className="d-flex flex-row justify-content-center pb-1">
                     <Nav.Link><Link className="link" to="/">Home</Link></Nav.Link>
                     <Nav.Link><Link className="link" to="/about">About</Link></Nav.Link>
                     <Nav.Link><Link className="link" to="/courses">Courses</Link></Nav.Link>
                     <Nav.Link><Link className="link" to="/contact-us">Contact Us</Link></Nav.Link>
+                    <Nav.Link><Link to="/parent-faq" className="link">For Parents</Link></Nav.Link>
                 </div>
                 <div className="d-flex flex-row justify-content-center py-1">
                     <div className="px-2"><a href="https://www.facebook.com/"><Facebook color="white" size={30}/></a></div>
