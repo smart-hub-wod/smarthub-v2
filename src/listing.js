@@ -22,7 +22,6 @@ export default function Listing() {
             })
             setCourse(items)
             setLoading(false)
-            console.log(course)
         })
     }
 
@@ -31,7 +30,17 @@ export default function Listing() {
     }, [])
 
     if(loading) {
-        return <h1 className="text-shblue pt-3">Loading...</h1>
+        return <h1 className="text-shblue pt-3 text-center">Loading...</h1>
+    }
+
+    // Course not Found Error Page
+    if(course.length === 0) {
+        return (
+            <>
+                <h1 className="text-shblue pt-3 text-center">Course not found</h1>
+                <h4 className="text-center text-secondary mb-4">See all courses <Link to="/courses">here!</Link></h4>
+            </>
+        )
     }
 
     return (
