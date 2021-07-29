@@ -98,3 +98,29 @@ p {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+
+/* 404 Error Page Start */
+
+
+
+/* 404 Erorr page end */
+
+/*  Login/ Signup appearence start */
+.auth-container {
+  margin: 0 17rem;
+  text-align: center;
+}
+
+.auth-btn {
+  width: 25%;
+  padding: 0.8rem 0;
+
+}
+
+.auth-card {
+  margin: 3rem 10rem;
+
+}
+
+/* Dashboard starts  */

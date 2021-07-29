@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react"
-import { Form, Button, Card, Alert } from 'react-bootstrap'
+import { Form, Button, Card, Alert, Container } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from "./contexts/AuthContext.js"
 import firebase from './firebase'
@@ -19,7 +19,7 @@ export default function Signup() {
         e.preventDefault()
         const email = emailRef.current.value
         const pw = passwordRef.current.value
-        
+
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError('Passwords do not match')
         }
@@ -31,7 +31,7 @@ export default function Signup() {
             setError('')
             setLoading(true)
             await signup(email, pw)
-            addUser(email, nameRef.current.value)            
+            addUser(email, nameRef.current.value)
             history.push("/dashboard")
         } catch {
             setError('Failed to create an account')
@@ -48,12 +48,13 @@ export default function Signup() {
 
     return (
         <>
-            <Card className="card m-5 p-5">
+          <Container className="auth-container">
+            <Card className="card auth-card p-5">
                 <Card.Body>
                     <h1 className="text-center text-shblue">SIGN UP</h1>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group id="name" className="mb-3 form-floating">
+                        <Form.Group id="name" className="mt-4 mb-3 form-floating">
                             <Form.Control type="text" ref={nameRef} className="form-control" placeholder="Your Name" id="InputName" aria-describedby="name" required/>
                             <Form.Label for="InputName" className="form-label floatingInput">Parent's Name</Form.Label>
                         </Form.Group>
@@ -75,13 +76,14 @@ export default function Signup() {
                                     <Form.Check.Label for="InputCheckbox" className="form-label">I agree to the <Link to="/terms-and-conditions">Terms and Conditions</Link></Form.Check.Label>
                             </div>
                         </Form.Group>
-                        <Button  bsPrefix="button-sh" className="w-100" type="submit" disabled={loading}>Sign Up</Button>
+                        <Button  bsPrefix="button-sh" className="auth-btn" type="submit" disabled={loading}>Sign Up</Button>
                     </Form>
+                    <div className="w-100 text-center my-3">
+                        Already have an account? <Link to="../login">Log In</Link>
+                    </div>
                 </Card.Body>
             </Card>
-            <div className="w-100 text-center my-2">
-                Already have an account? <Link to="../login">Log In</Link>
-            </div>
+          </Container>
         </>
     )
 }

@@ -18,12 +18,13 @@ import Settings from "./settings";
 import AddCourse from "./add-course";
 import ParentFAQ from "./parentfaq";
 import Lesson from "./lesson-module";
+import StudentDash from "./student-dash"
 // Add pages here!
 
 import { AuthProvider } from "./contexts/AuthContext"
 import PrivateRoute from "./PrivateRoute";
 
-function App() { 
+function App() {
   return (
     <>
     <Router>
@@ -34,6 +35,7 @@ function App() {
               <PrivateRoute exact path="/settings" component={Settings} />
               <PrivateRoute exact path="/add-course" component={AddCourse} />
               <PrivateRoute exact path="/lesson/:id" component={Lesson} />
+              <PrivateRoute path="/student-dash" component={StudentDash} />
               <Route exact path="/" component={Home} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
@@ -46,6 +48,7 @@ function App() {
               <Route path="/course-listing/:id" component={Listing} />
               <Route path="/parent-faq" component={ParentFAQ} />
               <Route path="*" component={Page404} />
+
               {/* Add Routes Here! */}
 
           </Switch>
@@ -55,6 +58,6 @@ function App() {
     </>
 
   )
-  
+
 }
 export default App;
