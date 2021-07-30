@@ -31,6 +31,7 @@ export default function NavBar() {
                     {currentUser ?
                     <Nav className="me-auto float-end">
                         <Nav.Link><Link to="/dashboard" className="link">My Profile</Link></Nav.Link>
+                        <Nav.Link><Link to="/cart" className="link">My Cart</Link></Nav.Link>
                     </Nav>  :
                     <Nav className="me-auto float-end">
                         <Nav.Link><Link to="/login" className="link">Log In</Link></Nav.Link>

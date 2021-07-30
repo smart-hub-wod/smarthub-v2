@@ -42,7 +42,8 @@ export default function Signup() {
     function addUser(email, username) {
         firebase.firestore().collection("users").doc(email).set({
             name: username,
-            children: {}
+            children: {},
+            cart: []
         })
     }
 
