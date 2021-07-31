@@ -12,29 +12,31 @@ export default function Cart() {
     const cartref = firebase.firestore().collection("users").doc(currentUser.email);
     const courseref = firebase.firestore().collection("courses");
 
-    function getCart() {
+    async function getCart() {
+        let courseInfo = []
         setLoading(true)
-        cartref.get().then((doc) => {
+        await cartref.get().then((doc) => {
             if (doc.exists) {
-                let courseInfo = []
                 (doc.data().cart).map((course) => {
                     courseref.doc(course).get().then((doc) => {
                         if (doc.exists) {
+                            setLoading(true)
                             courseInfo.push(doc.data())
                             console.log(doc.data())
+                            setLoading(false)
                         }
                     })
                     setCourses(courseInfo)
+                    
                 })
             }
         }).catch((error) => {
             console.log("Error getting document:", error);
         });
-        console.log(cart)
+        console.log(courses)
         courses.map((course) => {
             console.log(course)
         })
-        setLoading(false)
     }
 
     // function getCartFromUser() {
@@ -74,15 +76,16 @@ export default function Cart() {
         <div>
             <div className="text-center">
                 <h1 className="text-shblue mt-4">Cart Summary</h1>
+                {console.log("HELO")}
                 {courses.map((course) => {
                    return (
                     <Card className="p-3 mx-5 mb-3">
-                        <div class="row justify-content-start">
+                        <div className="row justify-content-start">
                             <div class="col-8">
                                 <h3 className="text-start text-shblue">{course.title}</h3>
                                 <p className="text-start">{course.description}</p>
                             </div>
-                            <div class="col-4">
+                            <div className="col-4">
                                 <h1 className="text-end text-shblue">${course.price}</h1>
                             </div>
                         </div>
