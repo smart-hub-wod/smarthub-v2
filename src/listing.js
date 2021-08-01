@@ -1,28 +1,37 @@
 import React, { useState, useEffect } from "react"
-import firebase from './firebase'
+// import firebase from './firebase'
+import firebase from 'firebase/app'
 import { useParams } from "react-router";
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useAuth } from "./contexts/AuthContext.js"
 
 export default function Listing() {
     let { id } = useParams();
     const [course, setCourse] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const courseref = firebase.firestore().collection("courses");
+    const courseref = firebase.firestore().collection("courses").doc(id);
+    const { currentUser } = useAuth()
+    const cartref = firebase.firestore().collection("users").doc(currentUser.email);
 
-    function getCourse() {
-        setLoading(true);
-        courseref.onSnapshot((querySnapshot) => {
-            let items = [];
-            querySnapshot.forEach((doc) => {
-                if (doc.data().id === parseInt(id)) {
-                    items = doc.data()
-                }
-            })
-            setCourse(items)
-            setLoading(false)
-        })
+    async function getCourse() {
+        setLoading(true)
+        await courseref.get().then((doc) => {
+            if (doc.exists) {
+                setCourse(doc.data())
+                setLoading(false)
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+        setLoading(false)
+    }
+    
+    function addCourse() {
+        cartref.update({
+            cart: firebase.firestore.FieldValue.arrayUnion(course.id)
+        });
     }
 
     useEffect(() => {
@@ -50,11 +59,11 @@ export default function Listing() {
                 <h4 className="text-center text-secondary mb-4">{course.timeline}</h4>
             </div>
             <div className="row align-items-start justify-content-center my-4">
-                <div className="col-6 text-white is-shblue p-2 rounded">
+                <div className="col-6 text-white is-shblue p-4 rounded">
                 {course.description}
                 </div>
                 <div className="col-4 text-center">
-                    <Link to="/"><Button bsPrefix="button-sh">Add to Cart</Button></Link>
+                    <Button bsPrefix="button-sh" onClick={addCourse}>Add to Cart</Button>
                     <p className="text-shblue mt-1">Only <span className="fs-3 fw-bold">${course.price} </span></p>
                 </div>
             </div>

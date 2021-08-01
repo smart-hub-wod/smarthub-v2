@@ -33,10 +33,6 @@ export default function Cart() {
         }).catch((error) => {
             console.log("Error getting document:", error);
         });
-        console.log(courses)
-        courses.map((course) => {
-            console.log(course)
-        })
     }
 
     // function getCartFromUser() {
