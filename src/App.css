@@ -15,7 +15,7 @@ p {
 }
 
 .is-shblue {
-  background-color: #0b3f84;
+  background-color: #0b3f84 !important;
 }
 
 .text-shblue {

@@ -2,13 +2,12 @@ import React, {useRef, useState} from "react"
 import { Form, Button, Card, Alert, Container } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from "./contexts/AuthContext.js"
-import firebase from './firebase'
 
 export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const nameRef = useRef()
+    // const nameRef = useRef()
     const termsRef = useRef()
     const { signup } = useAuth()
     const [error, setError] = useState('')
@@ -29,23 +28,26 @@ export default function Signup() {
 
         try {
             setError('')
+            console.log("1")
             setLoading(true)
+            console.log("2")
             await signup(email, pw)
-            addUser(email, nameRef.current.value)
+            console.log("3")
             history.push("/dashboard")
+            console.log("4")
         } catch {
             setError('Failed to create an account')
         }
         setLoading(false)
     }
 
-    function addUser(email, username) {
-        firebase.firestore().collection("users").doc(email).set({
-            name: username,
-            children: {},
-            cart: []
-        })
-    }
+    // function addUser(username) {
+    //     firebase.firestore().collection("users").doc(email).set({
+    //         name: username,
+    //         children: {},
+    //         cart: []
+    //     })
+    // }
 
     return (
         <>
@@ -55,10 +57,10 @@ export default function Signup() {
                     <h1 className="text-center text-shblue">SIGN UP</h1>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group id="name" className="mt-4 mb-3 form-floating">
+                        {/* <Form.Group id="name" className="mt-4 mb-3 form-floating">
                             <Form.Control type="text" ref={nameRef} className="form-control" placeholder="Your Name" id="InputName" aria-describedby="name" required/>
                             <Form.Label for="InputName" className="form-label floatingInput">Parent's Name</Form.Label>
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group id="email" className="mb-3 form-floating">
                             <Form.Control type="email" ref={emailRef} className="form-control" placeholder="name@example.com" id="InputEmail" aria-describedby="email" required/>
                             <Form.Label for="InputEmail" className="form-label floatingInput">Parent's Email address</Form.Label>

@@ -13,7 +13,7 @@ export default function Listing() {
 
     const courseref = firebase.firestore().collection("courses").doc(id);
     const { currentUser } = useAuth()
-    const cartref = firebase.firestore().collection("users").doc(currentUser.email);
+    const cartref = firebase.firestore().collection("users").doc(currentUser.uid);
 
     async function getCourse() {
         setLoading(true)

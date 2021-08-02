@@ -7,7 +7,8 @@ export default function Settings() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const { currentUser, updateEmail, updatePassword } = useAuth()
+    const nameRef = useRef()
+    const { currentUser, updateEmail, updatePassword, setDisplayName } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -25,6 +26,10 @@ export default function Settings() {
         setError('')
         if (emailRef.current.value !== currentUser.email) {
             promises.push(updateEmail(emailRef.current.value))
+        }
+
+        if (nameRef.current.value !== currentUser.displayName) {
+            promises.push(setDisplayName(nameRef.current.value))
         }
 
         if (passwordRef.current.value) {
@@ -50,6 +55,10 @@ export default function Settings() {
                     <p className="text-center">Leave password field blank to keep the same</p>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}> 
+                        <Form.Group id="name" className="mb-3 form-floating">
+                            <Form.Control type="text" ref={nameRef} className="form-control" placeholder="name" id="InputName" aria-describedby="name" required defaultValue={currentUser.displayName}/>
+                            <Form.Label for="InputName" className="form-label floatingInput">New Display Name</Form.Label>
+                        </Form.Group>
                         <Form.Group id="email" className="mb-3 form-floating">
                             <Form.Control type="email" ref={emailRef} className="form-control" placeholder="name@example.com" id="InputEmail" aria-describedby="email" required defaultValue={currentUser.email}/>
                             <Form.Label for="InputEmail" className="form-label floatingInput">New Email address</Form.Label>
