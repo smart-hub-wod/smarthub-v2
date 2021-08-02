@@ -16,7 +16,7 @@ export default function ParentFAQ() {
                     <Card>
                     <Card.Header>
                         <Accordion.Toggle as={Button} 
-                        bsPrefix="sh-link" eventKey="0">
+                        bsPrefix="sh-link" eventKey="0" className="w-100 text-start">
                         Question #1
                         </Accordion.Toggle>
                     </Card.Header>
@@ -30,7 +30,7 @@ export default function ParentFAQ() {
                     <Card>
                     <Card.Header>
                         <Accordion.Toggle as={Button} 
-                        bsPrefix="sh-link" eventKey="2">
+                        bsPrefix="sh-link" eventKey="2" className="w-100 text-start">
                         Question #2
                         </Accordion.Toggle>
                     </Card.Header>
@@ -44,7 +44,7 @@ export default function ParentFAQ() {
                     <Card>
                     <Card.Header>
                         <Accordion.Toggle as={Button} 
-                        bsPrefix="sh-link" eventKey="3">
+                        bsPrefix="sh-link" eventKey="3" className="w-100 text-start">
                         Question #3
                         </Accordion.Toggle>
                     </Card.Header>
