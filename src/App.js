@@ -25,6 +25,7 @@ import ForgotPassword from "./forgot-password";
 
 import { AuthProvider } from "./contexts/AuthContext"
 import PrivateRoute from "./PrivateRoute";
+import Contact from "./contact";
 
 function App() {
   return (
@@ -51,7 +52,9 @@ function App() {
               <Route path="/privacy-policy" component={Privacy} />
               <Route path="/course-listing/:id" component={Listing} />
               <Route path="/parent-faq" component={ParentFAQ} />
+              <Route path="/contact-us" component={Contact} />
               <Route path="*" component={Page404} />
+              
 
               {/* Add Routes Here! */}
 

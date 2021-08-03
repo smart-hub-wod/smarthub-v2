@@ -119,3 +119,28 @@ p {
 }
 
 /* Dashboard starts  */
+
+
+/* Contact Us page starts */
+
+#contact hr {
+  border: 3px solid #0b3f84;  
+}
+
+
+#contact .heading-text{
+  margin-top: 5rem;
+  color: #0b3f84;
+}
+
+#contact .label-text {
+  font-weight: 500;
+  font-size: 1.7rem;
+  color: #0b3f84;
+
+}
+
+#contact .input {
+  height: 3rem;
+  box-shadow: 2px 1px 4px 1px #969696;
+}
