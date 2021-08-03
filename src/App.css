@@ -22,6 +22,7 @@ p {
   color: #0b3f84;
 }
 
+
 .button-sh {
   background-color: #fe5c36;
   color: white;
@@ -143,4 +144,32 @@ p {
 #contact .input {
   height: 3rem;
   box-shadow: 2px 1px 4px 1px #969696;
+}
+
+/* Course indivisual page Starts */
+
+.course-banner {
+
+}
+
+.course-banner-img {
+   height: 400px;
+   background-image: url("https://th.bing.com/th/id/OIP.TCSkGnIfl1fIQieMpI1RVAHaE7?w=246&h=180&c=7&o=5&pid=1.7");
+   background-repeat: repeat;
+   position: absolute;
+   z-index: -1;
+   
+   
+}
+
+.course-container {
+  background-color: white;
+  margin: 5rem auto;
+  
+}
+
+.course-includes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
