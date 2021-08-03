@@ -100,7 +100,7 @@ export default function Contact() {
                                 className="input"
                                 as="textarea"
                                 placeholder="type your message here"
-                                style={{height: "2rem;"}}
+                                style={{height: "12rem"}}
                                 required
                             />
                         </Form.Group>
@@ -113,6 +113,7 @@ export default function Contact() {
                         as="input" 
                         type="submit"
                         value="Send"
+                        className="px-5"
                     />   
                 </Form.Group>
                 

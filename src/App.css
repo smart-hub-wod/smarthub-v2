@@ -123,6 +123,12 @@ p {
 
 /* Contact Us page starts */
 
+div .background {
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/black-thread.png");
+  
+}
+
 #contact hr {
   border: 3px solid #0b3f84;  
 }
@@ -135,7 +141,7 @@ p {
 
 #contact .label-text {
   font-weight: 500;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: #0b3f84;
 
 }
