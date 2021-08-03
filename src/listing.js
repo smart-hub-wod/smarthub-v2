@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 // import firebase from './firebase'
 import firebase from 'firebase/app'
 import { useParams } from "react-router";
-import { Button } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useAuth } from "./contexts/AuthContext.js"
 
@@ -10,6 +10,7 @@ export default function Listing() {
     let { id } = useParams();
     const [course, setCourse] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [kids, setKids] = useState([])
 
     const courseref = firebase.firestore().collection("courses").doc(id);
     const { currentUser } = useAuth()
@@ -20,6 +21,15 @@ export default function Listing() {
         await courseref.get().then((doc) => {
             if (doc.exists) {
                 setCourse(doc.data())
+                cartref.get().then((doc) => {
+                    if (doc.exists) {
+                        setKids(Object.keys(doc.data().children))
+                    }
+                })
+                console.log(kids)
+                kids.map((kid) => {
+                    console.log(kid)
+                })
                 setLoading(false)
             }
         }).catch((error) => {
@@ -27,11 +37,17 @@ export default function Listing() {
         });
         setLoading(false)
     }
-    
+
     function addCourse() {
+        const nameBar = document.querySelector('#nameSelect')
+        console.log(nameBar.value)
+        // cartref.update({
+        //     cart: firebase.firestore.FieldValue.arrayUnion(course.id)
+        // });
+
         cartref.update({
-            cart: firebase.firestore.FieldValue.arrayUnion(course.id)
-        });
+            [`cart.${nameBar.value}`]: firebase.firestore.FieldValue.arrayUnion(course.id)
+        })
     }
 
     useEffect(() => {
@@ -63,6 +79,11 @@ export default function Listing() {
                 {course.description}
                 </div>
                 <div className="col-4 text-center">
+                    <select className="form-select mb-3" defaultValue="0" aria-label="Default select example" id="nameSelect">
+                        {kids ? kids.map((kid) => {
+                            return (<option value={kid}>{kid}</option>)
+                        }) : <h1>Loading</h1>}
+                    </select>
                     <Button bsPrefix="button-sh" onClick={addCourse}>Add to Cart</Button>
                     <p className="text-shblue mt-1">Only <span className="fs-3 fw-bold">${course.price} </span></p>
                 </div>

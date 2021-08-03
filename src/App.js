@@ -25,6 +25,7 @@ import ForgotPassword from "./forgot-password";
 
 import { AuthProvider } from "./contexts/AuthContext"
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute"
 import Contact from "./contact";
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
           <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/settings" component={Settings} />
-              <PrivateRoute exact path="/add-course" component={AddCourse} />
+              <AdminRoute exact path="/add-course" component={AddCourse} />
               <PrivateRoute exact path="/lesson/:id" component={Lesson} />
               <PrivateRoute path="/student-dash" component={StudentDash} />
               <PrivateRoute path="/cart" component={Cart} />

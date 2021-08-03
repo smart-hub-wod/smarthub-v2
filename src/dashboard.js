@@ -5,7 +5,6 @@ import { useAuth } from "./contexts/AuthContext.js"
 import { useHistory, Link } from 'react-router-dom'
 
 export default function Dashboard() {
-    // https://www.youtube.com/watch?v=PKwu15ldZ7k (Update User Profile happens at 38:43)
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [user, setUser] = useState()
@@ -24,10 +23,12 @@ export default function Dashboard() {
         const childName = nameRef.current.value
         if (childName) {
             userRef.update({
-                [`children.${childName}`]: []   
+                [`children.${childName}`]: [],
+                [`cart.${childName}`]: []     
             })
         }
         handleClose()
+        getUser()
     }
 
     async function handleLogout() {
@@ -45,6 +46,7 @@ export default function Dashboard() {
         await userRef.get().then((doc) => {
             if (doc.exists) {
                 setUser(doc.data())
+                setLoading(false)
             } else {
                 firebase.firestore().collection("users").doc(currentUser.uid).set({
                     children: {},
@@ -52,6 +54,7 @@ export default function Dashboard() {
                 })
                 setDisplayName(currentUser.email)
                 getUser()
+                setLoading(false)
                 console.log(user)
             }
         }).catch((error) => {
@@ -59,7 +62,8 @@ export default function Dashboard() {
         });
         setLoading(false)
         console.log(user)
-        console.log(currentUser)
+        console.log(currentUser.email=== 'dev@smarthub.ca')
+        history.push("/dashboard")
     }
 
     useEffect(() => {
@@ -70,6 +74,8 @@ export default function Dashboard() {
         return <h1 className="text-shblue pt-3">Loading...</h1>
     }
 
+
+
     return (
         <>
             <Card className="card m-5 p-5">
@@ -77,7 +83,7 @@ export default function Dashboard() {
                     <Link to="/settings"><Button bsPrefix="button-sh" className="float-end">Settings</Button></Link>
                     <h1 className="text-center text-shblue">Profile</h1>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <h6>Welcome!</h6>
+                    {currentUser.email !== 'dev@smarthub.ca' ? <><h6>Welcome!</h6>
                     <h1 className="text-shblue">{currentUser.displayName}</h1>
                     <p>Tip: Change your display name in settings!</p>
                     <p>Welcome! Here is your dashboard to manage your students! Here you can manage and access each student’s account. </p>
@@ -89,9 +95,9 @@ export default function Dashboard() {
                         <div class="col-4">
                         <Button bsPrefix="button-sh" className="float-end" onClick={handleShow}>Add New Student</Button>   
                         </div>
-                    </div>
+                    </div></> : <Link to="add-course"><Button bsPrefix="button-sh">Add Course</Button></Link>  }
                     <div className="pt-2">
-                        {Object.keys(user.children).map(function(key, index) {
+                        {!user ? <h1>Loading</h1> : Object.keys(user.children).map(function(key, index) {
                             return (
                             <Card className="p-3 is-shblue mb-3 text-white w-50">
                                 <Card.Body>
