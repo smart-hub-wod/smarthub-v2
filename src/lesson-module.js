@@ -11,19 +11,14 @@ export default function Lesson() {
     const [loading, setLoading] = useState(false);
     const [lessonPlan, setLessonPlan] = useState();
 
-    const courseref = firebase.firestore().collection("lessons");
+    const courseref = firebase.firestore().collection("lessons").doc(id);
 
     function getCourse() {
         setLoading(true);
-        courseref.onSnapshot((querySnapshot) => {
-            let items = [];
-            querySnapshot.forEach((doc) => {
-                if (doc.data().id === parseInt(id)) {
-                    items = doc.data()
-                    console.log(items)
-                }
-            })
-            setCourse(items)
+        courseref.get().then((doc) => {
+            if (doc.exists) {
+                setCourse(doc.data())
+            }
             setLoading(false)
         })
     }
@@ -69,14 +64,17 @@ export default function Lesson() {
             </div>
             <div className="row justify-content-center">
                 <div className="col-3 is-shblue text-white pt-3 text-center rounded-end">
-                    <h5>Lesson 1</h5>
+                    {/* <h5>Lesson 1</h5>
                     <p className="active">1.1 - Content</p>
                     <p>1.2 - Quiz</p>
                     <br />
                     <h5>Lesson 2</h5>
                     <p>2.1 - Content</p>
                     <p>2.2 - Content</p>
-                    <p>2.3 - Quiz</p>
+                    <p>2.3 - Quiz</p> */}
+                    {Object.keys(course.lessons).reverse().map((lessonNum) => { 
+                        return(<h3>{lessonNum}</h3>)
+                    })}
                     <br />
                 </div>
                 <div className="col-9 px-5">
