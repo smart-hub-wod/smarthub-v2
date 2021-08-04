@@ -22,7 +22,6 @@ p {
   color: #0b3f84;
 }
 
-
 .button-sh {
   background-color: #fe5c36;
   color: white;
@@ -121,15 +120,13 @@ p {
 
 /* Dashboard starts  */
 
-
 /* Contact Us page starts */
 
 #contact hr {
-  border: 3px solid #0b3f84;  
+  border: 3px solid #0b3f84;
 }
 
-
-#contact .heading-text{
+#contact .heading-text {
   margin-top: 5rem;
   color: #0b3f84;
 }
@@ -138,7 +135,6 @@ p {
   font-weight: 500;
   font-size: 1.5rem;
   color: #0b3f84;
-
 }
 
 #contact .input {
@@ -148,24 +144,17 @@ p {
 
 /* Course indivisual page Starts */
 
-.course-banner {
-
-}
-
 .course-banner-img {
-   height: 400px;
-   background-image: url("https://th.bing.com/th/id/OIP.TCSkGnIfl1fIQieMpI1RVAHaE7?w=246&h=180&c=7&o=5&pid=1.7");
-   background-repeat: repeat;
-   position: absolute;
-   z-index: -1;
-   
-   
+  height: 400px;
+  background-image: url("https://th.bing.com/th/id/OIP.TCSkGnIfl1fIQieMpI1RVAHaE7?w=246&h=180&c=7&o=5&pid=1.7");
+  background-repeat: repeat;
+  position: absolute;
+  z-index: -1;
 }
 
 .course-container {
   background-color: white;
   margin: 5rem auto;
-  
 }
 
 .course-includes {

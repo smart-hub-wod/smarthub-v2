@@ -9,7 +9,7 @@ export default function Lesson() {
     let { id } = useParams();
     const [course, setCourse] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [lessonPlan, setLessonPlan] = useState();
+    const [currentLesson, setCurrentLesson] = useState(-1);
 
     const courseref = firebase.firestore().collection("lessons").doc(id);
 
@@ -21,6 +21,11 @@ export default function Lesson() {
             }
             setLoading(false)
         })
+    }
+
+    function handleLessonChange(index) {
+        setCurrentLesson(index)
+        console.log(index)
     }
 
     useEffect(() => {
@@ -41,21 +46,6 @@ export default function Lesson() {
         )
     }
 
-    function extractData() {
-        let menuList = ""
-        for(let lesson in course.lessons) {
-            menuList += `<h5>${lesson}</h5><br/>`
-            for (let section in course.lessons[lesson]) {
-                menuList += `<p>${section}</p><br/>`
-                for (let item in course.lessons[lesson][section]) {
-                    menuList += `<p>${item}</p><br/>`
-                }
-            }
-        }
-        setLessonPlan(menuList)
-        return menuList
-    }
-
     return (
         <>
             <div className="text-center">
@@ -72,17 +62,71 @@ export default function Lesson() {
                     <p>2.1 - Content</p>
                     <p>2.2 - Content</p>
                     <p>2.3 - Quiz</p> */}
-                    {Object.keys(course.lessons).reverse().map((lessonNum) => { 
-                        return(<h3>{lessonNum}</h3>)
+                    {/* {Object.keys(course.lessons).map((lessonNum) => { 
+                        return(
+                            <> 
+                                <h3>{lessonNum}</h3>
+                                <LessonBreakdown breakdown={course.lessons[lessonNum]}/>
+                            </>
+                        )
+                    })} */}
+                    {course.lessons.map((lessonNum, index) => { 
+                        return(
+                            <> 
+                                <h5 onClick={() => handleLessonChange(index)}>{lessonNum}</h5>
+                            </>
+                        )
                     })}
                     <br />
                 </div>
                 <div className="col-9 px-5">
-                    <h5 className="text-shblue text-center">1.1 Content</h5>
+                    {/* <h5 className="text-shblue text-center">1.1 Content</h5>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. </p> */}
+                    <ContentBox lssn={currentLesson} courseInfo={course}/>
                 </div>
             </div>
+        </>
+    )
+}
+
+// Comp Eng
+// function LessonBreakdown(props) { 
+//     console.log(props.breakdown)
+//     return (
+//         <>
+//             {Object.keys(props.breakdown).map((sectionNum) => { 
+//                 return(
+//                     <>
+//                         <h6>{sectionNum}</h6>
+//                     </>
+//                 )
+//             })}
+//         </>
+//     )
+//     // return ("Hello")
+// }
+
+function ContentBox(props) {
+    console.log(props.courseInfo.lessonContent[props.courseInfo.lessons[props.lssn]])
+    let lessn = props.courseInfo.lessonContent[props.courseInfo.lessons[props.lssn]]
+    let content = ''
+    if (props.lssn !== -1) {
+        if (Object.keys(lessn)[0] === 'article') {
+            content = lessn['article']
+        } else {
+            content = <iframe width="560" height="315" src={`https://www.youtube.com/embed/${lessn['video']}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        }
+    }
+
+    return (
+        <>
+            {props.lssn === -1 ?
+            <p>Welcome! Click a lesson number on the left to begin!</p> :
+            <>
+            <h3 className="text-shblue">{props.courseInfo.lessons[props.lssn]}</h3>
+            {content}
+            </>}
         </>
     )
 }
