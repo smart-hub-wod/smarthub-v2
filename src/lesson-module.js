@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import firebase from './firebase'
 import { useParams } from "react-router";
 import { Link } from 'react-router-dom'
-import { ChevronDoubleLeft } from "react-bootstrap-icons";
 
 
 export default function Lesson() {
@@ -114,8 +113,10 @@ function ContentBox(props) {
     if (props.lssn !== -1) {
         if (Object.keys(lessn)[0] === 'article') {
             content = lessn['article']
-        } else {
+        } else if (Object.keys(lessn)[0] === 'video') {
             content = <iframe width="560" height="315" src={`https://www.youtube.com/embed/${lessn['video']}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        } else {
+            content = <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScaIL8EfzCXsDhHY4OPcpqzPOWWT4ZhurafD682aO5frsvqGA/viewform?embedded=true" width="640" height="1316" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         }
     }
 
