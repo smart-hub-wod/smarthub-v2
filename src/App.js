@@ -39,7 +39,7 @@ function App() {
               <PrivateRoute exact path="/settings" component={Settings} />
               <AdminRoute exact path="/add-course" component={AddCourse} />
               <PrivateRoute exact path="/lesson/:id" component={Lesson} />
-              <PrivateRoute path="/student-dash" component={StudentDash} />
+              <PrivateRoute path="/student-dashboard/:id" component={StudentDash} />
               <PrivateRoute path="/cart" component={Cart} />
               <Route exact path="/" component={Home} />
               <Route exact path="/forgot-password" component={ForgotPassword} />

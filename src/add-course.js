@@ -1,6 +1,7 @@
 import React, {useRef} from "react"
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import firebase from './firebase'
+import { useAuth } from "./contexts/AuthContext.js"
 
 export default function AddCourse() {
     const titleRef = useRef()
@@ -9,24 +10,36 @@ export default function AddCourse() {
     const IDRef = useRef()
     const outlineRef = useRef()
     const orderRef = useRef()
+    const { currentUser } = useAuth()
 
     const lessonref = firebase.firestore().collection("lessons")
     const courseref = firebase.firestore().collection("courses")
+    console.log(currentUser.email)
 
     function handleSubmit(e) {
         e.preventDefault()
         console.log(JSON.parse(outlineRef.current.value))
-        lessonref.doc(IDRef.current.value).set({
-            name: titleRef.current.value,
-            lessons: orderRef.current.value.split(','),
-            lessonContent: JSON.parse(outlineRef.current.value)
-        })
-        .then(() => {
-            console.log("Document successfully written!");
-        })
-        .catch((error) => {
-            console.error("Error writing document: ", error);
-        });
+        if (currentUser.email === 'dev@smarthub.ca') {
+            lessonref.doc(IDRef.current.value).set({
+                name: titleRef.current.value,
+                lessons: orderRef.current.value.split(','),
+                lessonContent: JSON.parse(outlineRef.current.value)
+            })
+            .then(() => {
+                console.log("Document successfully written!");
+                courseref.doc(IDRef.current.value).set({
+                    title: titleRef.current.value,
+                    id: IDRef.current.value,
+                    description: descriptionRef.current.value,
+                    price: 50,
+                    timeline: timelineRef.current.value,
+                    modules: (orderRef.current.value.split(',')).length
+                })
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+        }  
     }
     return (
         <>
@@ -57,11 +70,10 @@ export default function AddCourse() {
                         <p><strong>Content Outline</strong> Refer to <a href="https://www.notion.so/Adding-a-Course-e3cda0b54b4d49b8bd1dbd56f3a6d18a" target="_blank" rel="noopener noreferrer"> this document</a> for details on how to construct a course outline</p>
                         <Form.Group id="outline" className="mb-3 form-floating">
                             <Form.Control as="textarea" style={{ height: '200px' }} type="text" ref={outlineRef} className="form-control" placeholder="Outline" id="InputOutline" aria-describedby="content" required/>
-                            <Form.Label for="InputOutline" className="form-label floatingInput">Course Content</Form.Label>
                         </Form.Group>
                         <p><strong>Course Order</strong> Refer to <a href="https://www.notion.so/Adding-a-Course-e3cda0b54b4d49b8bd1dbd56f3a6d18a" target="_blank" rel="noopener noreferrer">this document</a> for details on how to construct a course order</p>
                         <Form.Group id="order" className="mb-3 form-floating">
-                            <Form.Control as="textarea" style={{ height: '200px' }} type="text" ref={orderRef} className="form-control" placeholder="Order" id="InputOrder" aria-describedby="order" required/>
+                            <Form.Control as="textarea" style={{ height: '100px' }} type="text" ref={orderRef} className="form-control" placeholder="Order" id="InputOrder" aria-describedby="order" required/>
                             <Form.Label for="InputOrder" className="form-label floatingInput">Course Order</Form.Label>
                         </Form.Group>
                         <Button  bsPrefix="button-sh" className="w-100" type="submit">Add Course</Button>

@@ -9,7 +9,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
         <Route
             {...rest}
             render={props => {
-                return currentUser.email === 'dev@smarthub.ca' ? <Component {...props} />  : <Redirect to="/login" />
+                return currentUser.email === 'dev@smarthub.ca' ? <Component {...props} />  : <Redirect to="/dashboard" />
             }}
 
         ></Route>

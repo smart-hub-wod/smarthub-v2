@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from "react"
 import { Card, Button, Alert, Modal, Form } from "react-bootstrap"
-import firebase from './firebase'
+// import firebase from './firebase'
+import firebase from 'firebase/app'
+
 import { useAuth } from "./contexts/AuthContext.js"
 import { useHistory, Link } from 'react-router-dom'
 
@@ -20,11 +22,16 @@ export default function Dashboard() {
     const handleShow = () => setShow(true);
 
     function handleChild() {
+        console.log(user.children)
         const childName = nameRef.current.value
         if (childName) {
             userRef.update({
-                [`children.${childName}`]: [],
-                [`cart.${childName}`]: []     
+                [`cart.${childName}`]: [],
+                [`children.${Object.keys(user.children).length}`]: {
+                    name: childName,
+                    courses: {}
+                },  
+                //[`ids`]: firebase.firestore.FieldValue.arrayUnion(childName)  
             })
         }
         handleClose()
@@ -46,6 +53,7 @@ export default function Dashboard() {
         await userRef.get().then((doc) => {
             if (doc.exists) {
                 setUser(doc.data())
+                console.log("the user", user)
                 setLoading(false)
             } else {
                 firebase.firestore().collection("users").doc(currentUser.uid).set({
@@ -55,13 +63,11 @@ export default function Dashboard() {
                 setDisplayName(currentUser.email)
                 getUser()
                 setLoading(false)
-                console.log(user)
             }
         }).catch((error) => {
             console.log("Error getting document:", error);
         });
         setLoading(false)
-        console.log(user)
         console.log(currentUser.email=== 'dev@smarthub.ca')
         history.push("/dashboard")
     }
@@ -73,8 +79,6 @@ export default function Dashboard() {
     if(loading) {
         return <h1 className="text-shblue pt-3">Loading...</h1>
     }
-
-
 
     return (
         <>
@@ -88,22 +92,22 @@ export default function Dashboard() {
                     <p>Tip: Change your display name in settings!</p>
                     <p>Welcome! Here is your dashboard to manage your students! Here you can manage and access each student’s account. </p>
                     <br />
-                    <div class="row justify-content-between">
-                        <div class="col-4">
+                    <div className="row justify-content-between">
+                        <div className="col-4">
                         <h3 className="text-shblue">My Students</h3>
                         </div>
-                        <div class="col-4">
+                        <div className="col-4">
                         <Button bsPrefix="button-sh" className="float-end" onClick={handleShow}>Add New Student</Button>   
                         </div>
                     </div></> : <Link to="add-course"><Button bsPrefix="button-sh">Add Course</Button></Link>  }
                     <div className="pt-2">
-                        {!user ? <h1>Loading</h1> : Object.keys(user.children).map(function(key, index) {
+                        {!user ? <h1>Loading</h1> : Object.keys(user.children).map((key) => {
                             return (
                             <Card className="p-3 is-shblue mb-3 text-white w-50">
                                 <Card.Body>
                                     <div>
-                                        <h3>{key}</h3>
-                                        <Button bsPrefix="button-sh" classNam="mt-3">View {key}'s dashboard</Button>
+                                        <h3 className="">{user.children[key].name}</h3>
+                                        <Link to={`student-dashboard/${key}`}><Button bsPrefix="button-sh" className="mt-2">View {user.children[key].name}'s dashboard</Button></Link>
                                     </div>
                                 </Card.Body>
                             </Card>)

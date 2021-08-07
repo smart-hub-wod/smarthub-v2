@@ -1,27 +1,76 @@
-import React from "react"
-import { Row, Button, Card, Col, Container, Alert } from 'react-bootstrap'
+import React, { useState, useEffect } from "react"
+import { Card, Button } from 'react-bootstrap'
+import { useParams } from "react-router";
+import firebase from './firebase'
+import { useAuth } from "./contexts/AuthContext.js"
+import { Link } from 'react-router-dom'
 
 export default function StudentDash() {
+  let { id } = useParams();
+  const [child, setChild] = useState()
+  const [loading, setLoading] = useState(false)
+  const { currentUser, logout, setDisplayName } = useAuth()
+  const userRef = firebase.firestore().collection("users").doc(currentUser.uid);
+
+  async function getChild() {
+      setLoading(true)
+      await userRef.get().then((doc) => {
+          if (doc.exists) {
+              setChild((doc.data())['children'][id])
+              console.log(child)
+          }
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+      setLoading(false)
+  }
+
+  useEffect(() => {
+      getChild();
+      console.log(child)
+  }, [])
+
+  function titleMaker(title) {
+    let finished = title.split('-')
+    finished.map((word, index) => {
+      finished[index] = (word.charAt(0)).toUpperCase() + word.slice(1, word.length)
+    })
+    return finished.join(' ')
+  }
+
+
+  console.log(child)
   return (
     <>
-      {/* <Container>
-        <section id="studentDash-profile" class="betweenSection">
-          <Row>
-            <Col xs={8}>
-              <img class="student-img mr-5" src="https://th.bing.com/th/id/OIP.R4UQspZW7oAAq4fbbCbixgHaGf?w=189&h=180&c=7&o=5&pid=1.7" alt=""/>
-              <h1 class="name"> Bobby Brown </h1>
-              <h3 id="achievement" class="info"> Grade Level/ Star Ranking </h3>
-            </Col>
-
-            <div class="col-4">
-              <Button  bsPrefix="button-sh" className="" type="submit"> btn</Button>
-              <button class="btn fas fa-cogs mb-5" type="button" onclick=""> </button>
-              <button class="btn fas fa-bell mb-5" type="button" onclick="" style="margin-right: 80px;"> </button>
-              <a href="../parDash" class="btn-pos btn btn-dark btn-lg px-5 mb-4" role="button"> Return to parent </a>
-            </div>
-          </Row>
-        </section>
-      </Container> */}
+      <Card className="card m-5 p-5">
+        <Card.Body>
+          <h1 className="text-center text-shblue">My Dashboard</h1>
+          <h6>Welcome!</h6>
+          <h1 className="text-shblue">{child ? child.name : "Loading"}</h1>
+          <h3 className="text-shblue mt-5">My Courses</h3>
+          <h5 className="mt-4">In Progress</h5>
+          {child ? (child.courses['in-progress'] ? child.courses['in-progress'].map((course) => {
+            return (
+              <Card className="p-3 is-shblue mb-3 text-white w-50">
+                  <Card.Body>
+                      <h3>{titleMaker(course)}</h3>
+                      <Link to={`/lesson/${course}`}><Button bsPrefix="button-sh" className="mt-2">Continue to course!</Button></Link>
+                  </Card.Body>
+              </Card>
+            )
+          }): <p>No in progress courses!</p>) : <h1>Loading</h1>}
+          <h5 className="mt-5">Completed</h5>
+          {child ? (child.courses['completed'] ? child.courses['completed'].map((course) => {
+            return (
+              <Card className="p-3 is-shblue mb-3 text-white w-50">
+                  <Card.Body>
+                      {course}
+                  </Card.Body>
+              </Card>
+            )
+          }): <p>No completed courses!</p>) : <h1>Loading</h1>}
+        </Card.Body>
+      </Card>
     </>
   )
 }

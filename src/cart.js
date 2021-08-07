@@ -56,6 +56,13 @@ export default function Cart() {
                                 <ChildCart kidCourses={courses[kid]}/>
                             </>
                        )
+                    } else {
+                        return (
+                            <>
+                            <h5>{kid}</h5>
+                            <p>No courses found!</p>
+                            </>
+                        )
                     }
                    
                 })}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 // import firebase from './firebase'
 import firebase from 'firebase/app'
 import { useParams } from "react-router";
-import { Button, Form } from 'react-bootstrap'
+import { Button, Alert } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useAuth } from "./contexts/AuthContext.js"
 
@@ -26,7 +26,7 @@ export default function Listing() {
                         setKids(Object.keys(doc.data().children))
                     }
                 })
-                console.log(kids)
+                console.log(kids.length, 'Kids')
                 kids.map((kid) => {
                     console.log(kid)
                 })
@@ -76,15 +76,20 @@ export default function Listing() {
             </div>
             <div className="row align-items-start justify-content-center my-4">
                 <div className="col-6 text-white is-shblue p-4 rounded">
-                {course.description}
+                <p>{course.description}</p>
+                <h5>Includes {course.modules} Learning Modules!</h5>
                 </div>
                 <div className="col-4 text-center">
+                    {kids.length > 0 ?
                     <select className="form-select mb-3" defaultValue="0" aria-label="Default select example" id="nameSelect">
                         {kids ? kids.map((kid) => {
                             return (<option value={kid}>{kid}</option>)
                         }) : <h1>Loading</h1>}
-                    </select>
-                    <Button bsPrefix="button-sh" onClick={addCourse}>Add to Cart</Button>
+                    </select> :
+                    <Alert variant={'primary'}>
+                    Add a student to your account to purchase courses!
+                    </Alert>}
+                    {kids.length > 0 ? <Button bsPrefix="button-sh" onClick={addCourse}>Add to Cart</Button> : <Button variant="secondary" disabled>Add to Cart</Button>}
                     <p className="text-shblue mt-1">Only <span className="fs-3 fw-bold">${course.price} </span></p>
                 </div>
             </div>
