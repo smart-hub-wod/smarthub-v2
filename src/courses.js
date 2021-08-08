@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import firebase from './firebase'
+import 'firebase/storage';  
 import { Card, Button } from 'react-bootstrap'
 import { Search } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom'
@@ -9,6 +10,13 @@ export default function Courses() {
     const [loading, setLoading] = useState(false);
     const [filtered, setFiltered] = useState(false);
     const [newCourses, setNewCourses] = useState([]);
+    var storageRef = firebase.storage()
+    // var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
+                    // coverRef.getDownloadURL()
+                    // .then((URL) => {
+                    //     setUrl(URL)
+                        
+                    // })
 
     const courseref = firebase.firestore().collection("courses");
 
@@ -17,10 +25,20 @@ export default function Courses() {
         courseref.onSnapshot((querySnapshot) => {
             const items = [];
             querySnapshot.forEach((doc) => {
-                items.push(doc.data())
+                
+                const course = doc.data()
+                var coverRef = storageRef.ref(`${course.id}/${course.id}.jpeg`);
+                coverRef.getDownloadURL()
+                .then((URL) => {
+                    course.url = URL
+                }).then(() => {
+                    console.log(course.url)
+                })
+                items.push(course) 
+                             
             })
             setCourses(items)
-            setLoading(false)
+            setLoading(false)       
         })
     }
 
@@ -66,23 +84,33 @@ export default function Courses() {
                 <Button bsPrefix="button-sh" className="text-center mb-3" onClick={resetSearch}>Reset Search</Button>
             </div>
             <div id="course-previews">
-                {filtered ? 
+                {filtered ?
                 newCourses.map((course) => (
                     <Card className="p-3 mx-5 mb-3">
-                        <div key={course.id}>
+                        <div className="row">
+                        <div className="col-3 overflow-hidden">
+                            <img height="250" src={course.url} />
+                        </div>
+                        <div key={course.id} className="col-9">
                             <h2>{course.title}</h2>
                             <p>{course.description}</p>
                             <Link to={`/course-listing/${course.id}`}><Button bsPrefix="button-sh">View Course</Button></Link>
+                        </div>
                         </div>
                     </Card>
                     
                 ))
                 : courses.map((course) => (
                     <Card className="p-3 mx-5 mb-3">
-                        <div key={course.id}>
+                        <div className="row">
+                        <div className="col-3 overflow-hidden">
+                            <img height="250" src={course.url} />
+                        </div>
+                        <div key={course.id} className="col-9">
                             <h2>{course.title}</h2>
                             <p>{course.description}</p>
                             <Link to={`/course-listing/${course.id}`}><Button bsPrefix="button-sh">View Course</Button></Link>
+                        </div>
                         </div>
                     </Card>
                     

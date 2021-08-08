@@ -37,7 +37,10 @@ export default function StudentDash() {
     })
     return finished.join(' ')
   }
-
+  
+  if(loading) {
+      return <h1 className="text-shblue pt-3 text-center">Loading...</h1>
+  }
 
   console.log(child)
   return (
@@ -49,7 +52,7 @@ export default function StudentDash() {
           <h1 className="text-shblue">{child ? child.name : "Loading"}</h1>
           <h3 className="text-shblue mt-5">My Courses</h3>
           <h5 className="mt-4">In Progress</h5>
-          {child ? (child.courses ? child.courses.map((course) => {
+          {child ? (child.courses.length > 0 ? child.courses.map((course) => {
             return (
               <Card className="p-3 is-shblue mb-3 text-white w-50">
                   <Card.Body>

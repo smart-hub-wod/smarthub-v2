@@ -13,7 +13,8 @@ export default function Listing() {
     const [loading, setLoading] = useState(false);
     const [kids, setKids] = useState()
     const [url, setUrl] = useState("")
-    var coverRef = firebase.storage().ref(`${id}/software-engineering.jpeg`);
+    var storageRef = firebase.storage()
+    //var coverRef = firebase.storage().ref(`${id}/software-engineering.jpeg`);
 
     const courseref = firebase.firestore().collection("courses").doc(id);
     const { currentUser } = useAuth()
@@ -24,17 +25,21 @@ export default function Listing() {
         await courseref.get().then((doc) => {
             if (doc.exists) {
                 setCourse(doc.data())
-                cartref.get().then((doc) => {
-                    if (doc.exists) {
-                        setKids(doc.data())
+                cartref.get().then((kid) => {
+                    if (kid.exists) {
+                        setKids(kid.data())
                     }
-                })
-                console.log(kids, 'Kids')
-                coverRef.getDownloadURL()
+                    setLoading(true)
+                    console.log(course)
+                    var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
+                    coverRef.getDownloadURL()
                     .then((URL) => {
                         setUrl(URL)
+                        
                     })
-                setLoading(false)
+                    setLoading(false)
+                })
+                console.log(kids, 'Kids')  
             }
         }).catch((error) => {
             console.log("Error getting document:", error);
