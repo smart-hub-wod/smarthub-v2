@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 // import firebase from './firebase'
 import firebase from 'firebase/app'
+import 'firebase/storage';  
 import { useParams } from "react-router";
 import { Button, Alert } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -10,7 +11,9 @@ export default function Listing() {
     let { id } = useParams();
     const [course, setCourse] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [kids, setKids] = useState([])
+    const [kids, setKids] = useState()
+    const [url, setUrl] = useState("")
+    var coverRef = firebase.storage().ref(`${id}/software-engineering.jpeg`);
 
     const courseref = firebase.firestore().collection("courses").doc(id);
     const { currentUser } = useAuth()
@@ -23,13 +26,14 @@ export default function Listing() {
                 setCourse(doc.data())
                 cartref.get().then((doc) => {
                     if (doc.exists) {
-                        setKids(Object.keys(doc.data().children))
+                        setKids(doc.data())
                     }
                 })
-                console.log(kids.length, 'Kids')
-                kids.map((kid) => {
-                    console.log(kid)
-                })
+                console.log(kids, 'Kids')
+                coverRef.getDownloadURL()
+                    .then((URL) => {
+                        setUrl(URL)
+                    })
                 setLoading(false)
             }
         }).catch((error) => {
@@ -67,11 +71,14 @@ export default function Listing() {
             </>
         )
     }
-
+//height="100" width="300"
     return (
         <>
-            <div>
-                <h1 className="text-center text-shblue mt-5">{course.title}</h1>
+            <div> 
+                <div className="d-flex justify-content-center">
+                    <img height="150" className="rounded-pill mt-3" src={url} />
+                </div>
+                <h1 className="text-center text-shblue mt-3">{course.title}</h1>
                 <h4 className="text-center text-secondary mb-4">{course.timeline}</h4>
             </div>
             <div className="row align-items-start justify-content-center my-4">
@@ -79,19 +86,19 @@ export default function Listing() {
                 <p>{course.description}</p>
                 <h5>Includes {course.modules} Learning Modules!</h5>
                 </div>
-                <div className="col-4 text-center">
-                    {kids.length > 0 ?
+                {kids ? <div className="col-4 text-center">
+                    {kids ? (Object.keys(kids['children']).length > 0 ?
                     <select className="form-select mb-3" defaultValue="0" aria-label="Default select example" id="nameSelect">
-                        {kids ? kids.map((kid) => {
-                            return (<option value={kid}>{kid}</option>)
+                        {kids ? Object.keys(kids['children']).map((kid) => {
+                            return (<option value={kids['children'][kid]['name']} key={kid}>{kids['children'][kid]['name']}</option>)
                         }) : <h1>Loading</h1>}
                     </select> :
                     <Alert variant={'primary'}>
                     Add a student to your account to purchase courses!
-                    </Alert>}
-                    {kids.length > 0 ? <Button bsPrefix="button-sh" onClick={addCourse}>Add to Cart</Button> : <Button variant="secondary" disabled>Add to Cart</Button>}
+                    </Alert>) : <p>Loading</p>}
+                    {kids ? Object.keys(kids['children']).length > 0 ? <Button bsPrefix="button-sh" onClick={addCourse}>Add to Cart</Button> : <Button variant="secondary" disabled>Add to Cart</Button> : <p>Loading</p>}
                     <p className="text-shblue mt-1">Only <span className="fs-3 fw-bold">${course.price} </span></p>
-                </div>
+                </div> : <h1>Loading...</h1>}
             </div>
         </>
     )

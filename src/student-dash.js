@@ -9,7 +9,7 @@ export default function StudentDash() {
   let { id } = useParams();
   const [child, setChild] = useState()
   const [loading, setLoading] = useState(false)
-  const { currentUser, logout, setDisplayName } = useAuth()
+  const { currentUser } = useAuth()
   const userRef = firebase.firestore().collection("users").doc(currentUser.uid);
 
   async function getChild() {
@@ -49,12 +49,12 @@ export default function StudentDash() {
           <h1 className="text-shblue">{child ? child.name : "Loading"}</h1>
           <h3 className="text-shblue mt-5">My Courses</h3>
           <h5 className="mt-4">In Progress</h5>
-          {child ? (child.courses['in-progress'] ? child.courses['in-progress'].map((course) => {
+          {child ? (child.courses ? child.courses.map((course) => {
             return (
               <Card className="p-3 is-shblue mb-3 text-white w-50">
                   <Card.Body>
                       <h3>{titleMaker(course)}</h3>
-                      <Link to={`/lesson/${course}`}><Button bsPrefix="button-sh" className="mt-2">Continue to course!</Button></Link>
+                      <Link to={`/lesson/${course}/${id}`}><Button bsPrefix="button-sh" className="mt-2">Continue to course!</Button></Link>
                   </Card.Body>
               </Card>
             )

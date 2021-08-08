@@ -163,9 +163,8 @@ p {
   justify-content: center;
 }
 
-
 /* Privacy Policy page Starts */
-#privacy-policy .heading-text{
+#privacy-policy .heading-text {
   margin-top: 1rem;
   font-weight: 600;
 }
@@ -178,5 +177,4 @@ p {
 #privacy-policy .subHeading-text {
   font-size: 1.3rem;
   font-weight: 600;
-  
 }

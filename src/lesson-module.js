@@ -2,24 +2,44 @@ import React, { useState, useEffect } from "react"
 import firebase from './firebase'
 import { useParams } from "react-router";
 import { Link } from 'react-router-dom'
-
+import { Button } from 'react-bootstrap'
+import { useAuth } from "./contexts/AuthContext.js"
 
 export default function Lesson() {
-    let { id } = useParams();
+    let { id, child } = useParams();
     const [course, setCourse] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentLesson, setCurrentLesson] = useState(-1);
+    const { currentUser } = useAuth()
 
     const courseref = firebase.firestore().collection("lessons").doc(id);
+    const childref = firebase.firestore().collection("users").doc(currentUser.uid);
 
     function getCourse() {
         setLoading(true);
-        courseref.get().then((doc) => {
-            if (doc.exists) {
-                setCourse(doc.data())
+        childref.get().then((kid) => {
+            if (kid.exists) {
+                const kiddata = kid.data()['children'][child] ? kid.data()['children'][child]['courses'] : []
+                if (kiddata.find(element => element === id)) {
+                    console.log("yay!")
+                    courseref.get().then((doc) => {
+                        if (doc.exists) {
+                            setCourse(doc.data())
+                        }
+                        setLoading(false)
+                    })
+                } else {
+                    setCourse([])
+                    setLoading(false)
+                }
             }
-            setLoading(false)
         })
+        // courseref.get().then((doc) => {
+        //     if (doc.exists) {
+        //         setCourse(doc.data())
+        //     }
+        //     setLoading(false)
+        // })
     }
 
     function handleLessonChange(index) {
@@ -72,7 +92,7 @@ export default function Lesson() {
                     {course.lessons.map((lessonNum, index) => { 
                         return(
                             <> 
-                                <h5 onClick={() => handleLessonChange(index)}>{lessonNum}</h5>
+                                <h5 key={index} onClick={() => handleLessonChange(index)}>{lessonNum}</h5>
                             </>
                         )
                     })}
@@ -82,7 +102,7 @@ export default function Lesson() {
                     {/* <h5 className="text-shblue text-center">1.1 Content</h5>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac interdum purus. </p> */}
-                    <ContentBox lssn={currentLesson} courseInfo={course}/>
+                    <ContentBox lssn={currentLesson} courseInfo={course} child={child}/>
                 </div>
             </div>
         </>
@@ -107,16 +127,22 @@ export default function Lesson() {
 // }
 
 function ContentBox(props) {
-    console.log(props.courseInfo.lessonContent[props.courseInfo.lessons[props.lssn]])
     let lessn = props.courseInfo.lessonContent[props.courseInfo.lessons[props.lssn]]
     let content = ''
+
+    function handleComplete() {
+        console.log("hi")
+    }
+
     if (props.lssn !== -1) {
         if (Object.keys(lessn)[0] === 'article') {
             content = lessn['article']
         } else if (Object.keys(lessn)[0] === 'video') {
-            content = <iframe width="560" height="315" src={`https://www.youtube.com/embed/${lessn['video']}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            content = <iframe width="560" height="315" src={`https://www.youtube.com/embed/${lessn['video']}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+        } else if (Object.keys(lessn)[0] === 'quiz') {
+            content = <iframe src={`${lessn['quiz']}`} width="640" height="1316" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         } else {
-            content = <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScaIL8EfzCXsDhHY4OPcpqzPOWWT4ZhurafD682aO5frsvqGA/viewform?embedded=true" width="640" height="1316" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            content = <><p>{lessn['complete']}</p><Link to={`/student-dashboard/${props.child}`}><Button bsPrefix="button-sh" onClick={handleComplete}>Complete!</Button></Link></>
         }
     }
 
