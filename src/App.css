@@ -107,6 +107,7 @@ p {
 .auth-container {
   margin: 0 17rem;
   text-align: center;
+  
 }
 
 .auth-btn {
@@ -116,6 +117,8 @@ p {
 
 .auth-card {
   margin: 3rem 10rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 20px 0px;
+  width: 70%;
 }
 
 /* Dashboard starts  */
@@ -178,3 +181,16 @@ p {
   font-size: 1.3rem;
   font-weight: 600;
 }
+
+/* Home page Animation */
+.fade-in {
+  animation: fade 0.9s ease-in;
+  
+}
+
+@keyframes fade {
+  0%{
+    opacity: 0;
+  }
+}
+

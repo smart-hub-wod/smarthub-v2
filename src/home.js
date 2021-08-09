@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 export default function Home() {
     return (
-        <div>
-            <Container fluid className="d-flex justify-content-center text-center pt-5">
+        <div className="fade-in">
+            <Container fluid className="d-flex justify-content-center text-center pt-5 fade-left">
                 <div className="text-shblue">
                     <h1>A Head Start Into the Future</h1>
                     <h5>Introduce your child into the world of STEM to fuel their passion - with Smart Hub.</h5>

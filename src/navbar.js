@@ -7,7 +7,7 @@ export default function NavBar() {
     const { currentUser } = useAuth()
 
     return (
-        <Navbar className="is-shblue sticky-top">
+        <Navbar className="is-shblue sticky-top fade-in">
             <Container fluid className="d-flex justify-content-between">
                 <Navbar.Brand>
                     <Link to="/">
