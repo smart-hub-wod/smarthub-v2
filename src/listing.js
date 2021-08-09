@@ -54,9 +54,17 @@ export default function Listing() {
         //     cart: firebase.firestore.FieldValue.arrayUnion(course.id)
         // });
 
-        cartref.update({
-            [`cart.${nameBar.value}`]: firebase.firestore.FieldValue.arrayUnion(course.id)
+        cartref.get().then((doc) => {
+            if (doc.exists) {
+                if(!( (doc.data()['cart'][nameBar.value]).includes(course.id) )) {
+                    cartref.update({
+                        [`cart.${nameBar.value}`]: firebase.firestore.FieldValue.arrayUnion(course.id),
+                        ['cartTotal']: firebase.firestore.FieldValue.increment(course.price)
+                    })
+                }
+            }
         })
+        
     }
 
     useEffect(() => {

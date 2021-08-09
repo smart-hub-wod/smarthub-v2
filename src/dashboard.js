@@ -58,7 +58,8 @@ export default function Dashboard() {
             } else {
                 firebase.firestore().collection("users").doc(currentUser.uid).set({
                     children: {},
-                    cart: {}
+                    cart: {},
+                    cartTotal: 0
                 })
                 setDisplayName(currentUser.email)
                 getUser()

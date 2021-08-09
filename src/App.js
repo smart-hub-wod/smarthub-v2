@@ -21,6 +21,7 @@ import Lesson from "./lesson-module";
 import StudentDash from "./student-dash"
 import Cart from "./cart";
 import ForgotPassword from "./forgot-password";
+import Checkout from "./checkout";
 // Add pages here!
 
 import { AuthProvider } from "./contexts/AuthContext"
@@ -41,6 +42,7 @@ function App() {
               <PrivateRoute exact path="/lesson/:id/:child" component={Lesson} />
               <PrivateRoute path="/student-dashboard/:id" component={StudentDash} />
               <PrivateRoute path="/cart" component={Cart} />
+              <PrivateRoute path="/checkout" component={Checkout} />
               <Route exact path="/" component={Home} />
               <Route exact path="/forgot-password" component={ForgotPassword} />
               <Route path="/signup" component={Signup} />
