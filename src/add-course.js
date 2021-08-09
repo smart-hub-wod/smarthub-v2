@@ -1,6 +1,7 @@
 import React, {useRef} from "react"
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import firebase from './firebase'
+import 'firebase/storage';  
 import { useAuth } from "./contexts/AuthContext.js"
 
 export default function AddCourse() {
@@ -9,9 +10,11 @@ export default function AddCourse() {
     const timelineRef = useRef()
     const IDRef = useRef()
     const outlineRef = useRef()
+    const coverRef = useRef()
     const orderRef = useRef()
     const { currentUser } = useAuth()
-
+    
+    var storageRef = firebase.storage().ref();
     const lessonref = firebase.firestore().collection("lessons")
     const courseref = firebase.firestore().collection("courses")
     console.log(currentUser.email)
@@ -34,6 +37,12 @@ export default function AddCourse() {
                     price: 50,
                     timeline: timelineRef.current.value,
                     modules: (orderRef.current.value.split(',')).length
+                }).then(() => {
+                    const picRef = storageRef.child(`${IDRef.current.value}/${IDRef.current.value}.jpeg`);
+                    picRef.put(coverRef.current.files[0]).then((snapshot) => {
+                        console.log('Uploaded a blob or file!');
+                    });
+                    console.log("pic", coverRef.current.files[0])
                 })
             })
             .catch((error) => {
@@ -75,6 +84,10 @@ export default function AddCourse() {
                         <Form.Group id="order" className="mb-3 form-floating">
                             <Form.Control as="textarea" style={{ height: '100px' }} type="text" ref={orderRef} className="form-control" placeholder="Order" id="InputOrder" aria-describedby="order" required/>
                             <Form.Label for="InputOrder" className="form-label floatingInput">Course Order</Form.Label>
+                        </Form.Group>
+                        <p><strong>Cover Photo</strong> Must be named using course id and be a JPEG file Example: computer-engineering.jpeg</p>
+                        <Form.Group controlId="formFile" className="mb-3" id="coverPicInput">
+                            <Form.Control ref={coverRef} type="file" />
                         </Form.Group>
                         <Button  bsPrefix="button-sh" className="w-100" type="submit">Add Course</Button>
                     </Form>
