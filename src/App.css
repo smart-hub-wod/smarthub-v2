@@ -18,6 +18,10 @@ p {
   background-color: #0b3f84 !important;
 }
 
+.heading-text {
+  font-size: 2rem;
+}
+
 .text-shblue {
   color: #0b3f84;
 }
@@ -84,8 +88,7 @@ p {
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite
-      20s linear;
+    animation: App-logo-spin infinite 20s linear;
   }
 }
 .App-header {
@@ -107,7 +110,6 @@ p {
 .auth-container {
   margin: 0 17rem;
   text-align: center;
-  
 }
 
 .auth-btn {
@@ -185,12 +187,44 @@ p {
 /* Home page Animation */
 .fade-in {
   animation: fade 0.9s ease-in;
-  
 }
 
 @keyframes fade {
-  0%{
+  0% {
     opacity: 0;
   }
 }
 
+/* .shape {
+  height: 40px;
+  width: 40px;
+  animation: spin  2s ease-in;
+
+} */
+
+.logo-ani {
+  animation: logo-spin 1s linear;
+}
+
+/* @keyframes logo-spin {
+  25% {
+    -webkit-transform: rotate(5deg);
+    transform: rotate(23deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  75% {
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-23deg);
+  }
+} */
+
+.shape-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}

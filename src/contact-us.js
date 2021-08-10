@@ -3,7 +3,7 @@ import React from "react"
 export default function ContactUs() {
     return (
         <div>
-            <h1>[Meet the Team]</h1>
+            <h1>[meet the team]</h1>
         </div>
     )
 }
