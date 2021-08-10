@@ -127,6 +127,18 @@ p {
 
 /* Contact Us page starts */
 
+#contact p {
+  color: #0b3f84;
+  font-size: 1.3rem;
+
+}
+
+#contact h2 {
+  color: #0b3f84;
+  font-weight: 600;
+  padding-top: 3rem;
+}
+
 #contact hr {
   border: 3px solid #0b3f84;
 }
@@ -280,3 +292,5 @@ p {
   -o-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
 }
+
+
