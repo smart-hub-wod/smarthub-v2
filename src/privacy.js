@@ -160,10 +160,7 @@ export default function Privacy() {
           listed products and services.
         </p> */}
 
-        <input id="myinput" type="checkbox" />
-        <label for="myinput" className="indented-checkbox-text ps-3">
-          I agree!
-        </label>
+        
       </Container>
     </>
   );
