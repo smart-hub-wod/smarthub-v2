@@ -12,7 +12,7 @@ import NavBar from "./navbar";
 import Home from "./home";
 import About from "./about";
 import Courses from "./courses";
-import MeetTeam from "./meet-team.js";
+import MeetTeam  from "./meet-team";
 import Footer from "./footer";
 import Privacy from "./privacy";
 import Terms from "./terms";

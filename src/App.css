@@ -228,3 +228,55 @@ p {
   display: flex;
   justify-content: space-around;
 }
+
+/* Meet the Team page starts */
+
+.instructor-container {
+  margin-top: 5rem;
+  margin-left: 5rem;
+
+  overflow: auto;
+  border-radius: 5px;
+  word-wrap: break-word;
+  transform: rotate(-5.81deg);
+  width: 80%;
+  animation: instructorSpin1 0.9s ease-in;
+}
+
+#instructor2 > .instructor-container {
+  transform: rotate(10.42deg);
+  animation: instructorSpin2 0.9s ease-in;
+}
+
+@keyframes instructorSpin1 {
+  0% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes instructorSpin2 {
+  0% {
+    transform: rotate(0);
+  }
+}
+
+.instructor-img {
+  float: left;
+  width: 40%;
+  height: auto;
+
+  /* border: 5px solid brown; */
+  /* background-color: aqua; */
+}
+
+#meet-team .card {
+  transition: transform 1s ease-in;
+}
+
+#meet-team .card:hover {
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
