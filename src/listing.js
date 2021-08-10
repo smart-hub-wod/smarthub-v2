@@ -18,17 +18,30 @@ export default function Listing() {
 
     const courseref = firebase.firestore().collection("courses").doc(id);
     const { currentUser } = useAuth()
-    const cartref = firebase.firestore().collection("users").doc(currentUser.uid);
+    const cartref = currentUser ? firebase.firestore().collection("users").doc(currentUser.uid) : undefined;
 
     async function getCourse() {
         setLoading(true)
         await courseref.get().then((doc) => {
             if (doc.exists) {
                 setCourse(doc.data())
-                cartref.get().then((kid) => {
-                    if (kid.exists) {
-                        setKids(kid.data())
-                    }
+                if(currentUser) {
+                    cartref.get().then((kid) => {
+                        if (kid.exists) {
+                            setKids(kid.data())
+                        }
+                        setLoading(true)
+                        console.log(course)
+                        var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
+                        coverRef.getDownloadURL()
+                        .then((URL) => {
+                            setUrl(URL)
+                            
+                        })
+                        setLoading(false)
+                    }) 
+                }
+                else {
                     setLoading(true)
                     console.log(course)
                     var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
@@ -38,8 +51,8 @@ export default function Listing() {
                         
                     })
                     setLoading(false)
-                })
-                console.log(kids, 'Kids')  
+                }
+                //console.log(kids, 'Kids')  
             }
         }).catch((error) => {
             console.log("Error getting document:", error);
@@ -92,14 +105,14 @@ export default function Listing() {
                     <img height="150" className="rounded-pill mt-3" src={url} />
                 </div>
                 <h1 className="text-center text-shblue mt-3">{course.title}</h1>
-                <h4 className="text-center text-secondary mb-4">{course.timeline}</h4>
+                <h4 className="text-center text-secondary mb-4">Estimate Time to Complete: {course.timeline} hours</h4>
             </div>
             <div className="row align-items-start justify-content-center my-4">
                 <div className="col-6 text-white is-shblue p-4 rounded">
                 <p>{course.description}</p>
                 <h5>Includes {course.modules} Learning Modules!</h5>
                 </div>
-                {kids ? <div className="col-4 text-center">
+                {currentUser ? kids ? <div className="col-4 text-center">
                     {kids ? (Object.keys(kids['children']).length > 0 ?
                     <select className="form-select mb-3" defaultValue="0" aria-label="Default select example" id="nameSelect">
                         {kids ? Object.keys(kids['children']).map((kid) => {
@@ -111,7 +124,9 @@ export default function Listing() {
                     </Alert>) : <p>Loading</p>}
                     {kids ? Object.keys(kids['children']).length > 0 ? <Button bsPrefix="button-sh" onClick={addCourse}>Add to Cart</Button> : <Button variant="secondary" disabled>Add to Cart</Button> : <p>Loading</p>}
                     <p className="text-shblue mt-1">Only <span className="fs-3 fw-bold">${course.price} </span></p>
-                </div> : <h1>Loading...</h1>}
+                </div> : <h1>Loading...</h1> : <div className="col-4 text-center"><Alert className="" variant={'primary'}>
+                    Login to purchase courses!
+                    </Alert><Button variant="secondary" disabled>Add to Cart</Button> </div>}
             </div>
         </>
     )
