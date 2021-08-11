@@ -175,7 +175,9 @@ export default function Dashboard() {
                 </Link>
               )}
               <h3 className="text-shblue mt-5">My Courses</h3>
-              <p>Click view courses above to render courses below!</p>
+              <p>
+                Click <strong>View Courses</strong> above to render courses below!
+              </p>
               {courses &&
                 courses.map((c) => {
                   return (
@@ -183,7 +185,10 @@ export default function Dashboard() {
                       <Card.Body>
                         {" "}
                         <h1>{titleMaker(c)}</h1>
-                        <Button bsPrefix="button-sh">Edit Course</Button>
+                        <p>ID: {c}</p>
+                        <Link to={`/edit-course/${c}`}>
+                          <Button bsPrefix="button-sh">Edit Course</Button>
+                        </Link>
                       </Card.Body>
                     </Card>
                   );
