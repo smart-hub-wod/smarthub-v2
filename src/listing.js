@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/storage";
 import { useParams } from "react-router";
-import { Button, Alert } from "react-bootstrap";
+import { Button, Alert, Spinner, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
 
@@ -82,7 +82,14 @@ export default function Listing() {
   }, []);
 
   if (loading) {
-    return <h1 className="text-shblue pt-3 text-center">Loading...</h1>;
+    return (
+      <>
+        <h1 className="text-shblue pt-3 text-center">Loading...</h1>
+        <div className="d-flex justify-content-center">
+          <Spinner animation="border" variant="primary" />
+        </div>
+      </>
+    );
   }
 
   // Course not Found Error Page
@@ -106,10 +113,22 @@ export default function Listing() {
         <h1 className="text-center text-shblue mt-3">{course.title}</h1>
         <h4 className="text-center text-secondary mb-4">Estimated Time to Complete: {course.timeline} hours</h4>
       </div>
-      <div className="row align-items-start justify-content-center my-4">
+      <div className="row justify-content-center my-4">
         <div className="col-6 text-white is-shblue p-4 rounded">
           <p>{course.description}</p>
-          <h5>Includes {course.modules} Learning Modules!</h5>
+          <h5>
+            Includes {course.modules} Learning Modules{course.sync && " And Live Lessons"}!
+          </h5>
+          <div class="row justify-content-start mt-3 align-items-center">
+            <Image src={course.instructor_pic} className="border border-white rounded-circle" style={{ height: "100px", width: "100px" }} />
+            <div class="col-4">
+              <h6>Course Instructor:</h6>
+              <h4>
+                {" "}
+                <strong>{course.instructor}</strong>
+              </h4>
+            </div>
+          </div>
         </div>
         {currentUser ? (
           kids ? (

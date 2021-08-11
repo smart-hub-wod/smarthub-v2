@@ -54,8 +54,8 @@ function App() {
             <Route path="/meet-the-team" component={MeetTeam} />
             <Route path="/courses" component={Courses} />
             <Route path="/home" component={Home} />
-            <Route path="/terms-and-conditions" component={Terms} />
-            <Route path="/privacy-policy" component={Privacy} />
+            <Route path="/priv" component={Terms} />
+            <Route path="/terms-and-conditions" component={Privacy} />
             <Route path="/course-listing/:id" component={Listing} />
             <Route path="/parent-faq" component={ParentFAQ} />
             <Route path="/contact-us" component={Contact} />

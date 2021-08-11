@@ -29,11 +29,6 @@ export default function Footer() {
             </Link>
           </Nav.Link>
           <Nav.Link>
-            <Link className="link" to="/contact-us">
-              Contact Us
-            </Link>
-          </Nav.Link>
-          <Nav.Link>
             <Link to="/parent-faq" className="link">
               For Parents
             </Link>
@@ -68,13 +63,13 @@ export default function Footer() {
         </p>
         <div className="d-flex flex-row justify-content-center">
           <Nav.Link>
-            <Link className="link" to="/terms-and-conditions">
-              Terms and Conditions
+            <Link className="link" to="/contact-us">
+              Contact Us
             </Link>
           </Nav.Link>
           <Nav.Link>
-            <Link className="link" to="/privacy-policy">
-              Privacy Policy
+            <Link className="link" to="/terms-and-conditions">
+              Terms and Conditions
             </Link>
           </Nav.Link>
         </div>

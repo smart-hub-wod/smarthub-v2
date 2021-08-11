@@ -100,15 +100,14 @@ export default function Privacy() {
 
   return (
     <>
-      <h1 className="text-shblue pt-5 text-center">Privacy Policy</h1>
+      <h1 className="text-shblue pt-5 text-center">Terms and Conditions</h1>
       <Container
         id="privacy-policy"
         style={{
           marginTop: "3rem",
           width: "60%",
           border: "1px solid grey",
-          boxShadow:
-            "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+          boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
           borderRadius: "10px",
           padding: "2rem",
         }}
@@ -129,7 +128,7 @@ export default function Privacy() {
                 <hr
                   style={{
                     marginBottom: "80px",
-                    visibility: "hidden"
+                    visibility: "hidden",
                   }}
                 />
                 <h2 className="heading-text text-shblue pb-4">{elem.title}</h2>
@@ -140,9 +139,7 @@ export default function Privacy() {
                   elem.text.map((shop) => {
                     return (
                       <div id={shop.id}>
-                        <h2 className="subHeading-text text-shblue ps-3 pb-2">
-                          {shop.title}
-                        </h2>
+                        <h2 className="subHeading-text text-shblue ps-3 pb-2">{shop.title}</h2>
                         <p className="px-5"> {shop.text} </p>
                       </div>
                     );

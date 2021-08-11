@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Form, Button, Card, Alert, InputGroup, FormControl } from "react-bootstrap";
+import { Form, Button, Card, Alert, InputGroup, FormControl, Image } from "react-bootstrap";
 import firebase from "./firebase";
 import "firebase/storage";
 import { useAuth } from "./contexts/AuthContext.js";
@@ -96,6 +96,7 @@ export default function AddCourse() {
               grades: grades,
               defaultCover: coverRef.current.files.length > 0 ? false : true,
               instructor: currentUser.displayName,
+              instructor_pic: currentUser.photoURL ? currentUser.photoURL : "../defaultpfp.png",
             })
             .then(() => {
               if (coverRef.current.files.length > 0) {
@@ -308,8 +309,9 @@ export default function AddCourse() {
               <p>
                 <strong>Course Author: </strong> {currentUser.displayName}
               </p>
+              <Image className="mb-3" src={currentUser.photoURL ? currentUser.photoURL : "../defaultpfp.png"} roundedCircle style={{ height: "150px", width: "150px" }} />
               <p>
-                Your display name (shown above) and picture associated with this account will be displayed alongside each course. To edit this information visit <Link to="/settings">Settings</Link>
+                Your display name and picture (shown above) associated with this account will be displayed alongside each course. To edit this information visit <Link to="/settings">Settings</Link>
               </p>
               <Button bsPrefix="button-sh" className="w-100" type="submit">
                 Add Course
