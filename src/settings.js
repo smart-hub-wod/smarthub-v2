@@ -86,6 +86,7 @@ export default function Settings() {
             <h1 className="text-shblue mb-3 text-center">Settings</h1>
             <p className="text-center">Leave password field blank to keep the same</p>
             {error && <Alert variant="danger">{error}</Alert>}
+
             <div className="d-flex justify-content-center mb-4">
               <Image src={currentUser.photoURL ? currentUser.photoURL : "../defaultpfp.png"} roundedCircle style={{ height: "150px", width: "150px" }} />
             </div>

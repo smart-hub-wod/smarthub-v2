@@ -120,7 +120,7 @@ export default function Listing() {
             Includes {course.modules} Learning Modules{course.sync && " And Live Lessons"}!
           </h5>
           <div class="row justify-content-start mt-3 align-items-center">
-            <Image src={course.instructor_pic} className="border border-white rounded-circle" style={{ height: "100px", width: "100px" }} />
+            <Image src={course.instructor_pic} className="border border-white" roundedCircle style={{ height: "100px", width: "100px" }} />
             <div class="col-4">
               <h6>Course Instructor:</h6>
               <h4>

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Form, Button, Card, Alert, InputGroup, FormControl, Image } from "react-bootstrap";
-import firebase from "./firebase";
+import firebase from "firebase/app";
 import "firebase/storage";
 import { useAuth } from "./contexts/AuthContext.js";
 import { useState } from "react";
@@ -106,6 +106,11 @@ export default function AddCourse() {
                 });
               }
               setAlert(`${titleRef.current.value} was successfully added. If you wish to submit another course, refresh this page!`);
+            })
+            .then(() => {
+              adminRef.update({
+                [`courses.${currentUser.email.split(".")[0]}`]: firebase.firestore.FieldValue.arrayUnion(IDRef.current.value),
+              });
             });
         })
         .catch((error) => {

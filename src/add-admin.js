@@ -12,7 +12,9 @@ export default function AddAdmin() {
     //console.log(emailRef.current.value);
     adminref.update({
       ["accounts"]: firebase.firestore.FieldValue.arrayUnion(emailRef.current.value),
+      [`courses.${emailRef.current.value.split(".")[0]}`]: [],
     });
+    //console.log(emailRef.current.value.split(".")[0]);
     setAlert(`Success! ${emailRef.current.value} was added as an admin`);
     document.getElementById("InputEmail").value = "";
   };
