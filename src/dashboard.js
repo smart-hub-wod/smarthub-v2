@@ -19,6 +19,7 @@ export default function Dashboard() {
   // Modal Commands
   const [show, setShow] = useState(false);
   const [admin, setAdmin] = useState(false);
+  const [courses, setCourses] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -50,6 +51,15 @@ export default function Dashboard() {
     }
   }
 
+  function titleMaker(title) {
+    let finished = title.split("-");
+    finished.pop();
+    finished.map((word, index) => {
+      finished[index] = word.charAt(0).toUpperCase() + word.slice(1, word.length);
+    });
+    return finished.join(" ");
+  }
+
   async function getUser() {
     setLoading(true);
     await userRef
@@ -79,6 +89,18 @@ export default function Dashboard() {
       })
       .catch((error) => {
         console.log("Error getting document:", error);
+      })
+      .then(() => {
+        if (admin) {
+          console.log("yup ur good");
+          adminRef.get().then((doc) => {
+            const adminCourses = doc.data().courses;
+            if (currentUser.email.split(".")[0] in adminCourses) {
+              setCourses(adminCourses[currentUser.email.split(".")[0]]);
+              console.log(courses);
+            }
+          });
+        }
       });
     setLoading(false);
     console.log(admin);
@@ -133,6 +155,19 @@ export default function Dashboard() {
                   <Button bsPrefix="button-sh">Add Admins</Button>
                 </Link>
               )}
+              <h3 className="text-shblue mt-5">My Courses</h3>
+              {courses &&
+                courses.map((c) => {
+                  return (
+                    <Card className="p-3 is-shblue mb-3 text-white w-50">
+                      <Card.Body>
+                        {" "}
+                        <h1>{titleMaker(c)}</h1>
+                        <Button bsPrefix="button-sh">Edit Course</Button>
+                      </Card.Body>
+                    </Card>
+                  );
+                })}
             </>
           )}
           <div className="pt-2">

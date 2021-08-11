@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert, Image } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
@@ -16,10 +16,22 @@ export default function Settings() {
   const [URL, setURL] = useState();
   const history = useHistory();
   const coverRef = useRef();
+  const [admin, setAdmin] = useState(false);
+  const adminRef = firebase.firestore().collection("users").doc("admins");
 
   var storageRef = firebase.storage().ref();
 
   console.log(currentUser);
+
+  function getAdmin() {
+    adminRef.get().then((doc) => {
+      setAdmin(doc.data().accounts.includes(currentUser.email));
+    });
+  }
+
+  useEffect(() => {
+    getAdmin();
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -87,18 +99,22 @@ export default function Settings() {
             <p className="text-center">Leave password field blank to keep the same</p>
             {error && <Alert variant="danger">{error}</Alert>}
 
-            <div className="d-flex justify-content-center mb-4">
-              <Image src={currentUser.photoURL ? currentUser.photoURL : "../defaultpfp.png"} roundedCircle style={{ height: "150px", width: "150px" }} />
-            </div>
-            <Form.Group controlId="formFile" className="mb-2">
-              <Form.Label>
-                <strong>Replace Profile Image {">"}</strong>
-              </Form.Label>
-              <Form.Control ref={coverRef} type="file" />
-            </Form.Group>
-            <Button bsPrefix="button-sh" className="mb-3" onClick={handleImage}>
-              Replace Image
-            </Button>
+            {admin && (
+              <>
+                <div className="d-flex justify-content-center mb-4">
+                  <Image src={currentUser.photoURL ? currentUser.photoURL : "../defaultpfp.png"} roundedCircle style={{ height: "150px", width: "150px" }} />
+                </div>
+                <Form.Group controlId="formFile" className="mb-2">
+                  <Form.Label>
+                    <strong>Replace Profile Image {">"}</strong>
+                  </Form.Label>
+                  <Form.Control ref={coverRef} type="file" />
+                </Form.Group>
+                <Button bsPrefix="button-sh" className="mb-3" onClick={handleImage}>
+                  Replace Image
+                </Button>
+              </>
+            )}
 
             <Form onSubmit={handleSubmit}>
               <Form.Group id="name" className="mb-3 form-floating">

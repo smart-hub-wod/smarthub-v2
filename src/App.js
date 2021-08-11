@@ -11,7 +11,6 @@ import Courses from "./courses";
 import MeetTeam from "./meet-team";
 import Footer from "./footer";
 import Privacy from "./privacy";
-import Terms from "./terms";
 import Page404 from "./404";
 import Listing from "./listing";
 import Settings from "./settings";
@@ -54,7 +53,6 @@ function App() {
             <Route path="/meet-the-team" component={MeetTeam} />
             <Route path="/courses" component={Courses} />
             <Route path="/home" component={Home} />
-            <Route path="/priv" component={Terms} />
             <Route path="/terms-and-conditions" component={Privacy} />
             <Route path="/course-listing/:id" component={Listing} />
             <Route path="/parent-faq" component={ParentFAQ} />
