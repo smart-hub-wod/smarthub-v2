@@ -207,39 +207,47 @@ p {
   }
 }
 
-/* .shape {
+.slide-top {
+  animation: slideTop 1s cubic-bezier(0.41,-0.32, 0, 1.65);
+}
+
+@keyframes slideTop {
+  0%{
+    margin-top: -300px;
+  }
+  
+}
+
+.shape {
   height: 40px;
   width: 40px;
-  animation: spin  2s ease-in;
-
-} */
-
-.logo-ani {
-  animation: logo-spin 1s linear;
+  position: absolute;
+  animation: spin  2s ease-in infinite alternate;
+  z-index: -1;
 }
 
-/* @keyframes logo-spin {
-  25% {
-    -webkit-transform: rotate(5deg);
-    transform: rotate(23deg);
+@keyframes spin {
+  100%{
+    transform: rotate(360deg);
   }
+  
+}
 
-  50% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+
+@media (max-width: 1000px) {
+  .shape {
+    visibility: hidden;
   }
-
-  75% {
-    -webkit-transform: rotate(-5deg);
-    transform: rotate(-23deg);
+  .mission-res {
+    padding: 1rem 9rem 0 9rem;
   }
-} */
+}
 
-.shape-container {
+/* .shape-container {
   margin-top: 2rem;
-  display: flex;
-  justify-content: space-around;
-}
+} */
+
+/* Home page animation ends */
 
 /* Meet the Team page starts */
 

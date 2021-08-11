@@ -125,26 +125,36 @@ export default function Privacy() {
         {policy.map((elem) => {
           return (
             <>
-              <h2 className="heading-text text-shblue py-4" id={elem.id}>
-                {elem.title}
-              </h2>
-              {elem.title !== "About Shopping" ? (
-                <p> {elem.text} </p>
-              ) : (
-                elem.text.map((shop) => {
-                  return (
-                    <>
-                      <h2
-                        className="subHeading-text text-shblue ps-3 pb-2"
-                        id={shop.id}
-                      >
-                        {shop.title}
-                      </h2>
-                      <p className= "px-5"> {shop.text} </p>
-                    </>
-                  );
-                })
-              )}
+              <div id={elem.id}>
+                <hr
+                  style={{
+                    marginBottom: "80px",
+                    visibility: "hidden"
+                  }}
+                />
+                <h2 className="heading-text text-shblue pb-4">{elem.title}</h2>
+
+                {elem.title !== "About Shopping" ? (
+                  <p> {elem.text} </p>
+                ) : (
+                  elem.text.map((shop) => {
+                    return (
+                      <div id={shop.id}>
+                        <h2 className="subHeading-text text-shblue ps-3 pb-2">
+                          {shop.title}
+                        </h2>
+                        <p className="px-5"> {shop.text} </p>
+                      </div>
+                    );
+                  })
+                )}
+                {/* <hr
+                  style={{
+                    marginBottom: "50px",
+                    borderWidth: "0"
+                  }}
+                /> */}
+              </div>
             </>
           );
         })}
@@ -159,8 +169,6 @@ export default function Privacy() {
           development, loan/rental, access or maintenance of any of the above
           listed products and services.
         </p> */}
-
-        
       </Container>
     </>
   );

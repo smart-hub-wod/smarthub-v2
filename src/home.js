@@ -11,14 +11,6 @@ export default function Home() {
   return (
     // justify-content-center text-center
     <div className="fade-in">
-      {/* <div className="shape-container">
-        <img className="shape" src="../square.jpg" alt="shape-pic" />
-        <img className="shape" src="../triangle.png" alt="shape-pic" />
-        <img className="shape" src="../square.jpg" alt="shape-pic" />
-        <img className="shape" src="../triangle.png" alt="shape-pic" />
-        <img className="shape" src="../square.jpg" alt="shape-pic" />
-        <img className="shape" src="../triangle.png" alt="shape-pic" />
-      </div> */}
       <Container
         fluid
         className="d-flex align-items-center justify-content-center pt-5"
@@ -26,6 +18,37 @@ export default function Home() {
         <Row>
           <Col style={{ paddingTop: "5rem" }}>
             <div className="text-shblue ms-5">
+              <img
+                style={{ left: "25rem", top: "8.11rem" }}
+                className="shape"
+                src="../triangle.png"
+                alt="shape-pic"
+              />
+              <img
+                style={{ left: "50rem", top: "9rem" }}
+                className="shape"
+                src="../square.jpg"
+                alt="shape-pic"
+              />
+              <img
+                style={{ top: "30rem", left: "10rem" }}
+                className="shape"
+                src="../square.jpg"
+                alt="shape-pic"
+              />
+              <img
+                style={{ left: "5rem", top: "6rem" }}
+                className="shape"
+                src="../triangle.png"
+                alt="shape-pic"
+              />
+              <img
+                style={{ top: "25rem", left: "40rem" }}
+                className="shape"
+                src="../square.jpg"
+                alt="shape-pic"
+              />
+
               <h1 className="heading-text" style={{ width: "70%" }}>
                 A Head Start Into the Future
               </h1>
@@ -41,7 +64,30 @@ export default function Home() {
             </div>
           </Col>
           <Col>
-            <img className="logo-ani" src="../land-1pic.png" alt="1 landing page pic" />
+            <img
+              className="slide-top"
+              src="../land-1pic.png"
+              alt="1 landing page pic"
+            />
+
+            <img
+              style={{ right: "3rem", top: "8.11rem" }}
+              className="shape"
+              src="../triangle.png"
+              alt="shape-pic"
+            />
+            <img
+              style={{ top: "17rem", right: "10rem" }}
+              className="shape"
+              src="../square.jpg"
+              alt="shape-pic"
+            />
+            <img
+              style={{ right: "7rem", top: "29rem" }}
+              className="shape"
+              src="../triangle.png"
+              alt="shape-pic"
+            />
           </Col>
         </Row>
       </Container>
@@ -49,10 +95,26 @@ export default function Home() {
         fluid
         className="d-flex justify-content-center text-center py-5 mt-5 is-shblue text-white"
       >
-        <div className="row justify-content-center">
+      <Row className="justify-content-center">
+        <Col lg={2}>
+        <img alt="" src="../book-lover.svg" height="175" />
+  
+        </Col>
+        <Col lg={6} >
+        <h1>Our Mission</h1>
+            <p className="mission-res"> 
+              The mission of Smart Hub is to provide course materials on
+              STEM-related real-life applications such as biomedical
+              engineering, software engineering and quantum computing in a
+              simplified and understandable manner for elementary school
+              children to get a head start on their future interests and
+              careers!
+            </p>
+        </Col>
+      </Row>
+        {/* <div className="row justify-content-center">
           <div className="col-2">
-            <img alt="" src="../book-lover.svg" height="175" />
-          </div>
+                    </div>
           <div className="col-6 align-self-center">
             <h1>Our Mission</h1>
             <p>
@@ -64,7 +126,7 @@ export default function Home() {
               careers!
             </p>
           </div>
-        </div>
+        </div> */}
       </Container>
       <Container
         fluid
