@@ -6,7 +6,7 @@ import firebase from "firebase/app";
 import { useAuth } from "./contexts/AuthContext.js";
 import { useHistory, Link } from "react-router-dom";
 
-export default function Dashboard() {
+export default function ViewCourses() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState();
@@ -60,21 +60,6 @@ export default function Dashboard() {
     return finished.join(" ");
   }
 
-  function viewCourse() {
-    console.log("viewing");
-    //setCourses(courses);
-    if (admin) {
-      console.log("yup ur good");
-      adminRef.get().then((doc) => {
-        const adminCourses = doc.data().courses;
-        if (currentUser.email.split(".")[0] in adminCourses) {
-          setCourses(adminCourses[currentUser.email.split(".")[0]]);
-          console.log(courses);
-        }
-      });
-    }
-  }
-
   async function getUser() {
     setLoading(true);
     await userRef
@@ -106,16 +91,16 @@ export default function Dashboard() {
         console.log("Error getting document:", error);
       })
       .then(() => {
-        // if (admin) {
-        //   console.log("yup ur good");
-        //   adminRef.get().then((doc) => {
-        //     const adminCourses = doc.data().courses;
-        //     if (currentUser.email.split(".")[0] in adminCourses) {
-        //       setCourses(adminCourses[currentUser.email.split(".")[0]]);
-        //       console.log(courses);
-        //     }
-        //   });
-        // }
+        if (admin) {
+          console.log("yup ur good");
+          adminRef.get().then((doc) => {
+            const adminCourses = doc.data().courses;
+            if (currentUser.email.split(".")[0] in adminCourses) {
+              setCourses(adminCourses[currentUser.email.split(".")[0]]);
+              console.log(courses);
+            }
+          });
+        }
       });
     setLoading(false);
     console.log(admin);
@@ -165,9 +150,9 @@ export default function Dashboard() {
                 <Button bsPrefix="button-sh">Add Course</Button>
               </Link>
               <span className="ml-5"> </span>
-              <Button bsPrefix="button-sh" onClick={viewCourse}>
-                View Course
-              </Button>
+              <Link to="add-course">
+                <Button bsPrefix="button-sh">View Courses</Button>
+              </Link>
               <span className="ml-5"> </span>
               {currentUser.email === "dev@smarthub.ca" && (
                 <Link to="add-admin">
@@ -175,7 +160,6 @@ export default function Dashboard() {
                 </Link>
               )}
               <h3 className="text-shblue mt-5">My Courses</h3>
-              <p>Click view courses above to render courses below!</p>
               {courses &&
                 courses.map((c) => {
                   return (
