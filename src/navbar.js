@@ -57,7 +57,7 @@ export default function NavBar() {
               </Nav.Link>
               <Nav.Link>
                 <Link to="/parent-faq" className="link">
-                  For Parents
+                  Parent Zone
                 </Link>
               </Nav.Link>
             </Nav>

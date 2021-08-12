@@ -41,7 +41,7 @@ export default function AddCourse() {
   var storageRef = firebase.storage().ref();
   const lessonref = firebase.firestore().collection("lessons");
   const courseref = firebase.firestore().collection("courses");
-  const checkBoxes = ["kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5"];
+  const checkBoxes = ["kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5", "grade-6", "grade-7", "grade-8"];
 
   function getAdmin() {
     adminRef.get().then((doc) => {
@@ -120,6 +120,13 @@ export default function AddCourse() {
     }
   }
 
+  function titleMaker(title) {
+    let finished = title.split("-");
+    finished.map((word, index) => {
+      finished[index] = word.charAt(0).toUpperCase() + word.slice(1, word.length);
+    });
+    return finished.join(" ");
+  }
   const handleTitle = (e) => {
     setID(e.target.value.replace(/ /g, "-").toLowerCase() + "-" + btoa(dayjs().format()).substring(23, 29));
   };
@@ -250,12 +257,15 @@ export default function AddCourse() {
               </p>
               <Form.Group id="gradelevel" className="mb-3 form-floating" onChange={handleCheck} ref={GradeRef}>
                 <div className="mb-3">
-                  <Form.Check inline label="Kindergarten" name="group1" type="checkbox" id="kindergarten" />
+                  {checkBoxes.map((grade) => {
+                    return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} />;
+                  })}
+                  {/* <Form.Check inline label="Kindergarten" name="group1" type="checkbox" id="kindergarten" />
                   <Form.Check inline label="Grade 1" name="group1" type="checkbox" id="grade-1" />
                   <Form.Check inline label="Grade 2" name="group1" type="checkbox" id="grade-2" />
                   <Form.Check inline label="Grade 3" name="group1" type="checkbox" id="grade-3" />
                   <Form.Check inline label="Grade 4" name="group1" type="checkbox" id="grade-4" />
-                  <Form.Check inline label="Grade 5" name="group1" type="checkbox" id="grade-5" />
+                  <Form.Check inline label="Grade 5" name="group1" type="checkbox" id="grade-5" /> */}
                 </div>
               </Form.Group>
               <p>

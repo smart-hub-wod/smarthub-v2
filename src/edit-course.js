@@ -101,7 +101,7 @@ export default function EditCourse() {
   var storageRef = firebase.storage().ref();
   const lessonref = firebase.firestore().collection("lessons");
   const courseref = firebase.firestore().collection("courses");
-  const checkBoxes = ["kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5"];
+  const checkBoxes = ["kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5", "grade-6", "grade-7", "grade-8"];
 
   function getAdmin() {
     adminRef
