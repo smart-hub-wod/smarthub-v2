@@ -20,37 +20,44 @@ export default function Listing() {
   const { currentUser } = useAuth();
   const cartref = currentUser ? firebase.firestore().collection("users").doc(currentUser.uid) : undefined;
 
-  async function getCourse() {
+  function getCourse() {
     setLoading(true);
-    await courseref
+    courseref
       .get()
       .then((doc) => {
         if (doc.exists) {
           setCourse(doc.data());
-          if (currentUser) {
-            cartref.get().then((kid) => {
-              if (kid.exists) {
-                setKids(kid.data());
-              }
-              setLoading(true);
-              console.log(course);
-              var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
-              coverRef.getDownloadURL().then((URL) => {
-                setUrl(URL);
-              });
-              setLoading(false);
-            });
-          } else {
-            setLoading(true);
-            console.log(course);
-            var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
-            coverRef.getDownloadURL().then((URL) => {
-              setUrl(URL);
-            });
-            setLoading(false);
-          }
-          //console.log(kids, 'Kids')
         }
+      })
+      .then(() => {
+        if (currentUser) {
+          cartref.get().then((kid) => {
+            if (kid.exists) {
+              setKids(kid.data());
+            }
+            // setLoading(true);
+            // console.log(course);
+            // var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
+            // coverRef.getDownloadURL().then((URL) => {
+            //   setUrl(URL);
+            // });
+            // setLoading(false);
+          });
+        }
+        //console.log(kids, 'Kids')
+      })
+      .then(() => {
+        setLoading(true);
+        console.log(course.defaultCover);
+        if (!course.defaultCover) {
+          var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
+          coverRef.getDownloadURL().then((URL) => {
+            setUrl(URL);
+          });
+        } else {
+          setUrl("../defaultcourseimage.png");
+        }
+        setLoading(false);
       })
       .catch((error) => {
         console.log("Error getting document:", error);
@@ -190,7 +197,7 @@ export default function Listing() {
               <br />
               <Card>
                 <Card.Body>
-                  <div class="row mt-3 align-items-center justify-content-center mb-2">
+                  <div className="row mt-3 align-items-center justify-content-center mb-2">
                     <Image src={course.instructor_pic} className="border border-white" roundedCircle style={{ height: "100px", width: "125px" }} />
                     <div className="col-5 text-start">
                       <h6>Course Instructor:</h6>

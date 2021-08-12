@@ -19,7 +19,7 @@ export default function NavBar() {
 
   return (
     <Navbar
-      defaultExpnaded={false}
+      defaultExpanded={false}
       //   onToggle={toggleToggl}
       collapseOnSelect
       className="is-shblue sticky-top fade-in"
@@ -28,12 +28,7 @@ export default function NavBar() {
       <Container fluid className="d-flex justify-content-between">
         <Navbar.Brand>
           <Link to="/">
-            <img
-              src="../smarthub-logo.png"
-              height="50"
-              className="d-inline-block align-top"
-              alt="Smart Hub logo"
-            />
+            <img src="../smarthub-logo.png" height="50" className="d-inline-block align-top" alt="Smart Hub logo" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle
@@ -42,7 +37,7 @@ export default function NavBar() {
           onClick={toggleToggl}
           //   bsPrefix={{ }}
         />
-        <Navbar.Collapse id="smarthub-nav" className="justify-content-between" style={!toggled ? {margin: "0 1rem 0 5rem"} : {}}>
+        <Navbar.Collapse id="smarthub-nav" className="justify-content-between" style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}>
           <div>
             <Nav navbarScroll={true} className="">
               <Nav.Link>
@@ -92,12 +87,7 @@ export default function NavBar() {
                   </Link>
                 </Nav.Link>
                 <Nav.Link className={!toggled ? "bg-light rounded" : ""}>
-                  <Link
-                    to="/signup"
-                    className={
-                      !toggled ? "text-sh-blue nounder" : "text-white nounder"
-                    }
-                  >
+                  <Link to="/signup" className={!toggled ? "text-sh-blue nounder" : "text-white nounder"}>
                     Sign Up
                   </Link>
                 </Nav.Link>

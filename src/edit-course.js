@@ -21,11 +21,13 @@ export default function EditCourse() {
   const coverRef = useRef();
   const orderRef = useRef();
   const GradeRef = useRef();
+  const priceRef = useRef();
   const zoomRef = useRef();
   const [errMessage, setErrMessage] = useState("");
-  const [sync, setSync] = useState("");
-  const [publish, setPublish] = useState("");
+  const [sync, setSync] = useState();
+  const [publish, setPublish] = useState();
   const [grades, setGrades] = useState([]);
+  const [dateField, setDateField] = useState();
   const [course, setCourse] = useState({});
   const [lesson, setLesson] = useState({});
   const [alert, setAlert] = useState();
@@ -65,6 +67,9 @@ export default function EditCourse() {
           .then((doc) => {
             setCourse(doc.data());
             console.log(doc.data());
+            setPublish(doc.data().published);
+            setSync(doc.data().sync);
+            setGrades(doc.data().grades);
           });
       })
       .then(() => {
@@ -73,7 +78,7 @@ export default function EditCourse() {
           .get()
           .then((doc) => {
             setLesson(doc.data());
-            console.log(doc.data());
+            setDateField(doc.data().schedule.split(" "));
           });
       });
   }
@@ -84,15 +89,13 @@ export default function EditCourse() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(JSON.parse(outlineRef.current.value));
-    console.log(EndDateRef.current.value); //2021-08-24
-    console.log(StartTimeRef.current.value); //02:00
+    console.log(publish, "PUBLISHED");
+    console.log(sync, "SYNC");
 
     if (admin === true) {
       const lessonPlan = JSON.parse(outlineRef.current.value);
       lessonPlan["Finished!"] = { complete: "Congrats you did it! Click below to finish the course and access your certificate!" };
       const lessonOrder = orderRef.current.value.split(",");
-      lessonOrder.push("Finished!");
       console.log(lessonPlan, lessonOrder);
       lessonref
         .doc(IDRef.current.value)
@@ -118,7 +121,7 @@ export default function EditCourse() {
               title: titleRef.current.value,
               id: IDRef.current.value,
               description: descriptionRef.current.value,
-              price: 50,
+              price: priceRef.current.value,
               timeline: parseInt(timelineRef.current.value),
               modules: orderRef.current.value.split(",").length,
               published: publish,
@@ -168,7 +171,8 @@ export default function EditCourse() {
 
   const handleSync = (e) => {
     setSync(e.target.id === "yessync");
-    console.log(admin);
+    console.log(e.target.id);
+    console.log(course.sync);
   };
 
   const handlePublish = (e) => {
@@ -214,6 +218,8 @@ export default function EditCourse() {
                   aria-describedby="description"
                   required
                   defaultValue={course.description}
+                  //defaultValue={dayjs(dateField?.slice(3, 6).join(" "), "MMMM D, YYYY").format("YYYY-MM-DD")}
+                  //{dayjs(dateField.slice(3, 6).join(" "), "MMMM D, YYYY").format("YYYY-MM-DD")}
                 />
                 <Form.Label for="InputDescription" className="form-label floatingInput">
                   Course Description
@@ -228,16 +234,32 @@ export default function EditCourse() {
                 {/* <Form.Label for="InputTimeline" className="form-label floatingInput">Timeline</Form.Label> */}
               </InputGroup>
               <p>
+                <strong>Price</strong>
+              </p>
+              <InputGroup id="price" className="mb-3 form-floating">
+                <InputGroup.Text id="basic-addon3">$</InputGroup.Text>
+                <FormControl type="number" aria-describedby="basic-addon3" ref={priceRef} className="form-control" placeholder="Price" id="InputPrice" aria-describedby="price" required defaultValue={50} />
+
+                {/* <Form.Label for="InputTimeline" className="form-label floatingInput">Timeline</Form.Label> */}
+              </InputGroup>
+              <p>
                 <strong>Will this course be synchronous?</strong>
               </p>
               <Form.Group id="sync" className="mb-3 form-floating" onChange={handleSync}>
                 <div className="mb-3">
-                  {course.sync ? <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" checked /> : <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" />}
-                  {!course.sync ? <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" checked /> : <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" />}
+                  <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" defaultChecked={course.sync} />
+                  <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" defaultChecked={!course.sync} />
                 </div>
               </Form.Group>
               <p>
-                <strong>Live Sessions</strong> Only if you selected Yes in the question above
+                <strong>Live Sessions</strong> Only if you selected Yes in the question above!
+                {lesson.sync && (
+                  <p>
+                    <br />
+                    Your Previous Schedule was: <br />
+                    {lesson.schedule}
+                  </p>
+                )}
               </p>
               <Form.Group id="startdate" className="mb-3 form-floating">
                 <Form.Control type="date" ref={StartDateRef} className="form-control" placeholder="Start Date" id="InputStartDate" aria-describedby="id" />
@@ -275,18 +297,8 @@ export default function EditCourse() {
               <Form.Group id="gradelevel" className="mb-3 form-floating" onChange={handleCheck} ref={GradeRef}>
                 <div className="mb-3">
                   {checkBoxes.map((grade) => {
-                    if (course.grades?.includes(grade)) {
-                      return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} checked />;
-                    } else {
-                      return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} />;
-                    }
+                    return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} defaultChecked={course.grades?.includes(grade)} />;
                   })}
-                  {/* <Form.Check inline label="Kindergarten" name="group1" type="checkbox" id="kindergarten" />
-                  <Form.Check inline label="Grade 1" name="group1" type="checkbox" id="grade-1" />
-                  <Form.Check inline label="Grade 2" name="group1" type="checkbox" id="grade-2" />
-                  <Form.Check inline label="Grade 3" name="group1" type="checkbox" id="grade-3" />
-                  <Form.Check inline label="Grade 4" name="group1" type="checkbox" id="grade-4" />
-                  <Form.Check inline label="Grade 5" name="group1" type="checkbox" id="grade-5" /> */}
                 </div>
               </Form.Group>
               <p>
@@ -310,7 +322,7 @@ export default function EditCourse() {
                   id="InputOutline"
                   aria-describedby="content"
                   required
-                  defaultValue={JSON.stringify(lesson.lessonContent)}
+                  defaultValue={JSON.stringify(lesson.lessonContent, undefined, 4)}
                 />
               </Form.Group>
               <p>
@@ -340,7 +352,7 @@ export default function EditCourse() {
                 </Form.Label>
               </Form.Group>
               <p>
-                <strong>Cover Photo</strong> The previous image is saved, ONLY update if you need to change this photo.
+                <strong>Cover Photo</strong> Reupload photo even if previously uploaded
               </p>
               <Form.Group controlId="formFile" className="mb-3" id="coverPicInput">
                 <Form.Control ref={coverRef} type="file" />
@@ -350,8 +362,8 @@ export default function EditCourse() {
               </p>
               <Form.Group id="productionReady" className="mb-3 form-floating" onChange={handlePublish}>
                 <div className="mb-3">
-                  {course.published ? <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" checked /> : <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" />}
-                  {!course.published ? <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" checked /> : <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" />}
+                  <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" defaultChecked={course.published} />
+                  <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" defaultChecked={!course.published} />
                 </div>
               </Form.Group>
               <p>
@@ -365,9 +377,9 @@ export default function EditCourse() {
                 Update Course
               </Button>
             </Form>
-            <Button variant="danger" className="w-100 mt-3" onClick={deleteModal}>
+            {/* <Button variant="danger" className="w-100 mt-3" onClick={deleteModal}>
               Delete Course
-            </Button>
+            </Button> */}
             {alert ? (
               <Alert className="mt-4" variant="success">
                 {alert}
