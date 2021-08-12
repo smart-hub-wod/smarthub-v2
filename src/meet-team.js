@@ -14,52 +14,52 @@ function MeetTeam() {
       name: "Omar Murju",
       intro:
         "Lorem iscelerisque fermentum duiaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelleaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelle faucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pellentesque sit amet porttitor eget dolor. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Praesent tristique magna sit amet purus gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam.",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
+      profileImg: "../Omar+Murji+Photo+-+1Transparent+BG.png1",
     },
   ]);
 
   const members = [
     {
+      name: "Khloe Ramdhan Junseo Kim",
+      team: "Software Internship",
+      contribution: "contribution",
+      profileImg: "../members/",
+    },
+    {
       name: "Junseo Kim",
       team: "Software Internship",
       contribution: "contribution",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
-    },
-    {
-      name: "Khloe Ramdhan",
-      team: "Software Internship",
-      contribution: "contribution",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
+      profileImg: "../members/",
     },
     {
       name: "Zayan Hussain",
       team: "Smarthub Leader",
       contribution: "contribution",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
+      profileImg: "../members/",
     },
     {
       name: "Komal",
       team: "Software Internship",
       contribution: "contribution",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
+      profileImg: "../members/",
     },
     {
       name: "Rachel Zhu",
       team: "Business Development",
       contribution: "contribution",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
+      profileImg: "../members/",
     },
     {
       name: "Anne Yin",
       team: "Business Development",
       contribution: "contribution",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
+      profileImg: "../members/",
     },
     {
       name: "Cassidy West",
       team: "Business Development",
       contribution: "contribution",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
+      profileImg: "../members/",
     },
   ];
 
@@ -76,7 +76,7 @@ function MeetTeam() {
       <Container>
         <h1 className="text-shblue" style={{ margin: "5rem 0" }}> Our Instructors </h1>
         <Row>
-          <Col xs={6}>
+          <Col lg={6} md ={12}>
             <div className="instructor-container is-shblue p-4">
               <img
                 className="instructor-img mb-3"
@@ -88,7 +88,7 @@ function MeetTeam() {
             </div>
           </Col>
 
-          <Col xs={6} id="instructor2">
+          <Col lg={6} md ={12} id="instructor2">
             <div className="instructor-container is-shblue p-4">
               <img
                 className="instructor-img mb-3"
@@ -160,6 +160,82 @@ function MeetTeam() {
           </Col>
           <Col lg={3} md={6}>
           <Card
+              className="text-center card"
+            >
+              <Card.Img variant="top" src={members[0].profileImg} />
+
+              <Card.Title
+                style={{
+                  fontWeight: "600",
+                }}
+                className="my-2"
+              >
+                {members[0].name}
+              </Card.Title>
+
+              <Card.Text className="mb-2">{members[0].team}</Card.Text>
+            </Card>
+          </Col>
+
+          <Col lg={3} md={6}>
+            <Card
+              className="text-center card"
+            >
+              <Card.Img variant="top" src={members[0].profileImg} />
+
+              <Card.Title
+                style={{
+                  fontWeight: "600",
+                }}
+                className="my-2"
+              >
+                {members[0].name}
+              </Card.Title>
+
+              <Card.Text className="mb-2">{members[0].team}</Card.Text>
+            </Card>
+          </Col>
+
+          <Col lg={3} md={6}>
+            <Card
+              className="text-center card"
+            >
+              <Card.Img variant="top" src={members[0].profileImg} />
+
+              <Card.Title
+                style={{
+                  fontWeight: "600",
+                }}
+                className="my-2"
+              >
+                {members[0].name}
+              </Card.Title>
+
+              <Card.Text className="mb-2">{members[0].team}</Card.Text>
+            </Card>
+          </Col>
+
+          <Col lg={3} md={6}>
+            <Card
+              className="text-center card"
+            >
+              <Card.Img variant="top" src={members[0].profileImg} />
+
+              <Card.Title
+                style={{
+                  fontWeight: "600",
+                }}
+                className="my-2"
+              >
+                {members[0].name}
+              </Card.Title>
+
+              <Card.Text className="mb-2">{members[0].team}</Card.Text>
+            </Card>
+          </Col>
+
+          <Col lg={3} md={6}>
+            <Card
               className="text-center card"
             >
               <Card.Img variant="top" src={members[0].profileImg} />
