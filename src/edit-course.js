@@ -26,6 +26,8 @@ export default function EditCourse() {
   const [sync, setSync] = useState("");
   const [publish, setPublish] = useState("");
   const [grades, setGrades] = useState([]);
+  const [course, setCourse] = useState({});
+  const [lesson, setLesson] = useState({});
   const [alert, setAlert] = useState();
   const [admin, setAdmin] = useState(false);
 
@@ -39,17 +41,41 @@ export default function EditCourse() {
   const [ID, setID] = useState("");
   const { currentUser } = useAuth();
 
+  function deleteModal() {
+    console.log("deleting");
+  }
+
   var storageRef = firebase.storage().ref();
   const lessonref = firebase.firestore().collection("lessons");
   const courseref = firebase.firestore().collection("courses");
   const checkBoxes = ["kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5"];
 
   function getAdmin() {
-    adminRef.get().then((doc) => {
-      const eml = currentUser.email.split(".")[0];
-      console.log(doc.data().courses[eml]);
-      setAdmin(doc.data().accounts.includes(currentUser.email) && doc.data().courses[eml].includes(id));
-    });
+    adminRef
+      .get()
+      .then((doc) => {
+        const eml = currentUser.email.split(".")[0];
+        //console.log(doc.data().courses[eml]);
+        setAdmin(doc.data().accounts.includes(currentUser.email) && (doc.data().courses[eml].includes(id) || currentUser.email === "dev@smarthub.ca"));
+      })
+      .then(() => {
+        courseref
+          .doc(id)
+          .get()
+          .then((doc) => {
+            setCourse(doc.data());
+            console.log(doc.data());
+          });
+      })
+      .then(() => {
+        lessonref
+          .doc(id)
+          .get()
+          .then((doc) => {
+            setLesson(doc.data());
+            console.log(doc.data());
+          });
+      });
   }
 
   useEffect(() => {
@@ -70,7 +96,7 @@ export default function EditCourse() {
       console.log(lessonPlan, lessonOrder);
       lessonref
         .doc(IDRef.current.value)
-        .set({
+        .update({
           name: titleRef.current.value,
           lessons: lessonOrder,
           lessonContent: lessonPlan,
@@ -88,7 +114,7 @@ export default function EditCourse() {
           console.log("Document successfully written!");
           courseref
             .doc(IDRef.current.value)
-            .set({
+            .update({
               title: titleRef.current.value,
               id: IDRef.current.value,
               description: descriptionRef.current.value,
@@ -109,12 +135,7 @@ export default function EditCourse() {
                   console.log("Uploaded a blob or file!");
                 });
               }
-              setAlert(`${titleRef.current.value} was successfully added. If you wish to submit another course, refresh this page!`);
-            })
-            .then(() => {
-              adminRef.update({
-                [`courses.${currentUser.email.split(".")[0]}`]: firebase.firestore.FieldValue.arrayUnion(IDRef.current.value),
-              });
+              setAlert(`${titleRef.current.value} was successfully updated. If you wish to update this course again, refresh this page!`);
             });
         })
         .catch((error) => {
@@ -137,6 +158,14 @@ export default function EditCourse() {
     setGrades(gradesArr);
   };
 
+  function titleMaker(title) {
+    let finished = title.split("-");
+    finished.map((word, index) => {
+      finished[index] = word.charAt(0).toUpperCase() + word.slice(1, word.length);
+    });
+    return finished.join(" ");
+  }
+
   const handleSync = (e) => {
     setSync(e.target.id === "yessync");
     console.log(admin);
@@ -157,7 +186,7 @@ export default function EditCourse() {
                 <strong>Course Title</strong> will be the display name. Example: Computer Engineering
               </p>
               <Form.Group id="title" className="mb-3 form-floating">
-                <Form.Control type="text" ref={titleRef} onChange={handleTitle} className="form-control" placeholder="Course Title" id="InputName" aria-describedby="name" required />
+                <Form.Control type="text" ref={titleRef} onChange={handleTitle} className="form-control" placeholder="Course Title" id="InputName" aria-describedby="name" required defaultValue={course.title} readOnly />
                 <Form.Label for="InputName" className="form-label floatingInput">
                   Course Title
                 </Form.Label>
@@ -166,7 +195,7 @@ export default function EditCourse() {
                 <strong>Course ID</strong> should be course name hyphenated and lowercase. Example: computer-engineering
               </p>
               <Form.Group id="courseid" className="mb-3 form-floating">
-                <Form.Control type="text" value={ID} ref={IDRef} className="form-control" placeholder="Course ID" id="InputID" aria-describedby="id" required readOnly />
+                <Form.Control type="text" ref={IDRef} className="form-control" placeholder="Course ID" id="InputID" aria-describedby="id" required readOnly defaultValue={id} />
                 <Form.Label for="InputID" className="form-label floatingInput">
                   Course ID
                 </Form.Label>
@@ -184,6 +213,7 @@ export default function EditCourse() {
                   id="InputDescription"
                   aria-describedby="description"
                   required
+                  defaultValue={course.description}
                 />
                 <Form.Label for="InputDescription" className="form-label floatingInput">
                   Course Description
@@ -193,7 +223,7 @@ export default function EditCourse() {
                 <strong>Expected Duration of Course (in hours)</strong> Example: 10 hours
               </p>
               <InputGroup id="timeline" className="mb-3 form-floating">
-                <FormControl type="number" aria-describedby="basic-addon2" ref={timelineRef} className="form-control" placeholder="Timeline" id="InputTimeline" aria-describedby="timeline" required />
+                <FormControl type="number" aria-describedby="basic-addon2" ref={timelineRef} className="form-control" placeholder="Timeline" id="InputTimeline" aria-describedby="timeline" required defaultValue={course.timeline} />
                 <InputGroup.Text id="basic-addon2">hours</InputGroup.Text>
                 {/* <Form.Label for="InputTimeline" className="form-label floatingInput">Timeline</Form.Label> */}
               </InputGroup>
@@ -202,8 +232,8 @@ export default function EditCourse() {
               </p>
               <Form.Group id="sync" className="mb-3 form-floating" onChange={handleSync}>
                 <div className="mb-3">
-                  <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" />
-                  <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" />
+                  {course.sync ? <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" checked /> : <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" />}
+                  {!course.sync ? <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" checked /> : <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" />}
                 </div>
               </Form.Group>
               <p>
@@ -234,7 +264,7 @@ export default function EditCourse() {
                 </Form.Label>
               </Form.Group>
               <Form.Group id="zoomlink" className="mb-3 form-floating">
-                <Form.Control type="text" ref={zoomRef} className="form-control" placeholder="Zoom Link" id="InputZoom" aria-describedby="id" />
+                <Form.Control type="text" ref={zoomRef} className="form-control" placeholder="Zoom Link" id="InputZoom" aria-describedby="id" defaultValue={lesson.zoom} />
                 <Form.Label for="InputZoom" className="form-label floatingInput">
                   Zoom Link
                 </Form.Label>
@@ -244,12 +274,19 @@ export default function EditCourse() {
               </p>
               <Form.Group id="gradelevel" className="mb-3 form-floating" onChange={handleCheck} ref={GradeRef}>
                 <div className="mb-3">
-                  <Form.Check inline label="Kindergarten" name="group1" type="checkbox" id="kindergarten" />
+                  {checkBoxes.map((grade) => {
+                    if (course.grades?.includes(grade)) {
+                      return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} checked />;
+                    } else {
+                      return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} />;
+                    }
+                  })}
+                  {/* <Form.Check inline label="Kindergarten" name="group1" type="checkbox" id="kindergarten" />
                   <Form.Check inline label="Grade 1" name="group1" type="checkbox" id="grade-1" />
                   <Form.Check inline label="Grade 2" name="group1" type="checkbox" id="grade-2" />
                   <Form.Check inline label="Grade 3" name="group1" type="checkbox" id="grade-3" />
                   <Form.Check inline label="Grade 4" name="group1" type="checkbox" id="grade-4" />
-                  <Form.Check inline label="Grade 5" name="group1" type="checkbox" id="grade-5" />
+                  <Form.Check inline label="Grade 5" name="group1" type="checkbox" id="grade-5" /> */}
                 </div>
               </Form.Group>
               <p>
@@ -273,6 +310,7 @@ export default function EditCourse() {
                   id="InputOutline"
                   aria-describedby="content"
                   required
+                  defaultValue={JSON.stringify(lesson.lessonContent)}
                 />
               </Form.Group>
               <p>
@@ -295,13 +333,14 @@ export default function EditCourse() {
                   id="InputOrder"
                   aria-describedby="order"
                   required
+                  defaultValue={lesson?.lessons?.toString()}
                 />
                 <Form.Label for="InputOrder" className="form-label floatingInput">
                   Course Order
                 </Form.Label>
               </Form.Group>
               <p>
-                <strong>Cover Photo</strong> If not added will be replaced with default image
+                <strong>Cover Photo</strong> The previous image is saved, ONLY update if you need to change this photo.
               </p>
               <Form.Group controlId="formFile" className="mb-3" id="coverPicInput">
                 <Form.Control ref={coverRef} type="file" />
@@ -311,8 +350,8 @@ export default function EditCourse() {
               </p>
               <Form.Group id="productionReady" className="mb-3 form-floating" onChange={handlePublish}>
                 <div className="mb-3">
-                  <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" />
-                  <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" />
+                  {course.published ? <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" checked /> : <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" />}
+                  {!course.published ? <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" checked /> : <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" />}
                 </div>
               </Form.Group>
               <p>
@@ -323,9 +362,12 @@ export default function EditCourse() {
                 Your display name and picture (shown above) associated with this account will be displayed alongside each course. To edit this information visit <Link to="/settings">Settings</Link>
               </p>
               <Button bsPrefix="button-sh" className="w-100" type="submit">
-                Add Course
+                Update Course
               </Button>
             </Form>
+            <Button variant="danger" className="w-100 mt-3" onClick={deleteModal}>
+              Delete Course
+            </Button>
             {alert ? (
               <Alert className="mt-4" variant="success">
                 {alert}

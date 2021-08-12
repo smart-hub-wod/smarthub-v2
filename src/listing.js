@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/storage";
 import { useParams } from "react-router";
-import { Button, Alert, Spinner, Image } from "react-bootstrap";
+import { Button, Alert, Spinner, Image, Badge, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
 
@@ -56,6 +56,14 @@ export default function Listing() {
         console.log("Error getting document:", error);
       });
     setLoading(false);
+  }
+
+  function titleMaker(title) {
+    let finished = title.split("-");
+    finished.map((word, index) => {
+      finished[index] = word.charAt(0).toUpperCase() + word.slice(1, word.length);
+    });
+    return finished.join(" ");
   }
 
   function addCourse() {
@@ -119,16 +127,25 @@ export default function Listing() {
           <h5>
             Includes {course.modules} Learning Modules{course.sync && " And Live Lessons"}!
           </h5>
-          <div class="row justify-content-start mt-3 align-items-center">
+          <h6 className="mb-3">Perfect for:</h6>
+          {course.grades.map((grade) => {
+            return (
+              <>
+                <Badge bsPrefix="button-sh">{titleMaker(grade)}</Badge>
+                <span> </span>
+              </>
+            );
+          })}
+          {/* <div class="row justify-content-start mt-3 align-items-center">
             <Image src={course.instructor_pic} className="border border-white" roundedCircle style={{ height: "100px", width: "100px" }} />
-            <div class="col-4">
+            <div className="col-4">
               <h6>Course Instructor:</h6>
               <h4>
                 {" "}
                 <strong>{course.instructor}</strong>
               </h4>
             </div>
-          </div>
+          </div> */}
         </div>
         {currentUser ? (
           kids ? (
@@ -170,6 +187,21 @@ export default function Listing() {
               <p className="text-shblue mt-1">
                 Only <span className="fs-3 fw-bold">${course.price} </span>
               </p>
+              <br />
+              <Card>
+                <Card.Body>
+                  <div class="row mt-3 align-items-center justify-content-center mb-2">
+                    <Image src={course.instructor_pic} className="border border-white" roundedCircle style={{ height: "100px", width: "125px" }} />
+                    <div className="col-5 text-start">
+                      <h6>Course Instructor:</h6>
+                      <h4>
+                        {" "}
+                        <strong>{course.instructor}</strong>
+                      </h4>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
             </div>
           ) : (
             <h1>Loading...</h1>

@@ -19,6 +19,7 @@ export default function AddCourse() {
   const coverRef = useRef();
   const orderRef = useRef();
   const GradeRef = useRef();
+  const priceRef = useRef();
   const zoomRef = useRef();
   const [errMessage, setErrMessage] = useState("");
   const [sync, setSync] = useState("");
@@ -88,7 +89,7 @@ export default function AddCourse() {
               title: titleRef.current.value,
               id: IDRef.current.value,
               description: descriptionRef.current.value,
-              price: 50,
+              price: priceRef.current.value,
               timeline: parseInt(timelineRef.current.value),
               modules: orderRef.current.value.split(",").length,
               published: publish,
@@ -191,6 +192,15 @@ export default function AddCourse() {
               <InputGroup id="timeline" className="mb-3 form-floating">
                 <FormControl type="number" aria-describedby="basic-addon2" ref={timelineRef} className="form-control" placeholder="Timeline" id="InputTimeline" aria-describedby="timeline" required />
                 <InputGroup.Text id="basic-addon2">hours</InputGroup.Text>
+                {/* <Form.Label for="InputTimeline" className="form-label floatingInput">Timeline</Form.Label> */}
+              </InputGroup>
+              <p>
+                <strong>Price</strong>
+              </p>
+              <InputGroup id="price" className="mb-3 form-floating">
+                <InputGroup.Text id="basic-addon3">$</InputGroup.Text>
+                <FormControl type="number" aria-describedby="basic-addon3" ref={priceRef} className="form-control" placeholder="Price" id="InputPrice" aria-describedby="price" required defaultValue={50} />
+
                 {/* <Form.Label for="InputTimeline" className="form-label floatingInput">Timeline</Form.Label> */}
               </InputGroup>
               <p>
