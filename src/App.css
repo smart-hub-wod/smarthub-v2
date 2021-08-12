@@ -130,7 +130,6 @@ p {
 #contact p {
   color: #0b3f84;
   font-size: 1.3rem;
-
 }
 
 #contact h2 {
@@ -208,31 +207,28 @@ p {
 }
 
 .slide-top {
-  animation: slideTop 1s cubic-bezier(0.41,-0.32, 0, 1.65);
+  animation: slideTop 1s cubic-bezier(0.41, -0.32, 0, 1.65);
 }
 
 @keyframes slideTop {
-  0%{
+  0% {
     margin-top: -300px;
   }
-  
 }
 
 .shape {
   height: 40px;
   width: 40px;
   position: absolute;
-  animation: spin  2s ease-in infinite alternate;
+  animation: spin 2s ease-in infinite alternate;
   z-index: -1;
 }
 
 @keyframes spin {
-  100%{
+  100% {
     transform: rotate(360deg);
   }
-  
 }
-
 
 @media (max-width: 1000px) {
   .shape {
@@ -301,4 +297,4 @@ p {
   transform: rotateY(-180deg);
 }
 
-
+/* Parent Faq start */

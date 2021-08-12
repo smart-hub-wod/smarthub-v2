@@ -76,7 +76,7 @@ export default function Lesson() {
           <>
             <h5 className="text-shblue">This course is synchronous!</h5>
             <p>
-              {course.schedule} at {course.zoom}
+              {course.schedule} at <a href={course.zoom}>{course.zoom}</a>
             </p>
           </>
         ) : (

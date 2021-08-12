@@ -22,11 +22,13 @@ export default function Listing() {
 
   function getCourse() {
     setLoading(true);
+    let defaultIMG = false;
     courseref
       .get()
       .then((doc) => {
         if (doc.exists) {
           setCourse(doc.data());
+          defaultIMG = doc.data().defaultCover;
         }
       })
       .then(() => {
@@ -48,8 +50,8 @@ export default function Listing() {
       })
       .then(() => {
         setLoading(true);
-        console.log(course.defaultCover);
-        if (!course.defaultCover) {
+        console.log(defaultIMG);
+        if (!defaultIMG) {
           var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
           coverRef.getDownloadURL().then((URL) => {
             setUrl(URL);

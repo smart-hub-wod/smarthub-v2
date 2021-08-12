@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from "react";
-import { Form, Button, Card, Alert, InputGroup, FormControl, Image } from "react-bootstrap";
+import { Form, Button, Card, Alert, InputGroup, FormControl, Image, Modal } from "react-bootstrap";
 import firebase from "firebase/app";
 import "firebase/storage";
 import { useAuth } from "./contexts/AuthContext.js";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 
 export default function EditCourse() {
@@ -32,6 +32,12 @@ export default function EditCourse() {
   const [lesson, setLesson] = useState({});
   const [alert, setAlert] = useState();
   const [admin, setAdmin] = useState(false);
+  const history = useHistory();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const adminRef = firebase.firestore().collection("users").doc("admins");
 
@@ -43,8 +49,53 @@ export default function EditCourse() {
   const [ID, setID] = useState("");
   const { currentUser } = useAuth();
 
-  function deleteModal() {
+  function deleteCourse() {
     console.log("deleting");
+    console.log(id);
+    firebase
+      .firestore()
+      .collection("lessons")
+      .doc(id)
+      .delete()
+      .then(() => {
+        console.log("Document successfully deleted!");
+      })
+      .then(() => {
+        firebase
+          .firestore()
+          .collection("courses")
+          .doc(id)
+          .delete()
+          .then(() => {
+            console.log("Document successfully deleted!");
+          });
+      })
+      .then(() => {
+        firebase
+          .firestore()
+          .collection("users")
+          .doc("admins")
+          .update({
+            [`courses.${currentUser.email.split(".")[0]}`]: firebase.firestore.FieldValue.arrayRemove(id),
+          })
+          .then(() => {
+            console.log("Document successfully deleted!");
+          })
+          .then(() => {
+            firebase
+              .storage()
+              .ref()
+              .child(`${id}/${id}.jpeg`)
+              .delete()
+              .then(() => {
+                console.log("file deleted!");
+              });
+          });
+      })
+      .catch((error) => {
+        console.error("Error removing document: ", error);
+      });
+    history.push("/dashboard");
   }
 
   var storageRef = firebase.storage().ref();
@@ -78,7 +129,7 @@ export default function EditCourse() {
           .get()
           .then((doc) => {
             setLesson(doc.data());
-            setDateField(doc.data().schedule.split(" "));
+            //setDateField(doc.data().schedule.split(" "));
           });
       });
   }
@@ -177,6 +228,8 @@ export default function EditCourse() {
 
   const handlePublish = (e) => {
     setPublish(e.target.id === "yespublish");
+    console.log(e.target.id);
+    console.log(course.published);
   };
 
   return (
@@ -190,7 +243,7 @@ export default function EditCourse() {
                 <strong>Course Title</strong> will be the display name. Example: Computer Engineering
               </p>
               <Form.Group id="title" className="mb-3 form-floating">
-                <Form.Control type="text" ref={titleRef} onChange={handleTitle} className="form-control" placeholder="Course Title" id="InputName" aria-describedby="name" required defaultValue={course.title} readOnly />
+                <Form.Control type="text" ref={titleRef} onChange={handleTitle} className="form-control" placeholder="Course Title" id="InputName" aria-describedby="name" required defaultValue={course?.title} readOnly />
                 <Form.Label for="InputName" className="form-label floatingInput">
                   Course Title
                 </Form.Label>
@@ -217,7 +270,7 @@ export default function EditCourse() {
                   id="InputDescription"
                   aria-describedby="description"
                   required
-                  defaultValue={course.description}
+                  defaultValue={course?.description}
                   //defaultValue={dayjs(dateField?.slice(3, 6).join(" "), "MMMM D, YYYY").format("YYYY-MM-DD")}
                   //{dayjs(dateField.slice(3, 6).join(" "), "MMMM D, YYYY").format("YYYY-MM-DD")}
                 />
@@ -229,7 +282,7 @@ export default function EditCourse() {
                 <strong>Expected Duration of Course (in hours)</strong> Example: 10 hours
               </p>
               <InputGroup id="timeline" className="mb-3 form-floating">
-                <FormControl type="number" aria-describedby="basic-addon2" ref={timelineRef} className="form-control" placeholder="Timeline" id="InputTimeline" aria-describedby="timeline" required defaultValue={course.timeline} />
+                <FormControl type="number" aria-describedby="basic-addon2" ref={timelineRef} className="form-control" placeholder="Timeline" id="InputTimeline" aria-describedby="timeline" required defaultValue={course?.timeline} />
                 <InputGroup.Text id="basic-addon2">hours</InputGroup.Text>
                 {/* <Form.Label for="InputTimeline" className="form-label floatingInput">Timeline</Form.Label> */}
               </InputGroup>
@@ -238,7 +291,7 @@ export default function EditCourse() {
               </p>
               <InputGroup id="price" className="mb-3 form-floating">
                 <InputGroup.Text id="basic-addon3">$</InputGroup.Text>
-                <FormControl type="number" aria-describedby="basic-addon3" ref={priceRef} className="form-control" placeholder="Price" id="InputPrice" aria-describedby="price" required defaultValue={50} />
+                <FormControl type="number" aria-describedby="basic-addon3" ref={priceRef} className="form-control" placeholder="Price" id="InputPrice" aria-describedby="price" required defaultValue={course?.price} />
 
                 {/* <Form.Label for="InputTimeline" className="form-label floatingInput">Timeline</Form.Label> */}
               </InputGroup>
@@ -247,8 +300,8 @@ export default function EditCourse() {
               </p>
               <Form.Group id="sync" className="mb-3 form-floating" onChange={handleSync}>
                 <div className="mb-3">
-                  <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" defaultChecked={course.sync} />
-                  <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" defaultChecked={!course.sync} />
+                  <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" defaultChecked={course?.sync} />
+                  <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" defaultChecked={!course?.sync} />
                 </div>
               </Form.Group>
               <p>
@@ -286,7 +339,7 @@ export default function EditCourse() {
                 </Form.Label>
               </Form.Group>
               <Form.Group id="zoomlink" className="mb-3 form-floating">
-                <Form.Control type="text" ref={zoomRef} className="form-control" placeholder="Zoom Link" id="InputZoom" aria-describedby="id" defaultValue={lesson.zoom} />
+                <Form.Control type="text" ref={zoomRef} className="form-control" placeholder="Zoom Link" id="InputZoom" aria-describedby="id" defaultValue={lesson?.zoom} />
                 <Form.Label for="InputZoom" className="form-label floatingInput">
                   Zoom Link
                 </Form.Label>
@@ -297,7 +350,7 @@ export default function EditCourse() {
               <Form.Group id="gradelevel" className="mb-3 form-floating" onChange={handleCheck} ref={GradeRef}>
                 <div className="mb-3">
                   {checkBoxes.map((grade) => {
-                    return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} defaultChecked={course.grades?.includes(grade)} />;
+                    return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} defaultChecked={course?.grades?.includes(grade)} />;
                   })}
                 </div>
               </Form.Group>
@@ -322,7 +375,7 @@ export default function EditCourse() {
                   id="InputOutline"
                   aria-describedby="content"
                   required
-                  defaultValue={JSON.stringify(lesson.lessonContent, undefined, 4)}
+                  defaultValue={JSON.stringify(lesson?.lessonContent, undefined, 4)}
                 />
               </Form.Group>
               <p>
@@ -362,8 +415,8 @@ export default function EditCourse() {
               </p>
               <Form.Group id="productionReady" className="mb-3 form-floating" onChange={handlePublish}>
                 <div className="mb-3">
-                  <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" defaultChecked={course.published} />
-                  <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" defaultChecked={!course.published} />
+                  <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" defaultChecked={course?.published} />
+                  <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" defaultChecked={!course?.published} />
                 </div>
               </Form.Group>
               <p>
@@ -377,9 +430,9 @@ export default function EditCourse() {
                 Update Course
               </Button>
             </Form>
-            {/* <Button variant="danger" className="w-100 mt-3" onClick={deleteModal}>
+            <Button variant="danger" className="w-100 mt-3" onClick={handleShow}>
               Delete Course
-            </Button> */}
+            </Button>
             {alert ? (
               <Alert className="mt-4" variant="success">
                 {alert}
@@ -390,6 +443,21 @@ export default function EditCourse() {
           </Card.Body>
         </Card>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>Are you sure you want to delete this course?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>This is a permanent decision and the course can not be recovered!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteCourse}>
+            Yes delete this course!
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

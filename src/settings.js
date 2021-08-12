@@ -77,13 +77,33 @@ export default function Settings() {
           console.log("Uploaded a blob or file!");
         })
         .then(() => {
-          picRef.getDownloadURL().then((URL) => {
+          picRef.getDownloadURL().then((urllink) => {
             currentUser
               .updateProfile({
-                photoURL: URL,
+                photoURL: urllink,
               })
               .then(() => {
-                setURL(URL);
+                setURL(urllink);
+              })
+              .then(() => {
+                adminRef.get().then((doc) => {
+                  if (doc.data()) {
+                    doc.data().courses[currentUser.email.split(".")[0]].map((c) => {
+                      console.log(c);
+                      firebase
+                        .firestore()
+                        .collection("courses")
+                        .doc(c)
+                        .update({
+                          [`instructor_pic`]: urllink,
+                          [`instructor`]: nameRef.current.value,
+                        })
+                        .then(() => {
+                          console.log("Document successfully deleted!");
+                        });
+                    });
+                  }
+                });
               });
           });
         });
@@ -106,12 +126,16 @@ export default function Settings() {
                 </div>
                 <Form.Group controlId="formFile" className="mb-2">
                   <Form.Label>
-                    <strong>Replace Profile Image {">"}</strong>
+                    <strong>Select new Profile Image {">"}</strong>
                   </Form.Label>
                   <Form.Control ref={coverRef} type="file" />
                 </Form.Group>
+                <p>
+                  Upload a photo above and click Replace Image below to save changes. Wait until your profile picture uploads before exiting this page. If you are updating your display name, you must also click the button below in addition to the Update Profile button to save changes across all of
+                  your courses.
+                </p>
                 <Button bsPrefix="button-sh" className="mb-3" onClick={handleImage}>
-                  Replace Image
+                  Replace Image and Update Display Name
                 </Button>
               </>
             )}
