@@ -332,3 +332,48 @@ p {
   }
 }
 /* Parent Faq start */
+
+
+/* About us page begins  */
+.top-catcher {
+  height: 400px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
+.value-section {
+  background-color: #0b3f84;
+  color: white;
+  
+  
+}
+
+.value-container {
+
+}
+
+.value-section .row {
+  text-align: center;
+  color: black;
+}
+
+.value-section .row2 {
+  margin-top: 2rem;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.row2  .card {
+  width: 60%;
+  
+  
+}
+
+.st-meet-team {
+  /* background-color: aqua; */
+  
+}
