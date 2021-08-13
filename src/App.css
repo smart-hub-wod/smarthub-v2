@@ -118,7 +118,7 @@ p {
 }
 
 .auth-card {
-  margin: 3rem 10rem;
+  margin: 0 10rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 20px 0px;
   width: 70%;
 }
