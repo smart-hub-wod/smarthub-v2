@@ -108,18 +108,24 @@ p {
 
 /*  Login/ Signup appearence start */
 .auth-container {
+  margin-top: 5rem;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  
 }
 
 .auth-btn {
   width: 25%;
   padding: 0.8rem 0;
+  min-width: 132px;
+  
 }
 
 .auth-card {
-  margin: 0 10rem;
+  /* margin: 0 10rem; */
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 20px 0px;
-  width: 70%;
+  width: 65%;
 }
 
 /* Dashboard starts  */

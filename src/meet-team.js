@@ -27,7 +27,7 @@ function MeetTeam() {
       name: "Zayan Hussain",
       team: "Smarthub Leader",
       contribution: "contribution",
-      profileImg: "../members/komal.png",
+      profileImg: "../members/zayan.jpg",
     },
     {
       name: "Khloe Ramdhan",
@@ -77,6 +77,7 @@ function MeetTeam() {
       contribution: "contribution",
       profileImg: "../members/cassidy.png",
     },
+
     // {
     //   name: "Aryaan",
     //   team: "Business Development",
