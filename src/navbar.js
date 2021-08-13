@@ -22,7 +22,7 @@ export default function NavBar() {
       defaultExpanded={false}
       //   onToggle={toggleToggl}
       collapseOnSelect
-      className="is-shblue sticky-top fade-in"
+      className="is-shblue sticky-top"
       expand="md"
     >
       <Container fluid className="d-flex justify-content-between">

@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     // justify-content-center text-center
-    <div className="fade-in">
+    <div >
       <Container
         fluid
         className="d-flex align-items-center justify-content-center pt-5"
@@ -24,12 +24,12 @@ export default function Home() {
                 src="../triangle.png"
                 alt="shape-pic"
               />
-              <img
-                style={{ left: "50rem", top: "9rem" }}
+              {/* <img
+                style={{ left: "45rem", top: "9rem" }}
                 className="shape"
                 src="../square.jpg"
                 alt="shape-pic"
-              />
+              /> */}
               <img
                 style={{ top: "30rem", left: "10rem" }}
                 className="shape"
