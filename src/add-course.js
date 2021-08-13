@@ -158,7 +158,7 @@ export default function AddCourse() {
             <h1 className="text-center text-shblue">Add New Course</h1>
             <Form onSubmit={handleSubmit}>
               <p>
-                <strong>Course Title</strong> will be the display name. Example: Computer Engineering
+                <strong>Course Title</strong> will be the display name and cannot be changed after submitting. Example: Computer Engineering
               </p>
               <Form.Group id="title" className="mb-3 form-floating">
                 <Form.Control type="text" ref={titleRef} onChange={handleTitle} className="form-control" placeholder="Course Title" id="InputName" aria-describedby="name" required />
@@ -167,7 +167,7 @@ export default function AddCourse() {
                 </Form.Label>
               </Form.Group>
               <p>
-                <strong>Course ID</strong> should be course name hyphenated and lowercase. Example: computer-engineering
+                <strong>Course ID</strong>
               </p>
               <Form.Group id="courseid" className="mb-3 form-floating">
                 <Form.Control type="text" value={ID} ref={IDRef} className="form-control" placeholder="Course ID" id="InputID" aria-describedby="id" required readOnly />
@@ -223,31 +223,31 @@ export default function AddCourse() {
                 <strong>Live Sessions</strong> Only if you selected Yes in the question above
               </p>
               <Form.Group id="startdate" className="mb-3 form-floating">
-                <Form.Control type="date" ref={StartDateRef} className="form-control" placeholder="Start Date" id="InputStartDate" aria-describedby="id" />
+                <Form.Control type="date" ref={StartDateRef} className="form-control" placeholder="Start Date" id="InputStartDate" aria-describedby="start date" required={sync} />
                 <Form.Label for="InputStartDate" className="form-label floatingInput">
                   Start Date
                 </Form.Label>
               </Form.Group>
               <Form.Group id="enddate" className="mb-3 form-floating">
-                <Form.Control type="date" ref={EndDateRef} className="form-control" placeholder="End Date" id="InputEndDate" aria-describedby="id" />
+                <Form.Control type="date" ref={EndDateRef} className="form-control" placeholder="End Date" id="InputEndDate" aria-describedby="end date" required={sync} />
                 <Form.Label for="InputEndDate" className="form-label floatingInput">
                   End Date
                 </Form.Label>
               </Form.Group>
               <Form.Group id="starttime" className="mb-3 form-floating">
-                <Form.Control type="time" ref={StartTimeRef} className="form-control" placeholder="Start Time" id="InputStartTime" aria-describedby="id" />
+                <Form.Control type="time" ref={StartTimeRef} className="form-control" placeholder="Start Time" id="InputStartTime" aria-describedby="start time" required={sync} />
                 <Form.Label for="InputStartTime" className="form-label floatingInput">
-                  Start Date
+                  Start Time
                 </Form.Label>
               </Form.Group>
               <Form.Group id="endtime" className="mb-3 form-floating">
-                <Form.Control type="time" ref={EndTimeRef} className="form-control" placeholder="End Time" id="InputEndTime" aria-describedby="id" />
+                <Form.Control type="time" ref={EndTimeRef} className="form-control" placeholder="End Time" id="InputEndTime" aria-describedby="end time" required={sync} />
                 <Form.Label for="InputEndTime" className="form-label floatingInput">
-                  End Date
+                  End Time
                 </Form.Label>
               </Form.Group>
               <Form.Group id="zoomlink" className="mb-3 form-floating">
-                <Form.Control type="text" ref={zoomRef} className="form-control" placeholder="Zoom Link" id="InputZoom" aria-describedby="id" />
+                <Form.Control type="text" ref={zoomRef} className="form-control" placeholder="Zoom Link" id="InputZoom" aria-describedby="zoom link" required={sync} />
                 <Form.Label for="InputZoom" className="form-label floatingInput">
                   Zoom Link
                 </Form.Label>

@@ -309,6 +309,8 @@ export default function EditCourse() {
                 {lesson.sync && (
                   <p>
                     <br />
+                    You must add the schedule again before saving!
+                    <br />
                     Your Previous Schedule was: <br />
                     {lesson.schedule}
                   </p>

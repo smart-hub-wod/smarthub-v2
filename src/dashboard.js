@@ -169,6 +169,11 @@ export default function Dashboard() {
                 View Course
               </Button>
               <span className="ml-5"> </span>
+
+              <Button bsPrefix="button-sh" href="https://www.notion.so/Adding-a-Course-e3cda0b54b4d49b8bd1dbd56f3a6d18a">
+                Adding/Editing Course Guide
+              </Button>
+              <span className="ml-5"> </span>
               {currentUser.email === "dev@smarthub.ca" && (
                 <Link to="add-admin">
                   <Button bsPrefix="button-sh">Add Admins</Button>
