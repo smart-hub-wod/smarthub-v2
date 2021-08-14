@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
 
@@ -95,13 +95,15 @@ export default function NavBar() {
                     Log In
                   </Link>
                 </Nav.Link>
-                <Nav.Link className={!toggled ? "bg-light rounded" : ""}>
+                <Nav.Link
+                  className="is-white rounded sign-up"
+
+                  // className={toggled ? "text-white" : ""}
+                >
                   <Link
                     to="/signup"
-                    onMouseOver=""
-                    onMouseLeave=""
                     className={
-                      !toggled ? "text-sh-blue nounder" : "text-white nounder"
+                      !toggled ? "text-sh-blue nounder" : "text-shblue nounder"
                     }
                   >
                     Sign Up

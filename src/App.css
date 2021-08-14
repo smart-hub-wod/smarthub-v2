@@ -19,7 +19,7 @@ p {
 }
 
 .is-white {
-  background-color: white;
+  background-color: white!important;
 }
 
 .heading-text {
@@ -42,6 +42,15 @@ p {
 .link {
   text-decoration: none;
   color: #fff;
+}
+.signup-nav {
+  border: 5px solid #0b3f84;
+  transition-property: ease-in;
+  transition-delay: 0ms;
+}
+.signup-nav:hover {
+  border: 5px solid #0f53ba83;
+  
 }
 
 
@@ -68,10 +77,31 @@ p {
 }
 
 #footer .nav-text {
-  font-size: 1rem;
+  font-size: 0.9rem;
   border-left-width: 0;
-  border-right-width: 5px;
+  border-right-width: 3px;
+  /* max-height: auto; */
 }
+
+#footer .logo {
+  width: 300px;
+  height: 60px;
+  object-fit: cover;
+
+}
+
+#footer ul {
+  list-style: none;
+}
+
+#footer h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#footer 
+
+/* footer, navbar ends */
 
 /* Parent Page */
 .sh-link {
@@ -285,7 +315,12 @@ p {
 
 #instructor2 > .instructor-container {
   transform: rotate(10.42deg);
-  animation: instructorSpin2 0.9s ease-in;
+  /* animation: instructorSpin2 0.9s ease-in; */
+}
+
+[data-aos= "instructorSpin1"] {
+  
+  
 }
 
 @keyframes instructorSpin1 {
@@ -304,7 +339,7 @@ p {
   float: left;
   width: 45%;
   height: auto;
-
+  
   /* border: 5px solid brown; */
   /* background-color: aqua; */
 }
@@ -356,7 +391,7 @@ p {
 /* About us page begins  */
 
 .top-catcher {
-  height: 700px;
+  height: 100vh;
   color: white;
   display: flex;
   width: 100%;

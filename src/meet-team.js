@@ -20,6 +20,12 @@ function MeetTeam() {
         "Lorem iscelerisque fermentum duiaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelleaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelle faucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pellentesque sit amet porttitor eget dolor. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Praesent tristique magna sit amet purus gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam.",
       profileImg: "../instructors/alikhan.png",
     },
+    {
+      name: "Anila Shawkat",
+      intro:
+        "Lorem iscelerisque fermentum duiaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelleaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelle faucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pellentesque sit amet porttitor eget dolor. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Praesent tristique magna sit amet purus gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam.",
+      profileImg: "../instructors/anila.png",
+    },
   ]);
 
   const members = [
@@ -106,15 +112,15 @@ function MeetTeam() {
 
   return (
     <div id="meet-team">
-      <h1
+      {/* <h1
         className="text-center text-shblue mb-5"
         style={{ marginTop: "5rem", fontSize: "3rem", textAlign: "center" }}
       >
         {" "}
         Meet Our Team{" "}
-      </h1>
+      </h1> */}
       <Container>
-        <h1 className="text-shblue" style={{ margin: "5rem 0 0 0" }}>
+        <h1 className="text-shblue" style={{ fontSize: "3rem" }}>
           {" "}
           Our Instructors{" "}
         </h1>
@@ -126,7 +132,7 @@ function MeetTeam() {
 
             return (
               <>
-                {index == 0 ? (
+                {index % 2 === 0 ? (
                   <Col as="div" md={12} className="mt-5 col-j-6">
                     <div className="instructor-container is-shblue p-4">
                       <img
