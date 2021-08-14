@@ -3,14 +3,9 @@ import { Container, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  // making the squre and triangle reducing function for responsive
-  // function sqTr() {
-  //     if()
-  // }
-
   return (
     // justify-content-center text-center
-    <div >
+    <div>
       <Container
         fluid
         className="d-flex align-items-center justify-content-center pt-5"
@@ -95,14 +90,13 @@ export default function Home() {
         fluid
         className="d-flex justify-content-center text-center py-5 mt-5 is-shblue text-white"
       >
-      <Row className="justify-content-center">
-        <Col lg={2}>
-        <img alt="" src="../book-lover.svg" height="175" />
-  
-        </Col>
-        <Col lg={6} >
-        <h1>Our Mission</h1>
-            <p className="mission-res"> 
+        <Row className="justify-content-center">
+          <Col lg={2}>
+            <img alt="" src="../book-lover.svg" height="175" />
+          </Col>
+          <Col lg={6}>
+            <h1>Our Mission</h1>
+            <p className="mission-res">
               The mission of Smart Hub is to provide course materials on
               STEM-related real-life applications such as biomedical
               engineering, software engineering and quantum computing in a
@@ -110,8 +104,8 @@ export default function Home() {
               children to get a head start on their future interests and
               careers!
             </p>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
         {/* <div className="row justify-content-center">
           <div className="col-2">
                     </div>

@@ -18,6 +18,10 @@ p {
   background-color: #0b3f84 !important;
 }
 
+.is-white {
+  background-color: white;
+}
+
 .heading-text {
   font-size: 2rem;
 }
@@ -52,7 +56,6 @@ p {
   color: #fe5c36;
 }
 
-/* About Us */
 
 /* Parent Page */
 .sh-link {
@@ -335,14 +338,35 @@ p {
 
 
 /* About us page begins  */
+
 .top-catcher {
-  height: 400px;
+  height: 700px;
   color: white;
   display: flex;
+  width: 100%;
   justify-content: center;
-  align-items: center;
+  background-attachment: fixed;
+  /* background-position: center; */
+  /* below two are intuitive */
+  background-repeat: no-repeat;
+  background-size: cover;
   
   
+}
+
+#about-us .card {
+  background-color: #0b3f84;
+  color: white;
+  border: none;
+  display: flex;
+  margin: 0 4.5rem;
+  
+}
+
+#about-us .card-title {
+  font-weight: 600;
+  font-size: 1.6rem;
+
 }
 
 .value-section {
@@ -369,11 +393,7 @@ p {
 
 .row2  .card {
   width: 60%;
+  margin: 0 5rem!important;
   
-  
-}
-
-.st-meet-team {
-  /* background-color: aqua; */
   
 }
