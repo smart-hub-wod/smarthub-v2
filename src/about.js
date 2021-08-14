@@ -13,7 +13,7 @@ export default function About() {
         className="top-catcher"
         style={{ backgroundImage: "url(../Shapes_3.gif)" }}
       >
-        <h1 style={{ marginTop: "10rem", fontSize: "3rem", width: "70%" }}>
+        <h1 style={{ marginTop: "10rem", fontSize: "4rem", width: "70%" }}>
           {" "}
           SmartHub is Our Solution To One Of The Educational Problem{" "}
         </h1>
@@ -25,7 +25,7 @@ export default function About() {
               <Col md={6}>
                 <h2
                   className="text-shblue mt-5 mb-3"
-                  style={{ fontWeight: "800" }}
+                  style={{ fontWeight: "800", fontSize: "2.5rem" }}
                 >
                   {" "}
                   Who We Are{" "}
@@ -66,7 +66,10 @@ export default function About() {
 
       <section className="value-section">
         <Container className="value-container py-5">
-          <h2 className="text-white mt-2 mb-5" style={{ fontWeight: "800" }}>
+          <h2
+            className="text-white text-center mt-2 mb-5"
+            style={{ fontWeight: "800", fontSize: "3rem" }}
+          >
             {" "}
             What We Focus{" "}
           </h2>

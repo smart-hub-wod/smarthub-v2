@@ -44,6 +44,7 @@ p {
   color: #fff;
 }
 
+
 .iconstext {
   font-size: 10px;
 }
@@ -52,10 +53,25 @@ p {
   text-decoration: none;
 }
 
-.link:hover {
-  color: #fe5c36;
+.nav-text {
+  font-size: 1.2rem;
+  border: 0 solid white;
+  border-left-width: 5px;
+  
 }
 
+.nav-text:hover {
+  border-radius: 10px;
+  background-color: #fe5c36;
+  color: white!important;
+   
+}
+
+#footer .nav-text {
+  font-size: 1rem;
+  border-left-width: 0;
+  border-right-width: 5px;
+}
 
 /* Parent Page */
 .sh-link {

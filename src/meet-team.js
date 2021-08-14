@@ -77,24 +77,24 @@ function MeetTeam() {
       contribution: "contribution",
       profileImg: "../members/cassidy.png",
     },
-    {
-      name: "Abeer Thayani",
-      team: "Business Development Associates",
-      contribution: "contribution",
-      profileImg: "../members/abeer.png",
-    },
-    {
-      name: "Carolyn Huang",
-      team: "Business Development Associates",
-      contribution: "contribution",
-      profileImg: "../members/cheng.png",
-    },
-    {
-      name: "Samad Hemani",
-      team: "Business Development Associates",
-      contribution: "contribution",
-      profileImg: "../members/samad.png",
-    },
+    // {
+    //   name: "Abeer Thayani",
+    //   team: "Business Development Associates",
+    //   contribution: "contribution",
+    //   profileImg: "../members/abeer.png",
+    // },
+    // {
+    //   name: "Carolyn Huang",
+    //   team: "Business Development Associates",
+    //   contribution: "contribution",
+    //   profileImg: "../members/cheng.png",
+    // },
+    // {
+    //   name: "Samad Hemani",
+    //   team: "Business Development Associates",
+    //   contribution: "contribution",
+    //   profileImg: "../members/samad.png",
+    // },
 
     // {
     //   name: "Aryaan",
@@ -108,7 +108,7 @@ function MeetTeam() {
     <div id="meet-team">
       <h1
         className="text-center text-shblue mb-5"
-        style={{ marginTop: "5rem", fontSize: "3rem" }}
+        style={{ marginTop: "5rem", fontSize: "3rem", textAlign: "center" }}
       >
         {" "}
         Meet Our Team{" "}
