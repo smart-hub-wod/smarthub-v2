@@ -13,6 +13,7 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [kids, setKids] = useState();
   const [url, setUrl] = useState("");
+  const [confirm, setConfirm] = useState();
   var storageRef = firebase.storage();
   //var coverRef = firebase.storage().ref(`${id}/software-engineering.jpeg`);
 
@@ -89,6 +90,9 @@ export default function Listing() {
             [`cart.${nameBar.value}`]: firebase.firestore.FieldValue.arrayUnion(course.id),
             ["cartTotal"]: firebase.firestore.FieldValue.increment(course.price),
           });
+          setConfirm(`Success! Course was added for ${nameBar.value}!`);
+        } else {
+          setConfirm(`Course has already been added for ${nameBar.value}! Check your cart to purchase!`);
         }
       }
     });
@@ -133,7 +137,7 @@ export default function Listing() {
       <div className="row justify-content-center my-4">
         <div className="col-6 text-white is-shblue p-4 rounded">
           <p>{course.description}</p>
-          <h5>
+          <h5 className="mt-3">
             Includes {course.modules} Learning Modules{course.sync && " And Live Lessons"}!
           </h5>
           <h6 className="mb-3">Perfect for:</h6>
@@ -156,75 +160,80 @@ export default function Listing() {
             </div>
           </div> */}
         </div>
-        {currentUser ? (
-          kids ? (
-            <div className="col-4 text-center">
-              {kids ? (
-                Object.keys(kids["children"]).length > 0 ? (
-                  <select className="form-select mb-3" defaultValue="0" aria-label="Default select example" id="nameSelect">
-                    {kids ? (
-                      Object.keys(kids["children"]).map((kid) => {
-                        return (
-                          <option value={kids["children"][kid]["name"]} key={kid}>
-                            {kids["children"][kid]["name"]}
-                          </option>
-                        );
-                      })
-                    ) : (
-                      <h1>Loading</h1>
-                    )}
-                  </select>
+        <div className="col-4 text-center">
+          {confirm && <Alert variant="success">{confirm}</Alert>}
+          {currentUser ? (
+            kids ? (
+              <div>
+                {kids ? (
+                  Object.keys(kids["children"]).length > 0 ? (
+                    <select className="form-select mb-3" defaultValue="0" aria-label="Default select example" id="nameSelect">
+                      {kids ? (
+                        Object.keys(kids["children"]).map((kid) => {
+                          return (
+                            <option value={kids["children"][kid]["name"]} key={kid}>
+                              {kids["children"][kid]["name"]}
+                            </option>
+                          );
+                        })
+                      ) : (
+                        <h1>Loading</h1>
+                      )}
+                    </select>
+                  ) : (
+                    <Alert variant={"primary"}>Add a student to your account to purchase courses!</Alert>
+                  )
                 ) : (
-                  <Alert variant={"primary"}>Add a student to your account to purchase courses!</Alert>
-                )
-              ) : (
-                <p>Loading</p>
-              )}
-              {kids ? (
-                Object.keys(kids["children"]).length > 0 ? (
-                  <Button bsPrefix="button-sh" onClick={addCourse}>
-                    Add to Cart
-                  </Button>
+                  <p>Loading</p>
+                )}
+                {kids ? (
+                  Object.keys(kids["children"]).length > 0 ? (
+                    <Button bsPrefix="button-sh" onClick={addCourse}>
+                      Add to Cart
+                    </Button>
+                  ) : (
+                    <Button variant="secondary" disabled>
+                      Add to Cart
+                    </Button>
+                  )
                 ) : (
-                  <Button variant="secondary" disabled>
-                    Add to Cart
-                  </Button>
-                )
-              ) : (
-                <p>Loading</p>
-              )}
-              <p className="text-shblue mt-1">
-                Only <span className="fs-3 fw-bold">${course.price} </span>
-              </p>
-              <br />
-              <Card>
-                <Card.Body>
-                  <div className="row mt-3 align-items-center justify-content-center mb-2">
-                    <Image src={course.instructor_pic} className="border border-white" roundedCircle style={{ height: "100px", width: "125px" }} />
-                    <div className="col-5 text-start">
-                      <h6>Course Instructor:</h6>
-                      <h4>
-                        {" "}
-                        <strong>{course.instructor}</strong>
-                      </h4>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </div>
+                  <p>Loading</p>
+                )}
+                <p className="text-shblue mt-1">
+                  Only <span className="fs-3 fw-bold">${course.price} </span>
+                </p>
+                <br />
+              </div> //
+            ) : (
+              <h1>Loading...</h1>
+            )
           ) : (
-            <h1>Loading...</h1>
-          )
-        ) : (
-          <div className="col-4 text-center">
-            <Alert className="" variant={"primary"}>
-              Login to purchase courses!
-            </Alert>
-            <Button variant="secondary" disabled>
-              Add to Cart
-            </Button>{" "}
-          </div>
-        )}
+            <>
+              <div className="mb-3">
+                <Alert className="" variant={"primary"}>
+                  Login to purchase courses!
+                </Alert>
+                <Button variant="secondary" disabled>
+                  Add to Cart
+                </Button>{" "}
+              </div>
+            </>
+          )}
+          <Card>
+            <Card.Body>
+              <div className="row mt-3 align-items-center justify-content-center mb-2">
+                <Image src={course.instructor_pic} className="border border-white" roundedCircle style={{ height: "100px", width: "125px" }} />
+                <div className="col-5 text-start">
+                  <h6>Course Instructor:</h6>
+                  <h4>
+                    {" "}
+                    <strong>{course.instructor}</strong>
+                  </h4>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+        </div>
       </div>
     </>
   );

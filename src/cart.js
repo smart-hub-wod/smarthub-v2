@@ -42,7 +42,7 @@ export default function Cart() {
     setLoading(false);
   }
 
-  const deleteCourse = (id, child) => {
+  const deleteCourse = (id, child, price) => {
     console.log(`deleting ${id} for ${child}`);
     firebase
       .firestore()
@@ -50,10 +50,11 @@ export default function Cart() {
       .doc(currentUser.uid)
       .update({
         [`cart.${child}`]: firebase.firestore.FieldValue.arrayRemove(id),
-        ["cartTotal"]: firebase.firestore.FieldValue.increment(-50),
+        ["cartTotal"]: firebase.firestore.FieldValue.increment(-1 * price),
       })
       .then(() => {
         console.log("Document successfully deleted!");
+        getCart();
       });
   };
 
@@ -73,14 +74,14 @@ export default function Cart() {
           if (courses[kid].length > 0) {
             return (
               <>
-                <h5>{kid}</h5>
+                <h5 className="mt-4">{kid}</h5>
                 <ChildCart kidCourses={courses[kid]} childName={kid} delete={deleteCourse} />
               </>
             );
           } else {
             return (
               <>
-                <h5>{kid}</h5>
+                <h5 className="mt-4">{kid}</h5>
                 <p>No courses found!</p>
               </>
             );
@@ -100,15 +101,29 @@ export default function Cart() {
 function ChildCart(props) {
   const courseref = firebase.firestore().collection("courses");
   const c = props.kidCourses;
-  const docInfo = [];
-  c.map((course) => {
-    courseref
-      .doc(course)
-      .get()
-      .then((doc) => {
-        docInfo.push(doc.data().title);
-      });
-  });
+
+  const [prices, setPrices] = useState([0]);
+  let docInfo = [];
+  function getPrices() {
+    docInfo = [];
+    c.map((course) => {
+      courseref
+        .doc(course)
+        .get()
+        .then((doc) => {
+          docInfo.push(doc.data().title);
+          console.log(doc.data().price);
+        });
+    });
+    setPrices(docInfo);
+  }
+
+  function setNewPrice(pric, index) {
+    const pri = prices;
+    pri[index] = pric;
+    setPrices(pri);
+  }
+
   // console.log(docInfo)
 
   function titleMaker(title) {
@@ -120,15 +135,30 @@ function ChildCart(props) {
     return finished.join(" ");
   }
 
+  useEffect(() => {
+    getPrices();
+  }, []);
+
   return (
     <>
       {c.length > 0 &&
-        c.map((course) => {
+        c.map((course, index) => {
+          courseref
+            .doc(course)
+            .get()
+            .then((doc) => {
+              setNewPrice(doc.data().price, index);
+            });
           return (
-            <Card className="pt-3 mx-5 mb-3">
+            <Card className="py-3 mx-5 mb-3">
               <div className="d-flex justify-content-between">
                 <h3 className="text-shblue mx-3">{titleMaker(course)}</h3>
-                <XCircle onClick={() => props.delete(course, props.childName)} className="float-end text-shblue mx-3" size={30} />
+                <div>
+                  <span className="text-shblue fs-3 fw-bold">${prices[index]}</span>
+                  <span>
+                    <XCircle onClick={() => props.delete(course, props.childName, prices[index])} style={{ cursor: "pointer" }} className="float-end text-shblue mx-3" size={30} />
+                  </span>
+                </div>
               </div>
               <div className="row">
                 <Link to={`/course-listing/${course}`}>
