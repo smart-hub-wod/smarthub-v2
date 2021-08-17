@@ -1,10 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Card, Button, Alert, Modal, Form } from "react-bootstrap";
-// import firebase from './firebase'
-import firebase from "firebase/app";
+import firebase from "./firebase";
+
+import app from "firebase/app";
 
 import { useAuth } from "./contexts/AuthContext.js";
 import { useHistory, Link } from "react-router-dom";
+
+var i;
 
 export default function Dashboard() {
   const [error, setError] = useState("");
@@ -23,6 +26,53 @@ export default function Dashboard() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // here
+
+  const pinRef = useRef();
+  const [delAlert, setDelAlert] = useState();
+
+  // del modal components
+  const [delShow, setDelShow] = useState(false);
+  const handleDelClose = () => {
+    setDelShow(false);
+  };
+
+  const [delKey, setDelKey] = useState();
+
+  const handleDelShow = (e) => {
+    setDelShow(true);
+    // console.log(typeof e.target.id);
+    setDelKey(e.target.id.toString());
+  };
+
+  async function deleteChild() {
+    // console.log(i);
+    // userRef.update({
+    //   [`cart.${childName}`]: NaN,
+    //   [`children.${i}`]: NaN,
+    // });
+    const childName = await user.children[delKey].name;
+
+    try {
+      await userRef.update({
+        [`cart.${childName}`]: app.firestore.FieldValue.delete(),
+        [`children.${delKey}`]: app.firestore.FieldValue.delete(),
+      });
+
+      setDelAlert("Student was successfully deleted");
+    } catch {
+      setError("Student could not be deleted");
+    }
+  }
+
+  async function removeDelAlert() {
+    setTimeout(() => {
+      setDelAlert("");
+    }, 3000);
+  }
+
+  // end
 
   function handleChild() {
     console.log(user.children);
@@ -55,7 +105,8 @@ export default function Dashboard() {
     let finished = title.split("-");
     finished.pop();
     finished.map((word, index) => {
-      finished[index] = word.charAt(0).toUpperCase() + word.slice(1, word.length);
+      finished[index] =
+        word.charAt(0).toUpperCase() + word.slice(1, word.length);
     });
     return finished.join(" ");
   }
@@ -146,14 +197,21 @@ export default function Dashboard() {
               <h6>Welcome!</h6>
               <h1 className="text-shblue">{currentUser.displayName}</h1>
               <p>Tip: Change your display name in settings!</p>
-              <p>Welcome! Here is your dashboard to manage your students! Here you can manage and access each student’s account. </p>
+              <p>
+                Welcome! Here is your dashboard to manage your students! Here
+                you can manage and access each student’s account.{" "}
+              </p>
               <br />
               <div className="row justify-content-between">
                 <div className="col-4">
                   <h3 className="text-shblue">My Students</h3>
                 </div>
                 <div className="col-4">
-                  <Button bsPrefix="button-sh" className="float-end" onClick={handleShow}>
+                  <Button
+                    bsPrefix="button-sh"
+                    className="float-end"
+                    onClick={handleShow}
+                  >
                     Add New Student
                   </Button>
                 </div>
@@ -170,7 +228,10 @@ export default function Dashboard() {
               </Button>
               <span className="ml-5"> </span>
 
-              <Button bsPrefix="button-sh" href="https://www.notion.so/Adding-a-Course-e3cda0b54b4d49b8bd1dbd56f3a6d18a">
+              <Button
+                bsPrefix="button-sh"
+                href="https://www.notion.so/Adding-a-Course-e3cda0b54b4d49b8bd1dbd56f3a6d18a"
+              >
                 Adding/Editing Course Guide
               </Button>
               <span className="ml-5"> </span>
@@ -181,7 +242,8 @@ export default function Dashboard() {
               )}
               <h3 className="text-shblue mt-5">My Courses</h3>
               <p>
-                Click <strong>View Courses</strong> above to render courses below!
+                Click <strong>View Courses</strong> above to render courses
+                below!
               </p>
               {courses &&
                 courses.map((c) => {
@@ -204,22 +266,33 @@ export default function Dashboard() {
             {!user ? (
               <h1>Loading</h1>
             ) : (
-              Object.keys(user.children).map((key) => {
-                return (
-                  <Card className="p-3 is-shblue mb-3 text-white w-50">
-                    <Card.Body>
-                      <div>
-                        <h3 className="">{user.children[key].name}</h3>
-                        <Link to={`student-dashboard/${key}`}>
-                          <Button bsPrefix="button-sh" className="mt-2">
-                            View {user.children[key].name}'s dashboard
+              <>
+                {delAlert ? <Alert variant="success"> {delAlert}</Alert> : ""}
+                {Object.keys(user.children).map((key) => {
+                  return (
+                    <Card className="p-3 is-shblue mb-3 text-white w-50">
+                      <Card.Body>
+                        <div>
+                          <Button
+                            bsPrefix="button-sh"
+                            className="float-end"
+                            onClick={handleDelShow}
+                            id={key}
+                          >
+                            Delete This Student
                           </Button>
-                        </Link>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                );
-              })
+                          <h3 className="">{user.children[key].name}</h3>
+                          <Link to={`student-dashboard/${key}`}>
+                            <Button bsPrefix="button-sh" className="mt-2">
+                              View {user.children[key].name}'s dashboard
+                            </Button>
+                          </Link>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  );
+                })}
+              </>
             )}
           </div>
         </Card.Body>
@@ -231,14 +304,37 @@ export default function Dashboard() {
       </div>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton className="is-shblue text-white">
+        <Modal.Header closeButton={false} className="is-shblue text-white">
           <Modal.Title>Add New Student</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group id="name" className="mb-3 form-floating">
-            <Form.Control type="text" ref={nameRef} className="form-control" placeholder="name" id="InputName" aria-describedby="name" required />
+            <Form.Control
+              type="text"
+              ref={nameRef}
+              className="form-control"
+              placeholder="name"
+              id="InputName"
+              aria-describedby="name"
+              required
+            />
             <Form.Label for="InputName" className="form-label floatingInput">
               New Student Name
+            </Form.Label>
+          </Form.Group>
+
+          <Form.Group id="pin" className="mb-3 form-floating">
+            <Form.Control
+              type="number"
+              ref={pinRef}
+              className="form-control"
+              placeholder="name"
+              id="InputPIN"
+              aria-describedby="name"
+              required
+            />
+            <Form.Label for="InputPIN" className="form-label floatingInput">
+              New student's PIN
             </Form.Label>
           </Form.Group>
         </Modal.Body>
@@ -248,6 +344,39 @@ export default function Dashboard() {
           </Button>
           <Button bsPrefix="button-sh" onClick={handleChild}>
             Add Student
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={delShow} onHide={handleDelClose}>
+        <Modal.Header
+          style={{ backgroundColor: "red" }}
+          closeButton={false}
+          className="text-white"
+        >
+          <Modal.Title>
+            Are you Sure You Want To Delete This Student?{" "}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          If you delete this student, the courses you bought for this student,
+          student's work including certificates will be permanently deleted.
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="link" onClick={handleDelClose}>
+            Cancel
+          </Button>
+          <Button
+            bsPrefix="button-sh"
+            onClick={async () => {
+              await deleteChild();
+              handleDelClose();
+              getUser();
+              await removeDelAlert();
+            }}
+          >
+            Delete Student
           </Button>
         </Modal.Footer>
       </Modal>
