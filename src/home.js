@@ -14,7 +14,7 @@ export default function Home() {
           <Col style={{ paddingTop: "5rem" }}>
             <div className="text-shblue ms-5">
               <img
-                style={{ left: "25rem", top: "8.11rem" }}
+                style={{ left: "25rem", top: "8.11rem", zIndex: "1" }}
                 className="shape"
                 src="../triangle.png"
                 alt="shape-pic"
@@ -66,7 +66,7 @@ export default function Home() {
             />
 
             <img
-              style={{ right: "3rem", top: "8.11rem" }}
+              style={{ right: "3rem", top: "8.11rem", zIndex: "1" }}
               className="shape"
               src="../triangle.png"
               alt="shape-pic"

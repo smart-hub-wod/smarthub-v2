@@ -6,8 +6,7 @@ import app from "firebase/app";
 
 import { useAuth } from "./contexts/AuthContext.js";
 import { useHistory, Link } from "react-router-dom";
-
-var i;
+import { parse } from "@fortawesome/fontawesome-svg-core";
 
 export default function Dashboard() {
   const [error, setError] = useState("");
@@ -30,6 +29,9 @@ export default function Dashboard() {
   // here
 
   const pinRef = useRef();
+  const childPass = useRef();
+  const [isChildLogin, setIsChildLogin] = useState(false);
+
   const [delAlert, setDelAlert] = useState();
 
   // del modal components
@@ -39,12 +41,34 @@ export default function Dashboard() {
   };
 
   const [delKey, setDelKey] = useState();
+  // child log in
+  // const [childLogin, setChildLogin] = useState();
 
   const handleDelShow = (e) => {
     setDelShow(true);
     // console.log(typeof e.target.id);
     setDelKey(e.target.id.toString());
   };
+
+  function childLogin(e) {
+    // e.target.id dash
+
+    var key = e.target.id.toString().split("-")[1];
+    // const enteredPin = childPass.current.value;
+
+    // console.log(typeof user.children[key].pin);
+
+    console.log(childPass.current.value);
+    // user.children[key].pin
+    if (true === user.children[key].pin.toString()) {
+      console.log("The pin is true");
+      setIsChildLogin(true);
+    } else {
+      console.log("The pin is false");
+      // below neccessary?
+      setIsChildLogin(false);
+    }
+  }
 
   async function deleteChild() {
     // console.log(i);
@@ -77,11 +101,13 @@ export default function Dashboard() {
   function handleChild() {
     console.log(user.children);
     const childName = nameRef.current.value;
+    const childPin = parseInt(pinRef.current.value);
     if (childName) {
       userRef.update({
         [`cart.${childName}`]: [],
         [`children.${Object.keys(user.children).length}`]: {
           name: childName,
+          pin: childPin,
           courses: [],
           complete: [],
         },
@@ -283,9 +309,40 @@ export default function Dashboard() {
                             Delete This Student
                           </Button>
                           <h3 className="">{user.children[key].name}</h3>
-                          <Link to={`student-dashboard/${key}`}>
-                            <Button bsPrefix="button-sh" className="mt-2">
-                              View {user.children[key].name}'s dashboard
+
+                          <Form>
+                            <Form.Group id="pin">
+                              <Form.Control
+                                // id="childPinPassInput"
+                                type="password"
+                                ref={childPass}
+                                placeholder="Enter your PIN number"
+                                className="form-control my-3 w-50"
+                                style={{
+                                  textDecoration: "none",
+                                }}
+                              />
+                            </Form.Group>
+                            <Button id={`dash-${key}`} onClick={childLogin}>
+                              test
+                            </Button>
+                          </Form>
+
+                          <Link
+                            to={
+                              isChildLogin
+                                ? `student-dashboard/${key}`
+                                : `/dashboard`
+                            }
+                          >
+                            <Button
+                              aria-disabled={true}
+                              bsPrefix="button-sh"
+                              className="mt-2"
+                              // id={`dash-${key}`}
+                              // onClick={childLogin}
+                            >
+                              View {user.children[key].name}'s Dashboard
                             </Button>
                           </Link>
                         </div>
