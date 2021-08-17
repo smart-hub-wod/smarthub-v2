@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import firebase from "./firebase";
+import firebase from "firebase/app";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useAuth } from "./contexts/AuthContext.js";
 
@@ -97,7 +97,7 @@ export default function Lesson() {
           <br />
         </div>
         <div className="col-9 px-5 pt-4">
-          <ContentBox lssn={currentLesson} courseInfo={course} child={child} />
+          <ContentBox lssn={currentLesson} courseInfo={course} child={child} courseid={id} userid={currentUser.uid} />
         </div>
       </div>
     </>
@@ -105,11 +105,20 @@ export default function Lesson() {
 }
 
 function ContentBox(props) {
+  const childref = firebase.firestore().collection("users").doc(props.userid);
+  const history = useHistory();
+
   let lessn = props.courseInfo.lessonContent[props.courseInfo.lessons[props.lssn]];
   let content = "";
 
   function handleComplete() {
-    console.log("hi");
+    console.log("completing course");
+    console.log(props.child, props.courseInfo, props.courseid);
+    childref.update({
+      [`children.${props.child}.complete`]: firebase.firestore.FieldValue.arrayUnion(props.courseid),
+      [`children.${props.child}.courses`]: firebase.firestore.FieldValue.arrayRemove(props.courseid),
+    });
+    history.push(`/student-dashboard/${props.child}`);
   }
 
   if (props.lssn !== -1) {
@@ -130,11 +139,11 @@ function ContentBox(props) {
       content = (
         <>
           <p>{lessn["complete"]}</p>
-          <Link to={`/student-dashboard/${props.child}`}>
-            <Button bsPrefix="button-sh" onClick={handleComplete}>
-              Complete!
-            </Button>
-          </Link>
+          {/* <Link to={`/student-dashboard/${props.child}`}> */}
+          <Button bsPrefix="button-sh" onClick={handleComplete}>
+            Complete!
+          </Button>
+          {/* </Link> */}
         </>
       );
     }
