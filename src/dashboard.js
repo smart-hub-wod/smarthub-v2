@@ -32,7 +32,8 @@ export default function Dashboard() {
         [`cart.${childName}`]: [],
         [`children.${Object.keys(user.children).length}`]: {
           name: childName,
-          courses: {},
+          courses: [],
+          complete: [],
         },
         //[`ids`]: firebase.firestore.FieldValue.arrayUnion(childName)
       });

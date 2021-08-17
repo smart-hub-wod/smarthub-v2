@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Login from "./login";
 import Signup from "./signup";
 import Dashboard from "./dashboard";
@@ -32,10 +33,17 @@ import DevRoute from "./DevRoute";
 import Contact from "./contact";
 
 function App() {
+  // const initialOptions = {
+  //   "client-id": "AYsA-yAUvEUvrOnjDoXqYVytOnxfG7787K6LfZRozQQTT7bqy9fD8-R07jw6xao7_PO4X5swVfEzZiBd",
+  //   currency: "CAD",
+  //   intent: "capture",
+  // };
+
   return (
     <>
       <Router>
         <AuthProvider>
+          {/* <PayPalScriptProvider options={initialOptions}> */}
           <NavBar />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
@@ -46,6 +54,7 @@ function App() {
             <PrivateRoute path="/student-dashboard/:id" component={StudentDash} />
             <DevRoute path="/add-admin" component={AddAdmin} />
             <PrivateRoute path="/cart" component={Cart} />
+
             <PrivateRoute path="/checkout" component={Checkout} />
             <Route exact path="/" component={Home} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
@@ -63,6 +72,7 @@ function App() {
 
             {/* Add Routes Here! */}
           </Switch>
+          {/* </PayPalScriptProvider> */}
         </AuthProvider>
         <Footer />
       </Router>

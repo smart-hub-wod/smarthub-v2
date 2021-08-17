@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import firebase from "./firebase";
 import "firebase/storage";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Spinner } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
@@ -116,14 +116,19 @@ export default function Courses() {
         </Button>
       </div>
       <div id="course-previews">
-        {console.log("TEMPPPP", temp)}
         {
           (filtered ? newCourses : courses).map((course) => (
             <Card className="p-3 mx-5 mb-3">
               <div className="row">
                 <div className="col-3 overflow-hidden">
                   {console.log(course.url)}
-                  <img height="250" src={course.url} />
+                  {course.url ? (
+                    <img height="250" src={course.url} />
+                  ) : (
+                    <div className="d-flex justify-content-center align-items-center">
+                      <Spinner animation="border" className="" variant="primary" />
+                    </div>
+                  )}
                 </div>
                 <div key={course.id} className="col-9">
                   <h2>{course.title}</h2>

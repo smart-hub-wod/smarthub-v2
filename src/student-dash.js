@@ -80,11 +80,13 @@ export default function StudentDash() {
           )}
           <h5 className="mt-5">Completed</h5>
           {child ? (
-            child.courses["completed"] ? (
-              child.courses["completed"].map((course) => {
+            child.complete.length > 0 ? (
+              child.complete.map((course) => {
                 return (
                   <Card className="p-3 is-shblue mb-3 text-white w-50">
-                    <Card.Body>{course}</Card.Body>
+                    <Card.Body>
+                      <h3>{titleMaker(course)}</h3>
+                    </Card.Body>
                   </Card>
                 );
               })
