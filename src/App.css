@@ -19,7 +19,7 @@ p {
 }
 
 .is-white {
-  background-color: white!important;
+  background-color: white !important;
 }
 
 .heading-text {
@@ -50,9 +50,13 @@ p {
 }
 .signup-nav:hover {
   border: 5px solid #0f53ba83;
-  
 }
 
+@media (max-width: 991.98px) {
+  #lesson-section {
+    display: none;
+  }
+}
 
 .iconstext {
   font-size: 10px;
@@ -66,14 +70,12 @@ p {
   font-size: 1.2rem;
   border: 0 solid white;
   border-left-width: 5px;
-  
 }
 
 .nav-text:hover {
   border-radius: 10px;
   background-color: #fe5c36;
-  color: white!important;
-   
+  color: white !important;
 }
 
 #footer .nav-text {
@@ -87,7 +89,6 @@ p {
   width: 300px;
   height: 60px;
   object-fit: cover;
-
 }
 
 #footer ul {
@@ -161,14 +162,12 @@ p {
   text-align: center;
   display: flex;
   justify-content: center;
-  
 }
 
 .auth-btn {
   width: 25%;
   padding: 0.8rem 0;
   min-width: 132px;
-  
 }
 
 .auth-card {
@@ -318,9 +317,7 @@ p {
   /* animation: instructorSpin2 0.9s ease-in; */
 }
 
-[data-aos= "instructorSpin1"] {
-  
-  
+[data-aos="instructorSpin1"] {
 }
 
 @keyframes instructorSpin1 {
@@ -339,17 +336,15 @@ p {
   float: left;
   width: 45%;
   height: auto;
-  
+
   /* border: 5px solid brown; */
   /* background-color: aqua; */
 }
 
 .member-img {
-
-    width: 100%;
-    height: 35vh;
-    object-fit: cover;
-    
+  width: 100%;
+  height: 35vh;
+  object-fit: cover;
 }
 
 #meet-team .card {
@@ -372,21 +367,20 @@ p {
   }
 }
 
-@media (min-width: 1200px){ 
+@media (min-width: 1200px) {
   #meet-team .col-j-6 {
     flex: 0 0 auto;
     width: 50%;
   }
 }
 
-@media (max-width: 576px ) {
+@media (max-width: 576px) {
   #meet-team .col-sm-4 {
     flex: 0 0 auto;
     width: 50%;
   }
 }
 /* Parent Faq start */
-
 
 /* About us page begins  */
 
@@ -401,8 +395,6 @@ p {
   /* below two are intuitive */
   background-repeat: no-repeat;
   background-size: cover;
-  
-  
 }
 
 #about-us .card {
@@ -411,24 +403,19 @@ p {
   border: none;
   display: flex;
   margin: 0 4.5rem;
-  
 }
 
 #about-us .card-title {
   font-weight: 600;
   font-size: 1.6rem;
-
 }
 
 .value-section {
   background-color: #0b3f84;
   color: white;
-  
-  
 }
 
 .value-container {
-
 }
 
 .value-section .row {
@@ -442,9 +429,7 @@ p {
   justify-content: space-around;
 }
 
-.row2  .card {
+.row2 .card {
   width: 60%;
-  margin: 0 5rem!important;
-  
-  
+  margin: 0 5rem !important;
 }

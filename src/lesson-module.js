@@ -70,35 +70,37 @@ export default function Lesson() {
 
   return (
     <>
-      <div className="text-center py-4" style={{ backgroundColor: "#E3E3E3" }}>
-        <h1 className="text-shblue">Lesson Module</h1>
-        <p>Welcome to {course.name}</p>
-        {course.sync ? (
-          <>
-            <h5 className="text-shblue">This course is synchronous!</h5>
-            <p>
-              {course.schedule} at <a href={course.zoom}>{course.zoom}</a>
-            </p>
-          </>
-        ) : (
-          ""
-        )}
-      </div>
-      <div className="row justify-content-center">
-        <div className="col-3 is-shblue text-white pt-3 text-center rounded-end">
-          {course.lessons.map((lessonNum, index) => {
-            return (
-              <>
-                <h5 key={index} onClick={() => handleLessonChange(index)}>
-                  {lessonNum}
-                </h5>
-              </>
-            );
-          })}
-          <br />
+      <div id="lesson-section">
+        <div className="text-center py-4" style={{ backgroundColor: "#E3E3E3" }}>
+          <h1 className="text-shblue">Lesson Module</h1>
+          <p>Welcome to {course.name}</p>
+          {course.sync ? (
+            <>
+              <h5 className="text-shblue">This course is synchronous!</h5>
+              <p>
+                {course.schedule} at <a href={course.zoom}>{course.zoom}</a>
+              </p>
+            </>
+          ) : (
+            ""
+          )}
         </div>
-        <div className="col-9 px-5 pt-4">
-          <ContentBox lssn={currentLesson} courseInfo={course} child={child} courseid={id} userid={currentUser.uid} />
+        <div className="row justify-content-center">
+          <div className="col-3 is-shblue text-white pt-3 text-center rounded-end">
+            {course.lessons.map((lessonNum, index) => {
+              return (
+                <>
+                  <h5 key={index} onClick={() => handleLessonChange(index)}>
+                    {lessonNum}
+                  </h5>
+                </>
+              );
+            })}
+            <br />
+          </div>
+          <div className="col-9 px-5 pt-4">
+            <ContentBox lssn={currentLesson} courseInfo={course} child={child} courseid={id} userid={currentUser.uid} />
+          </div>
         </div>
       </div>
     </>
