@@ -31,6 +31,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import DevRoute from "./DevRoute";
 import Contact from "./contact";
+import Certificate from "./certificate";
 
 function App() {
   // const initialOptions = {
@@ -54,7 +55,7 @@ function App() {
             <PrivateRoute path="/student-dashboard/:id" component={StudentDash} />
             <DevRoute path="/add-admin" component={AddAdmin} />
             <PrivateRoute path="/cart" component={Cart} />
-
+            <PrivateRoute path="/certificate/:child/:course" component={Certificate} />
             <PrivateRoute path="/checkout" component={Checkout} />
             <Route exact path="/" component={Home} />
             <Route exact path="/forgot-password" component={ForgotPassword} />

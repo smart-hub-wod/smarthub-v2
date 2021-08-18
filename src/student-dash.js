@@ -3,6 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import { useParams } from "react-router";
 import firebase from "./firebase";
 import { useAuth } from "./contexts/AuthContext.js";
+
 import { Link } from "react-router-dom";
 
 export default function StudentDash() {
@@ -86,6 +87,18 @@ export default function StudentDash() {
                   <Card className="p-3 is-shblue mb-3 text-white w-50">
                     <Card.Body>
                       <h3>{titleMaker(course)}</h3>
+                      <Link to={`/lesson/${course}/${id}`}>
+                        <Button bsPrefix="button-sh" className="mt-2">
+                          Revisit Course!
+                        </Button>
+                      </Link>
+
+                      <span> </span>
+                      <Link to={`/certificate/${id}/${course}`}>
+                        <Button bsPrefix="button-sh" className="mt-2 ml-2">
+                          View Certificate!
+                        </Button>
+                      </Link>
                     </Card.Body>
                   </Card>
                 );

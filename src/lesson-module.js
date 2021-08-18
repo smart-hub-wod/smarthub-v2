@@ -20,7 +20,8 @@ export default function Lesson() {
     childref.get().then((kid) => {
       if (kid.exists) {
         const kiddata = kid.data()["children"][child] ? kid.data()["children"][child]["courses"] : [];
-        if (kiddata.find((element) => element === id)) {
+        const kidcomplete = kid.data()["children"][child] ? kid.data()["children"][child]["complete"] : [];
+        if (kiddata.find((element) => element === id) || kidcomplete.find((element) => element === id)) {
           courseref.get().then((doc) => {
             if (doc.exists) {
               setCourse(doc.data());

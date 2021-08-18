@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
+import logo from "./assets/smarthub-logo.png";
 
 export default function NavBar() {
   const { currentUser } = useAuth();
@@ -28,12 +29,7 @@ export default function NavBar() {
       <Container fluid className="d-flex justify-content-between">
         <Navbar.Brand>
           <Link to="/">
-            <img
-              src="../smarthub-logo.png"
-              height="50"
-              className="d-inline-block align-top"
-              alt="Smart Hub logo"
-            />
+            <img src={logo} height="50" className="d-inline-block align-top" alt="Smart Hub logo" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle
@@ -42,11 +38,7 @@ export default function NavBar() {
           onClick={toggleToggl}
           //   bsPrefix={{ }}
         />
-        <Navbar.Collapse
-          id="smarthub-nav"
-          className="justify-content-between"
-          style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}
-        >
+        <Navbar.Collapse id="smarthub-nav" className="justify-content-between" style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}>
           <div>
             <Nav navbarScroll={true} className="">
               <Nav.Link className="mx-4 nav-text">
@@ -100,12 +92,7 @@ export default function NavBar() {
 
                   // className={toggled ? "text-white" : ""}
                 >
-                  <Link
-                    to="/signup"
-                    className={
-                      !toggled ? "text-sh-blue nounder" : "text-shblue nounder"
-                    }
-                  >
+                  <Link to="/signup" className={!toggled ? "text-sh-blue nounder" : "text-shblue nounder"}>
                     Sign Up
                   </Link>
                 </Nav.Link>

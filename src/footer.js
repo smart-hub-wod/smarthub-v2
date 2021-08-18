@@ -2,6 +2,7 @@ import React from "react";
 import { Nav, Container, Row, Col, Button } from "react-bootstrap";
 import { Facebook, Instagram, Linkedin } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
+import logo from "./assets/smarthub-logo.png";
 
 export default function Footer() {
   return (
@@ -16,7 +17,7 @@ export default function Footer() {
       >
         <Row className="" style={{ margin: "0 5rem" }}>
           <Col xs={4}>
-            <img className="logo" src="../defaultcourseimage.png" alt="logo" />
+            <img className="logo" src={logo} alt="logo" />
             <p className="ms-5 mt-3">
               Location:
               <br />
@@ -89,10 +90,7 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-            <h2 style={{ marginTop: "6.8rem" }}>
-              {" "}
-              Subscribe Smarthub News Letter:{" "}
-            </h2>
+            <h2 style={{ marginTop: "6.8rem" }}> Subscribe Smarthub News Letter: </h2>
             <Button className="button-sh mt-3"> Smarthub News Letter</Button>
           </Col>
           <Col xs={4}>

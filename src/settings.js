@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Form, Button, Card, Alert, Image } from "react-bootstrap";
+import { Form, Button, Card, Alert, Image, Modal } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
 import firebase from "./firebase";
@@ -10,7 +10,7 @@ export default function Settings() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const nameRef = useRef();
-  const { currentUser, updateEmail, updatePassword, setDisplayName } = useAuth();
+  const { currentUser, updateEmail, updatePassword, setDisplayName, deleteUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [URL, setURL] = useState();
@@ -18,8 +18,14 @@ export default function Settings() {
   const coverRef = useRef();
   const [admin, setAdmin] = useState(false);
   const adminRef = firebase.firestore().collection("users").doc("admins");
+  const userRef = firebase.firestore().collection("users").doc(currentUser.uid);
 
   var storageRef = firebase.storage().ref();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   console.log(currentUser);
 
@@ -32,6 +38,21 @@ export default function Settings() {
   useEffect(() => {
     getAdmin();
   }, []);
+
+  async function handleDelete() {
+    console.log("deleting");
+    try {
+      setError("");
+      setLoading(true);
+      await deleteUser();
+      await userRef.delete().then(() => {
+        history.push("/signup");
+      });
+    } catch {
+      setError("Failed to create an account");
+    }
+    setLoading(false);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -169,12 +190,30 @@ export default function Settings() {
                 Update Profile
               </Button>
             </Form>
+            <Button variant="danger" className="my-3 w-100" onClick={handleShow}>
+              Delete Account
+            </Button>
           </Card.Body>
         </Card>
         <div className="w-100 text-center my-3">
           <Link to="../dashboard">Cancel</Link>
         </div>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>Are you sure you want to delete your account?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>This is a permanent! Your account can not be recovered!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Yes delete my account!
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
