@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Card, Button, Alert, Modal, Form } from "react-bootstrap";
+import { Card, Button, Alert, Modal, Form, Row, Col } from "react-bootstrap";
 import firebase from "./firebase";
 
 import app from "firebase/app";
@@ -29,8 +29,10 @@ export default function Dashboard() {
   // here
 
   const pinRef = useRef();
-  const childPass = useRef();
+
+  const [childPass, setChildPass] = useState();
   const [isChildLogin, setIsChildLogin] = useState(false);
+  const [whichChild, setWhichChild] = useState();
 
   const [delAlert, setDelAlert] = useState();
 
@@ -50,25 +52,52 @@ export default function Dashboard() {
     setDelKey(e.target.id.toString());
   };
 
-  function childLogin(e) {
-    // e.target.id dash
+  function handleChildPin(e) {
+    setChildPass(parseInt(e.target.value));
+  }
+
+  async function handleChildLogin(e) {
+    e.preventDefault();
 
     var key = e.target.id.toString().split("-")[1];
     // const enteredPin = childPass.current.value;
 
     // console.log(typeof user.children[key].pin);
 
-    console.log(childPass.current.value);
+    // console.log(childPass);
     // user.children[key].pin
-    if (true === user.children[key].pin.toString()) {
-      console.log("The pin is true");
-      setIsChildLogin(true);
+    if (childPass === user.children[key].pin) {
+      // console.log("The pin is true");
+      await setWhichChild(`child${key}`);
+      await setIsChildLogin(true);
+
+      setChildPass("");
     } else {
-      console.log("The pin is false");
+      // console.log("The pin is false");
       // below neccessary?
       setIsChildLogin(false);
     }
   }
+
+  // function childLogin(e) {
+  //   // e.target.id dash
+
+  //   var key = e.target.id.toString().split("-")[1];
+  //   // const enteredPin = childPass.current.value;
+
+  //   // console.log(typeof user.children[key].pin);
+
+  //   console.log(childPass.current.value);
+  //   // user.children[key].pin
+  //   if (true === user.children[key].pin.toString()) {
+  //     console.log("The pin is true");
+  //     setIsChildLogin(true);
+  //   } else {
+  //     console.log("The pin is false");
+  //     // below neccessary?
+  //     setIsChildLogin(false);
+  //   }
+  // }
 
   async function deleteChild() {
     // console.log(i);
@@ -310,41 +339,61 @@ export default function Dashboard() {
                           </Button>
                           <h3 className="">{user.children[key].name}</h3>
 
-                          <Form>
-                            <Form.Group id="pin">
-                              <Form.Control
-                                // id="childPinPassInput"
-                                type="password"
-                                ref={childPass}
-                                placeholder="Enter your PIN number"
-                                className="form-control my-3 w-50"
-                                style={{
-                                  textDecoration: "none",
-                                }}
-                              />
-                            </Form.Group>
-                            <Button id={`dash-${key}`} onClick={childLogin}>
-                              test
-                            </Button>
-                          </Form>
-
-                          <Link
-                            to={
-                              isChildLogin
-                                ? `student-dashboard/${key}`
-                                : `/dashboard`
-                            }
-                          >
-                            <Button
-                              aria-disabled={true}
-                              bsPrefix="button-sh"
-                              className="mt-2"
-                              // id={`dash-${key}`}
-                              // onClick={childLogin}
+                          <Row>
+                            <Form
+                              id={`dash-${key}`}
+                              onSubmit={handleChildLogin}
                             >
-                              View {user.children[key].name}'s Dashboard
-                            </Button>
-                          </Link>
+                              <Form.Group>
+                                <Form.Control
+                                  // id="childPinPassInput"
+                                  type="password"
+                                  // ref={childPass}
+                                  value={childPass}
+                                  onChange={handleChildPin}
+                                  placeholder="Enter your PIN number"
+                                  className="form-control my-3"
+                                />
+                              </Form.Group>
+                              {isChildLogin && whichChild === `child${key}` ? (
+                                <Link to={`student-dashboard/${key}`}>
+                                  <Button
+                                    aria-disabled={true}
+                                    bsPrefix="button-sh"
+                                    className="mt-3"
+                                    id={`child${key}`}
+                                  >
+                                    View {user.children[key].name}'s Dashboard
+                                  </Button>
+                                </Link>
+                              ) : (
+                                <Button bsPrefix="button-sh" type="submit">
+                                  Log in
+                                </Button>
+                              )}
+                            </Form>
+
+                            {/* <Col xs={6}>
+                              <Link
+                                to={
+                                  isChildLogin
+                                    ? `student-dashboard/${key}`
+                                    : `/dashboard`
+                                }
+                              >
+                                <Button
+                                  aria-disabled={true}
+                                  bsPrefix="button-sh"
+                                  className="mt-3 ms-5"
+                                  // style={
+                                  //   isChildLogin ? { visibility: "hidden" } : {}
+                                  // }
+                                >
+                                  View {user.children[key].name}'s Dashboard
+                                </Button>
+                              </Link>
+                            </Col> */}
+                          </Row>
                         </div>
                       </Card.Body>
                     </Card>
