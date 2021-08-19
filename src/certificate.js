@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router";
 import firebase from "firebase/app";
-import { Card, Image } from "react-bootstrap";
+import { Card, Image, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useAuth } from "./contexts/AuthContext.js";
 import logo from "./assets/certificate-logo.png";
+import { Link } from "react-router-dom";
 
-export default function Certificate() {
+export function Certificate() {
   let { child, course } = useParams();
   const [kid, setKid] = useState("");
   const [name, setName] = useState("");
@@ -51,11 +52,16 @@ export default function Certificate() {
   return (
     <>
       <CertificateCard child={name} course={titleMaker(course)} />
+      <div className="d-flex justify-content-center">
+        <Link to={`/certificate-print/${name}/${titleMaker(course)}`}>
+          <Button bsPrefix="button-sh">View Print Version</Button>
+        </Link>
+      </div>
     </>
   );
 }
 
-function CertificateCard(props) {
+export function CertificateCard(props) {
   return (
     <div className="text-center">
       <Card className="mx-5 my-5 py-5">

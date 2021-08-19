@@ -17,6 +17,7 @@ import Listing from "./listing";
 import Settings from "./settings";
 import AddCourse from "./add-course";
 import ParentFAQ from "./parentfaq";
+import TeacherFAQ from "./teacherfaq";
 import Lesson from "./lesson-module";
 import StudentDash from "./student-dash";
 import Cart from "./cart";
@@ -31,7 +32,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import DevRoute from "./DevRoute";
 import Contact from "./contact";
-import Certificate from "./certificate";
+import { Certificate, CertificateCard } from "./certificate";
 
 function App() {
   // const initialOptions = {
@@ -56,6 +57,7 @@ function App() {
             <DevRoute path="/add-admin" component={AddAdmin} />
             <PrivateRoute path="/cart" component={Cart} />
             <PrivateRoute path="/certificate/:child/:course" component={Certificate} />
+            <PrivateRoute path="/certificate-print/:child/:course" component={CertificateCard} />
             <PrivateRoute path="/checkout" component={Checkout} />
             <Route exact path="/" component={Home} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
@@ -68,6 +70,7 @@ function App() {
             <Route path="/terms-and-conditions" component={Privacy} />
             <Route path="/course-listing/:id" component={Listing} />
             <Route path="/parent-faq" component={ParentFAQ} />
+            <Route path="/teacher-faq" component={TeacherFAQ} />
             <Route path="/contact-us" component={Contact} />
             <Route path="*" component={Page404} />
 

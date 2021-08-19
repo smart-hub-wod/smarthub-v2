@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Accordion, Card, Container } from "react-bootstrap";
 import { ArrowDownSquareFill, ArrowUpSquareFill } from "react-bootstrap-icons";
 
-export default function ParentFAQ() {
+export default function TeacherFAQ() {
   const [clicked, setClicked] = useState([false, false, false]);
 
   var faq = [
@@ -68,7 +68,7 @@ export default function ParentFAQ() {
     <>
       <div>
         <div className="text-center">
-          <h1 className="text-shblue mt-4">Parent FAQ</h1>
+          <h1 className="text-shblue mt-4">Teacher FAQ</h1>
           <p>Welcome!</p>
         </div>
         <Container style={{ maxWidth: "65%" }}>

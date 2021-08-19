@@ -68,6 +68,7 @@ export default function Checkout() {
             <h5 className="text-shblue mb-2">Your total is: ${cartTotal}</h5>
             <ShieldLockFill size={30} />
             <p className="px-4 mt-1">Complete your transaction using secure payment offered by Paypal using buttons on the right. Once completed courses will be available for your child.</p>
+            <p className="px-4 mt-1">All prices include tax.</p>
           </div>
           <div className="col mt-4"> {cartTotal === 0 ? <h3 className="text-shblue">Your cart is empty! Add courses to your cart before checking out!</h3> : <PayPalButton createOrder={(data, actions) => createOrder(data, actions)} onApprove={(data, actions) => onApprove(data, actions)} />}</div>
         </div>

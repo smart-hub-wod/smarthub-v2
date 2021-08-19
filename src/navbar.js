@@ -61,6 +61,11 @@ export default function NavBar() {
                   Parent Zone
                 </Link>
               </Nav.Link>
+              <Nav.Link className="mx-4 nav-text">
+                <Link to="/teacher-faq" className="link">
+                  Teacher Zone
+                </Link>
+              </Nav.Link>
             </Nav>
           </div>
           <div>

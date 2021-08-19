@@ -153,7 +153,7 @@ export default function Settings() {
                 </Form.Group>
                 <p>
                   Upload a photo above and click Replace Image below to save changes. Wait until your profile picture uploads before exiting this page. If you are updating your display name, you must also click the button below in addition to the Update Profile button to save changes across all of
-                  your courses. Square images are ideal for profile photos.
+                  your courses. <strong>Square images are ideal for profile photos.</strong>
                 </p>
                 <Button bsPrefix="button-sh" className="mb-3" onClick={handleImage}>
                   Replace Image and Update Display Name

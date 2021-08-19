@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import firebase from "firebase/app";
 
 export default function AddAdmin() {
   const emailRef = useRef();
   const [alert, setAlert] = useState();
+  const [admins, setAdmins] = useState();
   const adminref = firebase.firestore().collection("users").doc("admins");
 
   const handleSubmit = (e) => {
@@ -19,6 +20,20 @@ export default function AddAdmin() {
     document.getElementById("InputEmail").value = "";
   };
 
+  function getAdmin() {
+    adminref.get().then((doc) => {
+      setAdmins(doc.data().accounts);
+    });
+  }
+
+  function handleRemove() {
+    console.log("removing");
+  }
+
+  useEffect(() => {
+    getAdmin();
+  }, []);
+
   return (
     <>
       <div>
@@ -27,7 +42,7 @@ export default function AddAdmin() {
             <div className="text-center">
               <h1 className="text-shblue mt-4"> Add Admin </h1>
               {alert ? <Alert variant="success">{alert}</Alert> : ""}
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit} className="mb-3">
                 <Form.Group id="email" className="mb-3 mt-4 form-floating">
                   <Form.Control type="email" ref={emailRef} className="form-control" placeholder="name@example.com" id="InputEmail" aria-describedby="email" required />
                   <Form.Label for="InputEmail" className="form-label floatingInput">
@@ -38,6 +53,20 @@ export default function AddAdmin() {
                   Add Admin Address
                 </Button>
               </Form>
+              <h3 className="text-shblue text-start">Current Admins:</h3>
+              {admins?.map((admin) => {
+                return (
+                  <Card className="p-3 is-shblue mb-3 w-25 text-white">
+                    <Card.Body>
+                      {" "}
+                      <p>{admin}</p>
+                      <Button onClick={handleRemove} bsPrefix="button-sh">
+                        Remove Admin
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                );
+              })}
             </div>
           </Card.Body>
         </Card>

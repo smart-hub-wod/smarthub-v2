@@ -88,7 +88,8 @@ export default function Cart() {
           }
         })}
         <div className="mx-5">
-          <h1 className="text-shblue my-4 mr-5 text-end">Total: ${price}</h1>
+          <h1 className="text-shblue mt-4 mr-5 text-end">Total: ${price}</h1>
+          <p className="text-end">All prices include tax.</p>
           <Link to="/checkout">
             <Button bsPrefix="button-sh">Proceed to Checkout</Button>
           </Link>
