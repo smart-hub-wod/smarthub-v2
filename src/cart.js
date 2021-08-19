@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/storage";
 import { useAuth } from "./contexts/AuthContext.js";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Alert } from "react-bootstrap";
 import { XCircle } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
@@ -42,15 +42,16 @@ export default function Cart() {
     setLoading(false);
   }
 
-  const deleteCourse = (id, child, price) => {
+  const deleteCourse = (id, child, prices) => {
     console.log(`deleting ${id} for ${child}`);
+    let pricedecrease = prices - price < 0 ? prices : price;
     firebase
       .firestore()
       .collection("users")
       .doc(currentUser.uid)
       .update({
         [`cart.${child}`]: firebase.firestore.FieldValue.arrayRemove(id),
-        ["cartTotal"]: firebase.firestore.FieldValue.increment(-1 * price),
+        ["cartTotal"]: firebase.firestore.FieldValue.increment(-1 * pricedecrease),
       })
       .then(() => {
         console.log("Document successfully deleted!");

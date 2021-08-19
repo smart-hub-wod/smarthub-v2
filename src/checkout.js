@@ -1,21 +1,21 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
-
-// import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { Button, Form, Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import ReactDOM from "react-dom";
 import { useAuth } from "./contexts/AuthContext.js";
 import { Shield, ShieldLockFill } from "react-bootstrap-icons";
 
 export default function Checkout() {
-  // const [{ isPending }] = usePayPalScriptReducer();
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState();
   const [cartTotal, setCartTotal] = useState(0);
   // const [usedPromos, setUsedPromos] = useState([]);
   const { currentUser } = useAuth();
   const promoRef = useRef();
+  const history = useHistory();
 
   const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
   const cartref = firebase.firestore().collection("users").doc(currentUser.uid);
@@ -41,7 +41,24 @@ export default function Checkout() {
   };
 
   function CompleteTransaction() {
-    console.log("done");
+    cartref
+      .get()
+      .then((doc) => {
+        for (const key in doc.data().children) {
+          doc.data().cart[doc.data().children[key].name].map((c) => {
+            cartref.update({
+              [`children.${key}.courses`]: firebase.firestore.FieldValue.arrayUnion(c),
+              [`cart.${doc.data().children[key].name}`]: firebase.firestore.FieldValue.arrayRemove(c),
+            });
+          });
+          // cartref.update({
+          //   [`children.${key}.courses`]
+          // })
+        }
+      })
+      .then(() => {
+        history.push("/dashboard");
+      });
   }
 
   function getCartTotal() {
@@ -71,6 +88,7 @@ export default function Checkout() {
           cartref.get().then((cart) => {
             if (cart.data().promos.includes(promoRef.current.value)) {
               console.log("you've already used this code");
+              setAlert("Sorry! You've already applied that code!");
             } else {
               if (doc.data().type === "dollar-off") {
                 console.log(-1 * doc.data().value);
@@ -126,6 +144,11 @@ export default function Checkout() {
             <ShieldLockFill size={30} />
             <p className="px-4 mt-1">Complete your transaction using secure payment offered by Paypal using buttons on the right. Once completed courses will be available for your child.</p>
             <p className="px-4 mt-1">All prices include tax.</p>
+            {alert && (
+              <Alert className="mt-2" variant="success">
+                {alert}
+              </Alert>
+            )}
           </div>
           <div className="col mt-4">
             {" "}
