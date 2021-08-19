@@ -185,6 +185,9 @@ export default function Dashboard() {
                   <Link to="add-promo">
                     <Button bsPrefix="button-sh">Add Promo Code</Button>
                   </Link>
+                  <br />
+                  <br />
+                  <p>To edit courses you have not created, copy the course-id from the listing page and change the edit-course url to have that course-id instead. For example to edit medical-science-wMi0wN visit gosmarthub.com/edit-course/medical-science-wMi0wN</p>
                 </>
               )}
               <h3 className="text-shblue mt-5">My Courses</h3>
@@ -194,10 +197,10 @@ export default function Dashboard() {
               {courses &&
                 courses.map((c) => {
                   return (
-                    <Card className="p-3 is-shblue mb-3 text-white w-50">
+                    <Card className="p-3 is-shblue mb-3 text-white">
                       <Card.Body>
                         {" "}
-                        <h1>{titleMaker(c)}</h1>
+                        <h3>{titleMaker(c)}</h3>
                         <p>ID: {c}</p>
                         <Link to={`/edit-course/${c}`}>
                           <Button bsPrefix="button-sh">Edit Course</Button>
@@ -214,7 +217,7 @@ export default function Dashboard() {
             ) : (
               Object.keys(user.children).map((key) => {
                 return (
-                  <Card className="p-3 is-shblue mb-3 text-white w-50">
+                  <Card className="p-3 is-shblue mb-3 text-white">
                     <Card.Body>
                       <div>
                         <h3 className="">{user.children[key].name}</h3>

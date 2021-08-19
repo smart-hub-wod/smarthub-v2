@@ -14,6 +14,9 @@ export default function AddCourse() {
   const StartDateRef = useRef();
   const EndDateRef = useRef();
   const StartTimeRef = useRef();
+  const productnameRef = useRef();
+  const productpriceRef = useRef();
+  const productlinkRef = useRef();
   const EndTimeRef = useRef();
   const outlineRef = useRef();
   const coverRef = useRef();
@@ -24,6 +27,7 @@ export default function AddCourse() {
   const [errMessage, setErrMessage] = useState("");
   const [sync, setSync] = useState("");
   const [publish, setPublish] = useState("");
+  const [product, setProduct] = useState("");
   const [grades, setGrades] = useState([]);
   const [alert, setAlert] = useState();
   const [admin, setAdmin] = useState(false);
@@ -55,10 +59,9 @@ export default function AddCourse() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(JSON.parse(outlineRef.current.value));
-    console.log(EndDateRef.current.value); //2021-08-24
-    console.log(StartTimeRef.current.value); //02:00
-
+    // console.log(JSON.parse(outlineRef.current.value));
+    // console.log(EndDateRef.current.value); //2021-08-24
+    // console.log(StartTimeRef.current.value); //02:00
     if (admin === true) {
       const lessonPlan = JSON.parse(outlineRef.current.value);
       lessonPlan["Finished!"] = { complete: "Congrats you did it! Click below to finish the course and access your certificate!" };
@@ -80,6 +83,10 @@ export default function AddCourse() {
                 ).format("h:mm A")}`
               : "",
           zoom: zoomRef.current.value,
+          productlink: productlinkRef.current.value,
+          product: product,
+          productdescription: productnameRef.current.value,
+          productprice: productpriceRef.current.value,
         })
         .then(() => {
           console.log("Document successfully written!");
@@ -94,6 +101,8 @@ export default function AddCourse() {
               modules: orderRef.current.value.split(",").length,
               published: publish,
               sync: sync,
+              productlink: productlinkRef.current.value,
+              product: product,
               grades: grades,
               defaultCover: coverRef.current.files.length > 0 ? false : true,
               instructor: currentUser.displayName,
@@ -148,6 +157,10 @@ export default function AddCourse() {
 
   const handlePublish = (e) => {
     setPublish(e.target.id === "yespublish");
+  };
+  const handleProduct = (e) => {
+    setProduct(e.target.id === "yesproduct");
+    console.log(productnameRef.current.value, productpriceRef.current.value, productlinkRef.current.value, product);
   };
 
   return (
@@ -267,6 +280,40 @@ export default function AddCourse() {
                   <Form.Check inline label="Grade 4" name="group1" type="checkbox" id="grade-4" />
                   <Form.Check inline label="Grade 5" name="group1" type="checkbox" id="grade-5" /> */}
                 </div>
+              </Form.Group>
+              <p>
+                <strong>Does this course require a separate product?</strong>
+              </p>
+              <Form.Group id="product" className="mb-3 form-floating" onChange={handleProduct}>
+                <div className="mb-3">
+                  <Form.Check inline label="Yes it does require a separate product" name="group3" type="radio" id="yesproduct" />
+                  <Form.Check inline label="No there is nothing additional to add" name="group3" type="radio" id="noproduct" />
+                </div>
+              </Form.Group>
+              <p>
+                <strong>Product Information:</strong> Only required if you selected 'Yes' above <br />
+                Separate name and description using ' - '. Example: Music Machine - A machine that plays music!
+              </p>
+              <Form.Group id="productname" className="mb-3 form-floating">
+                <Form.Control type="text" ref={productnameRef} className="form-control" placeholder="Product Name and Description" id="InputProdName" aria-describedby="product name and description" required={product} />
+                <Form.Label for="InputProdName" className="form-label floatingInput">
+                  Product Name and Description
+                </Form.Label>
+              </Form.Group>
+              <p>
+                <strong>Current Price</strong> - Will be written as an estimate, provide the current listing price
+              </p>
+              <Form.Group id="productprice" className="mb-3 form-floating">
+                <Form.Control type="text" ref={productpriceRef} className="form-control" placeholder="Product Price" id="InputProdPrice" aria-describedby="product price" required={product} />
+                <Form.Label for="InputProdPrice" className="form-label floatingInput">
+                  Current Price
+                </Form.Label>
+              </Form.Group>
+              <Form.Group id="productlink" className="mb-3 form-floating">
+                <Form.Control type="text" ref={productlinkRef} className="form-control" placeholder="Product Link" id="InputProdLink" aria-describedby="product link" required={product} />
+                <Form.Label for="InputProdLink" className="form-label floatingInput">
+                  Purchasing Link
+                </Form.Label>
               </Form.Group>
               <p>
                 <strong>Content Outline</strong> Refer to{" "}

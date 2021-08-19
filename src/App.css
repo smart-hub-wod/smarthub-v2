@@ -53,8 +53,8 @@ p {
 }
 
 @media (max-width: 991.98px) {
-  #lesson-section {
-    display: none;
+  .rep-photo {
+    height: 150;
   }
 }
 

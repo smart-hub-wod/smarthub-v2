@@ -48,7 +48,7 @@ export default function Signup() {
   return (
     <>
       <Container className="auth-container mt-5 d-flex justify-content-center">
-        <Card className="card auth-card p-5">
+        <Card className="card auth-card px-md-5 pt-4 mb-2">
           <Card.Body>
             <h1 className="text-center text-shblue mb-4a">SIGN UP</h1>
             {error && <Alert variant="danger">{error}</Alert>}

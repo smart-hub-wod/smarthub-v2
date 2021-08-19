@@ -28,51 +28,24 @@ export default function Login() {
   return (
     <>
       <Container className="auth-container mt-5 d-flex justify-content-center">
-        <Card className=" p-5 auth-card">
+        <Card className=" px-md-5 pt-4 mb-2 auth-card">
           <Card.Body>
             <h1 className="text-center text-shblue mb-3 ">LOGIN</h1>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
               <Form.Group id="email" className="mb-3 mt-4 form-floating">
-                <Form.Control
-                  type="email"
-                  ref={emailRef}
-                  className="form-control"
-                  placeholder="name@example.com"
-                  id="InputEmail"
-                  aria-describedby="email"
-                  required
-                />
-                <Form.Label
-                  for="InputEmail"
-                  className="form-label floatingInput"
-                >
+                <Form.Control type="email" ref={emailRef} className="form-control" placeholder="name@example.com" id="InputEmail" aria-describedby="email" required />
+                <Form.Label for="InputEmail" className="form-label floatingInput">
                   Email address
                 </Form.Label>
               </Form.Group>
               <Form.Group id="password" className="mb-3 form-floating">
-                <Form.Control
-                  type="password"
-                  ref={passwordRef}
-                  className="form-control"
-                  placeholder="Password"
-                  id="InputPassword"
-                  aria-describedby="password"
-                  required
-                />
-                <Form.Label
-                  for="InputPassword"
-                  className="form-label floatingInput"
-                >
+                <Form.Control type="password" ref={passwordRef} className="form-control" placeholder="Password" id="InputPassword" aria-describedby="password" required />
+                <Form.Label for="InputPassword" className="form-label floatingInput">
                   Password
                 </Form.Label>
               </Form.Group>
-              <Button
-                bsPrefix="button-sh"
-                className="auth-btn mt-4"
-                type="submit"
-                disabled={loading}
-              >
+              <Button bsPrefix="button-sh" className="auth-btn mt-4" type="submit" disabled={loading}>
                 Login
               </Button>
             </Form>

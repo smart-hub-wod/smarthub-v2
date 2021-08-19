@@ -120,17 +120,17 @@ export default function Courses() {
           (filtered ? newCourses : courses).map((course) => (
             <Card className="p-3 mx-5 mb-3">
               <div className="row">
-                <div className="col-3 overflow-hidden">
+                <div className="col-md-6 col-lg-3 overflow-hidden">
                   {console.log(course.url)}
                   {course.url ? (
-                    <img height="250" src={course.url} />
+                    <img height="200" src={course.url} className="rep-photo" />
                   ) : (
                     <div className="d-flex justify-content-center align-items-center">
                       <Spinner animation="border" className="" variant="primary" />
                     </div>
                   )}
                 </div>
-                <div key={course.id} className="col-9">
+                <div key={course.id} className="col-md-6 col-lg-9 mt-3 mt-md-0">
                   <h2>{course.title}</h2>
                   <p>{course.description}</p>
                   <Link to={`/course-listing/${course.id}`}>
