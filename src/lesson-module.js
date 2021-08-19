@@ -91,8 +91,9 @@ export default function Lesson() {
               return (
                 <>
                   <h5 key={index} onClick={() => handleLessonChange(index)}>
-                    {lessonNum}
+                    {">"} {lessonNum}
                   </h5>
+                  {index !== course.lessons.length - 1 && <hr />}
                 </>
               );
             })}
@@ -129,6 +130,8 @@ function ContentBox(props) {
       content = lessn["article"];
     } else if (Object.keys(lessn)[0] === "video") {
       content = <iframe width="560" height="315" src={`https://www.youtube.com/embed/${lessn["video"]}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>;
+    } else if (Object.keys(lessn)[0] === "audio") {
+      content = <iframe src="https://drive.google.com/file/d/1YrovEI2-lnM-L280WYg39MX14a_B7yEi/preview" width="600" height="100" allow="autoplay"></iframe>;
     } else if (Object.keys(lessn)[0] === "pdf") {
       //https://drive.google.com/file/d/1NHmZf-mZ4Si5vscKPcD_Tz9r02C1eZ_g/view
       content = <iframe src={`${lessn["pdf"]}preview`} width="640" height="480" allow="autoplay"></iframe>;
@@ -155,7 +158,7 @@ function ContentBox(props) {
   return (
     <>
       {props.lssn === -1 ? (
-        <p>Welcome! Click a lesson number on the left to begin!</p>
+        <p>Welcome! Click a lesson on the left to begin!</p>
       ) : (
         <>
           <h3 className="text-shblue">{props.courseInfo.lessons[props.lssn]}</h3>

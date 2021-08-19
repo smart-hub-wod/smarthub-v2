@@ -90,6 +90,7 @@ export default function Dashboard() {
             children: {},
             cart: {},
             cartTotal: 0,
+            promos: [],
           });
           setDisplayName(currentUser.email);
           getUser();
@@ -176,9 +177,15 @@ export default function Dashboard() {
               </Button>
               <span className="ml-5"> </span>
               {currentUser.email === "dev@smarthub.ca" && (
-                <Link to="add-admin">
-                  <Button bsPrefix="button-sh">Add Admins</Button>
-                </Link>
+                <>
+                  <Link to="add-admin">
+                    <Button bsPrefix="button-sh">Add Admins</Button>
+                  </Link>
+                  <span> </span>
+                  <Link to="add-promo">
+                    <Button bsPrefix="button-sh">Add Promo Code</Button>
+                  </Link>
+                </>
               )}
               <h3 className="text-shblue mt-5">My Courses</h3>
               <p>

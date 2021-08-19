@@ -16,6 +16,7 @@ import Page404 from "./404";
 import Listing from "./listing";
 import Settings from "./settings";
 import AddCourse from "./add-course";
+import AddPromo from "./add-promo";
 import ParentFAQ from "./parentfaq";
 import TeacherFAQ from "./teacherfaq";
 import Lesson from "./lesson-module";
@@ -55,6 +56,7 @@ function App() {
             <PrivateRoute exact path="/lesson/:id/:child" component={Lesson} />
             <PrivateRoute path="/student-dashboard/:id" component={StudentDash} />
             <DevRoute path="/add-admin" component={AddAdmin} />
+            <DevRoute path="/add-promo" component={AddPromo} />
             <PrivateRoute path="/cart" component={Cart} />
             <PrivateRoute path="/certificate/:child/:course" component={Certificate} />
             <PrivateRoute path="/certificate-print/:child/:course" component={CertificateCard} />
