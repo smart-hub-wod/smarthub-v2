@@ -5,14 +5,14 @@ import React, { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import {} from "react-bootstrap-icons";
 
-function MeetTeam() {
+function MeetTeam(props) {
   // Here add instructor into the array that contains the objects use it for adding instructor
   var [instructors, setInstructors] = useState([
     {
-      name: "Omar Murju",
+      name: "Aryaan Bhimani",
       intro:
-        "Lorem iscelerisque fermentum duiaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelleaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelle faucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pellentesque sit amet porttitor eget dolor. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Praesent tristique magna sit amet purus gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam.",
-      profileImg: "../Omar+Murji+Photo+-+Transparent+BG.png",
+        "Aryaan Bhimani's deep-buring passion towards technology and philosophy is highly respectable. He entails knowledge about artificial intelligence, brain-computer interfaces, and even the blockchain. His purpose in STEM is to strive for a better understand about the world through researching STEM and discussing philosophy. ",
+      profileImg: "../instructors/aryaan.png",
     },
     {
       name: "Alikhan",
@@ -26,15 +26,22 @@ function MeetTeam() {
         "Lorem iscelerisque fermentum duiaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelleaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelle faucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pellentesque sit amet porttitor eget dolor. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Praesent tristique magna sit amet purus gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam.",
       profileImg: "../instructors/anila.png",
     },
+    {
+      name: "Zayan Hussain",
+      intro:
+        "Lorem iscelerisque fermentum duiaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelleaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelle faucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pellentesque sit amet porttitor eget dolor. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Praesent tristique magna sit amet purus gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam.",
+
+      profileImg: "../instructors/zayan.jpg",
+    },
   ]);
 
   const members = [
-    {
-      name: "Zayan Hussain",
-      team: "Project Lead (SmartHub)",
-      contribution: "contribution",
-      profileImg: "../members/zayan.jpg",
-    },
+    // {
+    //   name: "Zayan Hussain",
+    //   team: "Project Lead (SmartHub)",
+    //   contribution: "contribution",
+    //   profileImg: "../members/zayan.jpg",
+    // },
     {
       name: "Khloe Ramdhan",
       team: "Software Engineer",
@@ -111,7 +118,11 @@ function MeetTeam() {
   ];
 
   return (
-    <div id="meet-team">
+    <div
+      id="meet-team"
+      style={{ backgroundColor: "white" }}
+      className={props.className}
+    >
       {/* <h1
         className="text-center text-shblue mb-5"
         style={{ marginTop: "5rem", fontSize: "3rem", textAlign: "center" }}

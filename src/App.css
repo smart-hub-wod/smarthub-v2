@@ -389,12 +389,32 @@ p {
   color: white;
   display: flex;
   width: 100%;
+  object-fit: cover;
   justify-content: center;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   /* background-position: center; */
   /* below two are intuitive */
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background-repeat: no-repeat;
+  background-size: cover; */
+}
+
+.top-catcher-container {
+  height: 100vh;
+  color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.top-catcher-video {
+  height: 100vh;
+  color: white;
+  width: 100%;
+  object-fit: cover;
+  position: fixed;
+  z-index: -9999;
+
 }
 
 #about-us .card {

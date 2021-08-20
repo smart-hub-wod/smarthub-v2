@@ -29,7 +29,12 @@ export default function NavBar() {
       <Container fluid className="d-flex justify-content-between">
         <Navbar.Brand>
           <Link to="/">
-            <img src={logo} height="50" className="d-inline-block align-top" alt="Smart Hub logo" />
+            <img
+              src={logo}
+              height="50"
+              className="d-inline-block align-top"
+              alt="Smart Hub logo"
+            />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle
@@ -38,7 +43,11 @@ export default function NavBar() {
           onClick={toggleToggl}
           //   bsPrefix={{ }}
         />
-        <Navbar.Collapse id="smarthub-nav" className="justify-content-between" style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}>
+        <Navbar.Collapse
+          id="smarthub-nav"
+          className="justify-content-between"
+          style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}
+        >
           <div>
             <Nav navbarScroll={true} className="">
               <Nav.Link className="mx-4 nav-text">
@@ -54,6 +63,11 @@ export default function NavBar() {
               <Nav.Link className="mx-4 nav-text">
                 <Link to="/meet-the-team" className="link">
                   Meet the Team
+                </Link>
+              </Nav.Link>
+              <Nav.Link className="mx-4 nav-text">
+                <Link to="/student-zone" className="link">
+                  Student Zone
                 </Link>
               </Nav.Link>
               <Nav.Link className="mx-4 nav-text">
@@ -97,7 +111,12 @@ export default function NavBar() {
 
                   // className={toggled ? "text-white" : ""}
                 >
-                  <Link to="/signup" className={!toggled ? "text-sh-blue nounder" : "text-shblue nounder"}>
+                  <Link
+                    to="/signup"
+                    className={
+                      !toggled ? "text-sh-blue nounder" : "text-shblue nounder"
+                    }
+                  >
                     Sign Up
                   </Link>
                 </Nav.Link>
