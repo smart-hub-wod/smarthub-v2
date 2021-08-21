@@ -49,37 +49,25 @@ export default function NavBar() {
           style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}
         >
           <div>
-            <Nav navbarScroll={true} className="">
-              <Nav.Link className="mx-4 nav-text">
-                <Link to="/about" className="link">
-                  About
-                </Link>
-              </Nav.Link>
-              <Nav.Link className="mx-4 nav-text">
-                <Link to="/courses" className="link">
-                  Courses
-                </Link>
-              </Nav.Link>
-              <Nav.Link className="mx-4 nav-text">
-                <Link to="/meet-the-team" className="link">
-                  Meet the Team
-                </Link>
-              </Nav.Link>
-              <Nav.Link className="mx-4 nav-text">
-                <Link to="/student-zone" className="link">
-                  Student Zone
-                </Link>
-              </Nav.Link>
-              <Nav.Link className="mx-4 nav-text">
-                <Link to="/parent-faq" className="link">
-                  Parent Zone
-                </Link>
-              </Nav.Link>
-              <Nav.Link className="mx-4 nav-text">
-                <Link to="/teacher-faq" className="link">
-                  Teacher Zone
-                </Link>
-              </Nav.Link>
+            <Nav navbarScroll={true}>
+              <Link to="/about" className="link nav-text mx-4">
+                <div className="ms-2 me-3">About</div>
+              </Link>
+              <Link to="/courses" className="link nav-text mx-4">
+                <div className="ms-2 me-3">Courses</div>
+              </Link>
+              <Link to="/meet-the-team" className="link nav-text mx-4">
+                <div className="ms-2 me-3">Meet the Team</div>
+              </Link>
+              <Link to="/student-zone" className="link nav-text mx-4">
+                <div className="ms-2 me-3">Student Zone</div>
+              </Link>
+              <Link to="/parent-faq" className="link nav-text mx-4">
+                <div className="ms-2 me-3">Parent Zone</div>
+              </Link>
+              <Link to="/teacher-faq" className="link nav-text mx-4 nav-link">
+                <div className="ms-2 me-3">Teacher Zone</div>
+              </Link>
             </Nav>
           </div>
           <div>

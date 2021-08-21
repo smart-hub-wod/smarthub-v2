@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Alarm, PersonCheck, EmojiHeartEyes } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
@@ -6,8 +6,13 @@ import { faChild, faHandsWash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Player, BigPlayButton, LoadingSpinner } from "video-react";
 import MeetTeam from "./meet-team";
+import AOS from "aos";
 
 export default function About() {
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
     <div>
       <div id="about-us">
@@ -49,7 +54,7 @@ export default function About() {
                     experience and hands-on learning. Smart Hub makes online
                     learning fun and accessible by providing flexible learning
                     opportunities, engaging lessons and kid-friendly STEM
-                    material. Our c ourses are developed and reviewed by Ontario
+                    material. Our courses are developed and reviewed by Ontario
                     College of Teachers (OCT) certified teachers and will aid
                     your child in learning complex STEM materials in a
                     simplified manner.{" "}
@@ -85,7 +90,7 @@ export default function About() {
             </h2>
             <Row>
               <Col lg={4} md={6}>
-                <Card>
+                <Card data-aos="fade-right">
                   <Card.Title> Engaging Contents </Card.Title>
                   <EmojiHeartEyes
                     className="w-100 justify-content-center my-2"
@@ -94,14 +99,14 @@ export default function About() {
                   <Card.Body>
                     {" "}
                     One of the problems with virtual learning was the lack of
-                    the focus. However, our instructors only teaches very
+                    the focus. However, our instructors only teach very
                     interesting STEM concepts that will initiate child's
                     curiousity{" "}
                   </Card.Body>
                 </Card>
               </Col>
               <Col lg={4} md={6}>
-                <Card>
+                <Card data-aos="fade-left">
                   <Card.Title> Accountability </Card.Title>
                   <Alarm
                     className="w-100 justify-content-center my-2"
@@ -110,14 +115,14 @@ export default function About() {
                   <Card.Body>
                     {" "}
                     One of the problems of online courses is that there's no
-                    Accountability. However, we send notification to parents
-                    detailed about child's progress, making the course
-                    accountable{" "}
+                    Accountability. However, we send detailed notification to
+                    parents about child's progress, making the course
+                    accountable for your child{" "}
                   </Card.Body>
                 </Card>
               </Col>
               <Col lg={4} md={6}>
-                <Card>
+                <Card data-aos="fade-right">
                   <Card.Title> Hands on learning </Card.Title>
                   {/* <Book className="w-100 justify-content-center my-2" size={70} /> */}
                   <FontAwesomeIcon
@@ -130,14 +135,14 @@ export default function About() {
                     Knowledge is only potential, it becomes power when we use
                     it. So, our courses aren't just videos, and articles, we
                     have tutorials for child to do some experiments, and gain
-                    real-life experience{" "}
+                    real-life experiences{" "}
                   </Card.Body>
                 </Card>
               </Col>
             </Row>
             <Row className="row2">
               <Col className="d-flex justify-content-end" lg={6} md={6}>
-                <Card className="me-5">
+                <Card data-aos="fade-right" className="me-5">
                   <Card.Title> Experienced Instructors </Card.Title>{" "}
                   <PersonCheck
                     className="w-100 justify-content-center my-2"
@@ -151,7 +156,7 @@ export default function About() {
                 </Card>
               </Col>
               <Col lg={6} md={6}>
-                <Card className="ms-5">
+                <Card data-aos="fade-left" className="ms-5">
                   <Card.Title> Life Lessons </Card.Title>
                   <FontAwesomeIcon
                     className="w-100 justify-content-center my-2"
@@ -180,7 +185,7 @@ export default function About() {
         </section> */}
       </div>
 
-      <MeetTeam className="py-5" />
+      <MeetTeam header={false} className="py-5" />
     </div>
   );
 }

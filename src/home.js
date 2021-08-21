@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AOS from "aos";
 
 export default function Home() {
+  useEffect(() => {
+    AOS.init({
+      duration: 500,
+    });
+  });
   return (
     // justify-content-center text-center
     <div>
@@ -60,7 +66,7 @@ export default function Home() {
           </Col>
           <Col>
             <img
-              className="slide-top"
+              className="fade-up"
               src="../land-1pic.png"
               alt="1 landing page pic"
             />
@@ -91,8 +97,8 @@ export default function Home() {
         className="d-flex justify-content-center text-center py-5 mt-5 is-shblue text-white"
       >
         <Row className="justify-content-center">
-          <Col lg={2}>
-            <img alt="" src="../book-lover.svg" height="175" />
+          <Col lg={4}>
+            <img alt="" src="../book-lover.svg" height="200" />
           </Col>
           <Col lg={6}>
             <h1>Our Mission</h1>
@@ -129,7 +135,7 @@ export default function Home() {
         <div className="text-shblue">
           <h1>Why Choose Smart Hub?</h1>
           <div className="row align-items-start row justify-content-center">
-            <div className="col-3">
+            <div data-aos="slide-up" className="col-3">
               <img alt="" src="../boat.gif" height="175" />
               <h5>Kid Friendly</h5>
               <p>
@@ -137,7 +143,7 @@ export default function Home() {
                 understandable manner.
               </p>
             </div>
-            <div className="col-3">
+            <div data-aos="slide-up" data-aos-delay="200" className="col-3">
               <img alt="" src="../school.gif" height="175" />
               <h5>Engaging Lessons</h5>
               <p>
@@ -145,7 +151,7 @@ export default function Home() {
                 STEM kits.
               </p>
             </div>
-            <div className="col-3">
+            <div data-aos="slide-up" data-aos-delay="400" className="col-3">
               <img alt="" src="../confetti.gif" height="175" />
               <h5>Certifications</h5>
               <p>
@@ -186,7 +192,7 @@ export default function Home() {
               into STEM!
             </p>
             <Link to="../signup">
-              <Button bsPrefix="button-sh" className="mt-3">
+              <Button data-aos="fade-up" bsPrefix="button-sh" className="mt-3">
                 Sign Up Today!
               </Button>
             </Link>

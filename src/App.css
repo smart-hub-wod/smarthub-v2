@@ -68,8 +68,11 @@ p {
 
 .nav-text {
   font-size: 1.2rem;
+  color: white !important;
   border: 0 solid white;
   border-left-width: 5px;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+  
 }
 
 .nav-text:hover {
@@ -77,6 +80,18 @@ p {
   background-color: #fe5c36;
   color: white !important;
 }
+
+.nav-text > div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-text > .link:hover {
+  color: white;
+}
+
 
 #footer .nav-text {
   font-size: 0.9rem;
@@ -248,8 +263,27 @@ p {
   font-weight: 600;
 }
 
-/* Home page Animation */
-.fade-in {
+/* Home page Start */
+
+/* Home page font */
+.mission-res {
+  font-size: 1.1rem;
+}
+
+.background-video-container{
+  height: 100vh;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.background-video {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+  z-index: -9999;
+}
+/* .fade-in {
   animation: fade 0.9s ease-in;
 }
 
@@ -267,7 +301,7 @@ p {
   0% {
     margin-top: -300px;
   }
-}
+} */
 
 .shape {
   height: 40px;
@@ -307,29 +341,42 @@ p {
   overflow: auto;
   border-radius: 5px;
   word-wrap: break-word;
-  transform: rotate(-5.81deg);
   width: 80%;
-  animation: instructorSpin1 0.9s ease-in;
 }
 
-#instructor2 > .instructor-container {
+[data-aos="instructor-spin1"] {
+  opacity: 0;
+  transform: rotate(0deg);
+  transition-property: transform, opacity;
+}
+
+[data-aos="instructor-spin1"].aos-animate {
+  opacity: 1;
+  transform: rotate(-5.81deg);
+}
+
+[data-aos="instructor-spin2"] {
+  opacity: 0;
+  transform: rotate(0deg);
+  transition-property: transform, opacity;
+}
+
+[data-aos="instructor-spin2"].aos-animate {
+  opacity: 1;
   transform: rotate(10.42deg);
-  /* animation: instructorSpin2 0.9s ease-in; */
 }
 
-[data-aos="instructorSpin1"] {
-}
 
-@keyframes instructorSpin1 {
-  0% {
-    transform: rotate(0);
-  }
-}
 
-@keyframes instructorSpin2 {
-  0% {
-    transform: rotate(0);
-  }
+ @media (max-width: 768px) {
+
+    [data-aos="instructor-spin1"].aos-animate {
+      transform: rotate(0deg);
+    }
+    [data-aos="instructor-spin2"].aos-animate {
+      transform: rotate(0deg);
+    }
+
 }
 
 .instructor-img {
@@ -452,4 +499,31 @@ p {
 .row2 .card {
   width: 60%;
   margin: 0 5rem !important;
+}
+
+
+/* Student page starts */
+
+#student-page .background-video {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+  z-index: -9999;
+}
+
+#student-page .holder-container {
+  height: 100vh;
+  width: 100%;
+  overflow-y: hidden;
+  
+}
+
+#student-page .subtitle-container {
+  color:white;
+  position: relative;
+  top: 50vh;
+  background-color: black;
+  padding: 3rem 6rem;
+  background-attachment: fixed;
 }

@@ -26,39 +26,34 @@ export default function Footer() {
               <Col>
                 <Nav.Link className="nav-text mx-3">
                   <Link className="link" to="/">
-                    Home
+                    <div>Home</div>
                   </Link>
                 </Nav.Link>
                 <Nav.Link className="nav-text mx-3">
                   <Link className="link" to="/about">
-                    About
+                    <div>About</div>
                   </Link>
                 </Nav.Link>
                 <Nav.Link className="nav-text mx-3">
                   <Link className="link" to="/courses">
-                    Courses
+                    <div>Courses</div>
                   </Link>
                 </Nav.Link>
               </Col>
               <Col>
-                {/* <Nav.Link className="nav-text mx-3">
-                    <Link className="link" to="/meet-the-team">
-                      Meet The Team
-                    </Link>
-                  </Nav.Link> */}
                 <Nav.Link className="nav-text mx-3">
                   <Link to="/parent-faq" className="link">
-                    Parent Zone
+                    <div>Parent Zone</div>
                   </Link>
                 </Nav.Link>
                 <Nav.Link className="nav-text mx-3">
                   <Link className="link" to="/contact-us">
-                    Contact Us
+                    <div>Contact Us</div>
                   </Link>
                 </Nav.Link>
                 <Nav.Link className="nav-text mx-3">
                   <Link className="link" to="/terms-and-conditions">
-                    Terms and Conditions
+                    <div>Terms and Conditions</div>
                   </Link>
                 </Nav.Link>
               </Col>

@@ -76,6 +76,7 @@ function App() {
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/about" component={About} />
+            {/* below is a way to pass props to components */}
             <Route path="/meet-the-team" component={MeetTeam} />
             <Route path="/courses" component={Courses} />
             <Route path="/home" component={Home} />
