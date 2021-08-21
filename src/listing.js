@@ -200,7 +200,16 @@ export default function Listing() {
                   <p>Loading</p>
                 )}
                 <p className="text-shblue mt-1">
-                  Only <span className="fs-3 fw-bold">${course.price} </span>
+                  Only <span className="fs-3 fw-bold">${course.price}</span>
+                  {course.product && (
+                    <span>
+                      {" "}
+                      +{" "}
+                      <a href={course.productlink} target="_blank" rel="noopener noreferrer">
+                        additional resource costs
+                      </a>
+                    </span>
+                  )}
                 </p>
                 <br />
               </div> //

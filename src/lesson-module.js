@@ -74,15 +74,25 @@ export default function Lesson() {
         <div className="text-center py-4" style={{ backgroundColor: "#E3E3E3" }}>
           <h1 className="text-shblue">Lesson Module</h1>
           <p>Welcome to {course.name}</p>
-          {course.sync ? (
+          {course.sync && (
             <>
-              <h5 className="text-shblue">This course is synchronous!</h5>
+              <h5 className="text-shblue mt-2">This course is synchronous!</h5>
               <p>
                 {course.schedule} at <a href={course.zoom}>{course.zoom}</a>
               </p>
             </>
-          ) : (
-            ""
+          )}
+          {course.product && (
+            <>
+              <h5 className="text-shblue mt-2">This course recommends an extra resource!</h5>
+              <p>
+                {course.productdescription} <br /> Estimated ${course.productprice} at{" "}
+                <a href={course.productlink} target="_blank" rel="noopener noreferrer">
+                  {course.productlink}
+                </a>{" "}
+                (Actual price may vary)
+              </p>
+            </>
           )}
         </div>
         <div className="row justify-content-center">

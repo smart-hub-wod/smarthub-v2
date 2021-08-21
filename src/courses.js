@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import firebase from "./firebase";
 import "firebase/storage";
-import { Card, Button, Spinner } from "react-bootstrap";
+import { Card, Button, Spinner, Form, Alert } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,7 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filtered, setFiltered] = useState(false);
+  const [alert, setAlert] = useState();
   const [newCourses, setNewCourses] = useState([]);
   var temp = [];
   const [searchValue, setSearchValue] = useState("");
@@ -22,6 +23,7 @@ export default function Courses() {
   // })
 
   const courseref = firebase.firestore().collection("courses");
+  const filters = ["All Grades", "kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5", "grade-6", "grade-7", "grade-8", "teacher", "parent"];
 
   function getCourses() {
     setLoading(true);
@@ -47,7 +49,6 @@ export default function Courses() {
         }
       });
       setCourses(items);
-      console.log(courses);
 
       //searchRef.value = 'a'
 
@@ -83,8 +84,10 @@ export default function Courses() {
     setNewCourses([...temp]);
     if (temp.length > 0) {
       setFiltered(true);
+      setAlert(null);
     } else {
       setFiltered(false);
+      setAlert("No courses found!");
     }
   }
 
@@ -92,9 +95,69 @@ export default function Courses() {
     setSearchValue(e.target.value);
   };
 
+  const handleGrade = (e) => {
+    console.log(e.target.value);
+    temp = [];
+
+    courses.map((c) => {
+      let s = "";
+      if (e.target.value === "") {
+        s = "";
+      } else {
+        s = c.grades.includes(e.target.value);
+      }
+      if (s) {
+        temp.push(c);
+      }
+    });
+    console.log(temp.length);
+    setNewCourses([...temp]);
+    if (temp.length > 0) {
+      setFiltered(true);
+      setAlert(null);
+    } else {
+      setFiltered(false);
+      console.log(e.target.value);
+      if (e.target.value !== "All Grades") {
+        setAlert("No courses under this category exists! Try another!");
+      }
+    }
+  };
+  const handleSync = (e) => {
+    console.log(e.target.value);
+    temp = [];
+
+    courses.map((c) => {
+      let s = "";
+      if (e.target.value === "") {
+        s = "";
+      } else {
+        s = c.sync === (e.target.value === "sync");
+      }
+      if (s) {
+        temp.push(c);
+      }
+    });
+    console.log(temp.length);
+    setNewCourses([...temp]);
+    if (temp.length > 0) {
+      setFiltered(true);
+    } else {
+      setFiltered(false);
+    }
+  };
+
   function resetSearch() {
     setFiltered(false);
     setSearchValue("");
+  }
+
+  function titleMaker(title) {
+    let finished = title.split("-");
+    finished.map((word, index) => {
+      finished[index] = word.charAt(0).toUpperCase() + word.slice(1, word.length);
+    });
+    return finished.join(" ");
   }
 
   if (loading) {
@@ -115,13 +178,52 @@ export default function Courses() {
           Reset Search
         </Button>
       </div>
+      <div className="d-flex justify-content-center">
+        <div className="w-75">
+          <h5 className="mt-2 text-shblue text-center">Filter by grade:</h5>
+          <div className="d-flex justify-content-center">
+            <select className="mb-3 mt-2 d-flex form-select justify-content-center w-25" onChange={handleGrade} defaultValue="0">
+              {filters.map((grade) => {
+                return (
+                  <>
+                    <option bsPrefix="button-shmenu" key={grade} value={grade} id={grade}>
+                      {titleMaker(grade)}
+                    </option>
+                  </>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <div className="w-75">
+          <h5 className="mt-2 text-shblue text-center">Filter by Delivery Method:</h5>
+          <div className="d-flex justify-content-center">
+            <select className="mb-3 mt-2 d-flex form-select justify-content-center w-25" onChange={handleSync} defaultValue="0">
+              <option bsPrefix="button-shmenu" value="">
+                All Delivery Methods
+              </option>
+              <option bsPrefix="button-shmenu" value="sync">
+                Synchronous
+              </option>
+              <option bsPrefix="button-shmenu" value="async">
+                Asynchronous
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      {alert && (
+        <Alert variant="warning" className="px-5 text-center">
+          {alert}
+        </Alert>
+      )}
+
       <div id="course-previews">
         {
           (filtered ? newCourses : courses).map((course) => (
             <Card className="p-3 mx-5 mb-3">
               <div className="row">
                 <div className="col-md-6 col-lg-3 overflow-hidden">
-                  {console.log(course.url)}
                   {course.url ? (
                     <img height="200" src={course.url} className="rep-photo" />
                   ) : (
