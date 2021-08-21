@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, forwardRef, createRef } from "react";
 import firebase from "./firebase";
 import "firebase/storage";
-import { Card, Button, Spinner, Form, Alert } from "react-bootstrap";
-import { Search } from "react-bootstrap-icons";
+import { Card, Button, Spinner, Form, Alert, Tooltip, OverlayTrigger, Pagination } from "react-bootstrap";
+import { Search, QuestionCircleFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 export default function Courses() {
@@ -13,6 +13,7 @@ export default function Courses() {
   const [newCourses, setNewCourses] = useState([]);
   var temp = [];
   const [searchValue, setSearchValue] = useState("");
+  const [start, setStart] = useState(0);
   const searchRef = useRef();
   var storageRef = firebase.storage();
   // var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
@@ -22,16 +23,18 @@ export default function Courses() {
 
   // })
 
-  const courseref = firebase.firestore().collection("courses");
+  let courseref = firebase.firestore().collection("courses").orderBy("title").startAfter(start).limit(2);
   const filters = ["All Grades", "kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5", "grade-6", "grade-7", "grade-8", "teacher", "parent"];
 
-  function getCourses() {
+  function getCourses(refvar) {
+    console.log(start);
     setLoading(true);
     const items = [];
-    courseref.onSnapshot((querySnapshot) => {
+    refvar.onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         if (doc.data().published) {
           const course = doc.data();
+          console.log(doc.data().title);
           if (!doc.data().defaultCover) {
             var coverRef = storageRef.ref(`${course.id}/${course.id}.jpeg`);
             coverRef
@@ -49,17 +52,20 @@ export default function Courses() {
         }
       });
       setCourses(items);
+      courseref.get().then((documentSnapshots) => {
+        setStart(documentSnapshots.docs[documentSnapshots.docs.length - 1]);
+      });
 
       //searchRef.value = 'a'
 
       // setLoading(false)
       // setTimeout(setLoading(true), 100)
-      setTimeout(() => {
-        // setSearchValue('')
-        searchCourses();
-        // resetSearch()
-        setLoading(false);
-      }, 200);
+      // setTimeout(() => {
+      //   // setSearchValue('')
+      //   searchCourses();
+      //   // resetSearch()
+      setLoading(false);
+      // }, 200);
       // setSearchValue('a')
       // searchCourses()
       // resetSearch()
@@ -68,7 +74,7 @@ export default function Courses() {
   }
 
   useEffect(() => {
-    getCourses();
+    getCourses(courseref);
     console.log("hello");
   }, []);
 
@@ -87,13 +93,40 @@ export default function Courses() {
       setAlert(null);
     } else {
       setFiltered(false);
-      setAlert("No courses found!");
+      setAlert("No Courses Found!");
     }
   }
 
   const handleSearchInput = (e) => {
     setSearchValue(e.target.value);
   };
+
+  function handleNext() {
+    courseref.get().then((documentSnapshots) => {
+      // Get the last visible document
+      var lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+      console.log("last", lastVisible);
+      setStart(lastVisible);
+
+      // Construct a new query starting at this document,
+      // get the next 25 cities.
+      var next = firebase.firestore().collection("courses").orderBy("title").startAfter(start).limit(2);
+      courseref = next;
+      console.log(courseref === next);
+      getCourses(next);
+    });
+  }
+  function handlePrev() {
+    courseref.get().then((documentSnapshots) => {
+      var lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+      console.log("last", lastVisible);
+      setStart(lastVisible);
+      var next = firebase.firestore().collection("courses").orderBy("title").endBefore(start).limit(2);
+      courseref = next;
+      console.log(courseref === next);
+      getCourses(next);
+    });
+  }
 
   const handleGrade = (e) => {
     console.log(e.target.value);
@@ -142,8 +175,12 @@ export default function Courses() {
     setNewCourses([...temp]);
     if (temp.length > 0) {
       setFiltered(true);
+      setAlert(null);
     } else {
       setFiltered(false);
+      if (e.target.value !== "Dev") {
+        setAlert("No courses under this category exists! Try another!");
+      }
     }
   };
 
@@ -159,6 +196,19 @@ export default function Courses() {
     });
     return finished.join(" ");
   }
+
+  // const renderTooltip = (props) => (
+  //   <Tooltip id="button-tooltip" {...props}>
+  //     Asynchrno
+  //   </Tooltip>
+  // );
+
+  // const FancyButton = React.forwardRef((props, ref) => (
+  //   <button ref={ref} className="FancyButton">
+  //     {props.children}
+  //   </button>
+  // ));
+  // const ref = React.createRef();
 
   if (loading) {
     return <h1 className="text-shblue pt-3">Loading...</h1>;
@@ -196,10 +246,23 @@ export default function Courses() {
           </div>
         </div>
         <div className="w-75">
-          <h5 className="mt-2 text-shblue text-center">Filter by Delivery Method:</h5>
+          <OverlayTrigger
+            data-placement="right"
+            delay={{ hide: 450, show: 50 }}
+            overlay={(props) => (
+              <Tooltip {...props}>
+                <strong>Asynchronous</strong> means the course can be completed at any time! <strong>Synchronous</strong> means there will be live lessons included with the course!
+              </Tooltip>
+            )}
+            placement="bottom"
+          >
+            <h5 className="mt-2 text-shblue text-center">
+              Filter by Delivery Method: <QuestionCircleFill></QuestionCircleFill>
+            </h5>
+          </OverlayTrigger>
           <div className="d-flex justify-content-center">
             <select className="mb-3 mt-2 d-flex form-select justify-content-center w-25" onChange={handleSync} defaultValue="0">
-              <option bsPrefix="button-shmenu" value="">
+              <option bsPrefix="button-shmenu" value="Dev">
                 All Delivery Methods
               </option>
               <option bsPrefix="button-shmenu" value="sync">
@@ -259,6 +322,10 @@ export default function Courses() {
           // ))}
         }
       </div>
+      <Pagination className="d-flex justify-content-center">
+        <Pagination.Prev onClick={handlePrev}> </Pagination.Prev>
+        <Pagination.Next onClick={handleNext}> </Pagination.Next>
+      </Pagination>
     </div>
   );
 }
