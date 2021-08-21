@@ -78,10 +78,7 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-            <h2 style={{ marginTop: "6.8rem" }}>
-              {" "}
-              Subscribe Smarthub News Letter:{" "}
-            </h2>
+            <h2 style={{ marginTop: "6.8rem" }}> Subscribe Smarthub News Letter: </h2>
             <Button className="button-sh mt-3"> Smarthub News Letter</Button>
           </Col>
           {/* https://www.instagram.com/p/CSz1MWtppXR/?utm_source=ig_web_copy_link */}
@@ -113,7 +110,7 @@ export default function Footer() {
           <p>© West Oak Design Inc. | All rights reserved</p>
           <p className="iconstext text-light">
             Animated Icons by{" "}
-            <a className="text-white" href="https://lordicon.com">
+            <a className="text-white" href="https://lordicon.com" target="_blank" rel="noopener noreferrer">
               Lordicon.com
             </a>
           </p>

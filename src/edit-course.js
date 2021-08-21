@@ -23,9 +23,14 @@ export default function EditCourse() {
   const GradeRef = useRef();
   const priceRef = useRef();
   const zoomRef = useRef();
+  const productnameRef = useRef();
+  const productpriceRef = useRef();
+  const productlinkRef = useRef();
   const [errMessage, setErrMessage] = useState("");
   const [sync, setSync] = useState();
   const [publish, setPublish] = useState();
+  const [product, setProduct] = useState("");
+
   const [grades, setGrades] = useState([]);
   const [dateField, setDateField] = useState();
   const [course, setCourse] = useState({});
@@ -101,7 +106,7 @@ export default function EditCourse() {
   var storageRef = firebase.storage().ref();
   const lessonref = firebase.firestore().collection("lessons");
   const courseref = firebase.firestore().collection("courses");
-  const checkBoxes = ["kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5", "grade-6", "grade-7", "grade-8"];
+  const checkBoxes = ["kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5", "grade-6", "grade-7", "grade-8", "teacher", "parent"];
 
   function getAdmin() {
     adminRef
@@ -163,6 +168,10 @@ export default function EditCourse() {
                 ).format("h:mm A")}`
               : "",
           zoom: zoomRef.current.value,
+          productlink: productlinkRef.current.value,
+          product: product,
+          productdescription: productnameRef.current.value,
+          productprice: productpriceRef.current.value,
         })
         .then(() => {
           console.log("Document successfully written!");
@@ -176,6 +185,8 @@ export default function EditCourse() {
               timeline: parseInt(timelineRef.current.value),
               modules: orderRef.current.value.split(",").length,
               published: publish,
+              productlink: productlinkRef.current.value,
+              product: product,
               sync: sync,
               grades: grades,
               defaultCover: coverRef.current.files.length > 0 ? false : true,
@@ -230,6 +241,11 @@ export default function EditCourse() {
     setPublish(e.target.id === "yespublish");
     console.log(e.target.id);
     console.log(course.published);
+  };
+
+  const handleProduct = (e) => {
+    setProduct(e.target.id === "yesproduct");
+    console.log(productnameRef.current.value, productpriceRef.current.value, productlinkRef.current.value, product);
   };
 
   return (
@@ -355,6 +371,40 @@ export default function EditCourse() {
                     return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} defaultChecked={course?.grades?.includes(grade)} />;
                   })}
                 </div>
+              </Form.Group>
+              <p>
+                <strong>Does this course require a separate product?</strong>
+              </p>
+              <Form.Group id="product" className="mb-3 form-floating" onChange={handleProduct}>
+                <div className="mb-3">
+                  <Form.Check inline label="Yes it does require a separate product" name="group3" type="radio" id="yesproduct" defaultChecked={lesson?.product} />
+                  <Form.Check inline label="No there is nothing additional to add" name="group3" type="radio" id="noproduct" defaultChecked={!lesson?.product} />
+                </div>
+              </Form.Group>
+              <p>
+                <strong>Product Information:</strong> Only required if you selected 'Yes' above <br />
+                Separate name and description using ' - '. Example: Music Machine - A machine that plays music!
+              </p>
+              <Form.Group id="productname" className="mb-3 form-floating">
+                <Form.Control type="text" ref={productnameRef} className="form-control" placeholder="Product Name and Description" id="InputProdName" aria-describedby="product name and description" required={product} defaultValue={lesson?.productdescription} />
+                <Form.Label for="InputProdName" className="form-label floatingInput">
+                  Product Name and Description
+                </Form.Label>
+              </Form.Group>
+              <p>
+                <strong>Current Price</strong> - Will be written as an estimate, provide the current listing price
+              </p>
+              <Form.Group id="productprice" className="mb-3 form-floating">
+                <Form.Control type="text" ref={productpriceRef} className="form-control" placeholder="Product Price" id="InputProdPrice" aria-describedby="product price" required={product} defaultValue={lesson?.productprice} />
+                <Form.Label for="InputProdPrice" className="form-label floatingInput">
+                  Current Price
+                </Form.Label>
+              </Form.Group>
+              <Form.Group id="productlink" className="mb-3 form-floating">
+                <Form.Control type="text" ref={productlinkRef} className="form-control" placeholder="Product Link" id="InputProdLink" aria-describedby="product link" required={product} defaultValue={lesson?.productlink} />
+                <Form.Label for="InputProdLink" className="form-label floatingInput">
+                  Purchasing Link
+                </Form.Label>
               </Form.Group>
               <p>
                 <strong>Content Outline</strong> Refer to{" "}

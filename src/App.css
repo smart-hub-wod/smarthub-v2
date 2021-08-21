@@ -37,6 +37,15 @@ p {
   border-radius: 5px;
   border: none;
 }
+.button-shmenu {
+  background-color: #fe5c36;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 /* Navbar & Footer */
 .link {
@@ -451,7 +460,6 @@ p {
   width: 100%;
   display: flex;
   justify-content: center;
-
 }
 
 .top-catcher-video {
@@ -461,7 +469,6 @@ p {
   object-fit: cover;
   position: fixed;
   z-index: -9999;
-
 }
 
 #about-us .card {
