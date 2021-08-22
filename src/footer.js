@@ -17,13 +17,13 @@ export default function Footer() {
         className="is-shblue text-white position-sticky bottom-0 end-0 pt-5"
       >
         <Row className="" style={{ margin: "0 5rem" }}>
-          <Col xs={4}>
+          <Col xs={12} sm={4}>
             <img className="logo" src={logo} alt="logo" />
 
             <h2 className="mt-3"> Links: </h2>
             {/* <div className="d-flex justify-content-center"> */}
             <Row className="mt-3 ms-1">
-              <Col>
+              <Col xs={12} sm={4}>
                 <Nav.Link className="nav-text mx-3">
                   <Link className="link" to="/">
                     <div>Home</div>

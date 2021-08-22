@@ -286,8 +286,8 @@ export default function AddCourse() {
               </p>
               <Form.Group id="product" className="mb-3 form-floating" onChange={handleProduct}>
                 <div className="mb-3">
-                  <Form.Check inline label="Yes it does require a separate product" name="group3" type="radio" id="yesproduct" />
-                  <Form.Check inline label="No there is nothing additional to add" name="group3" type="radio" id="noproduct" />
+                  <Form.Check inline label="Yes it does require a separate product" name="group7" type="radio" id="yesproduct" />
+                  <Form.Check inline label="No there is nothing additional to add" name="group7" type="radio" id="noproduct" />
                 </div>
               </Form.Group>
               <p>
@@ -364,7 +364,7 @@ export default function AddCourse() {
                 </Form.Label>
               </Form.Group>
               <p>
-                <strong>Cover Photo</strong> If not added will be replaced with default image
+                <strong>Cover Photo</strong> If not added will be replaced with default image | Recommended aspect ratio: 4:3
               </p>
               <Form.Group controlId="formFile" className="mb-3" id="coverPicInput">
                 <Form.Control ref={coverRef} type="file" />
@@ -374,8 +374,8 @@ export default function AddCourse() {
               </p>
               <Form.Group id="productionReady" className="mb-3 form-floating" onChange={handlePublish}>
                 <div className="mb-3">
-                  <Form.Check inline label="Yes, publish immediately" name="group2" type="radio" id="yespublish" />
-                  <Form.Check inline label="No, save as draft" name="group2" type="radio" id="nopublish" />
+                  <Form.Check inline label="Yes, publish immediately" name="group6" type="radio" id="yespublish" />
+                  <Form.Check inline label="No, save as draft" name="group6" type="radio" id="nopublish" />
                 </div>
               </Form.Group>
               <p>

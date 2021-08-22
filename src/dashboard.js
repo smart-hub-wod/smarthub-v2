@@ -171,6 +171,10 @@ export default function Dashboard() {
                 View Course
               </Button>
               <span className="ml-5"> </span>
+              <Link to="add-profile">
+                <Button bsPrefix="button-sh">Add Profile</Button>
+              </Link>
+              <span className="ml-5"> </span>
 
               <Button bsPrefix="button-sh" href="https://www.notion.so/Adding-a-Course-e3cda0b54b4d49b8bd1dbd56f3a6d18a">
                 Adding/Editing Course Guide
@@ -235,8 +239,8 @@ export default function Dashboard() {
           </div>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>
+      <div className="w-100 text-center mb-5">
+        <Button bsPrefix="button-sh" onClick={handleLogout}>
           Log Out
         </Button>
       </div>

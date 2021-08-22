@@ -8,13 +8,20 @@ import { Link } from "react-router-dom";
 export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(1);
   const [filtered, setFiltered] = useState(false);
   const [alert, setAlert] = useState();
   const [newCourses, setNewCourses] = useState([]);
   var temp = [];
   const [searchValue, setSearchValue] = useState("");
+  const querySize = 4;
+
   const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(querySize);
+  //const [pos, setPos] = useState(0);
   const searchRef = useRef();
+  const syncRef = useRef();
+  const gradeRef = useRef();
   var storageRef = firebase.storage();
   // var coverRef = storageRef.ref(`${id}/${id}.jpeg`);
   // coverRef.getDownloadURL()
@@ -23,7 +30,8 @@ export default function Courses() {
 
   // })
 
-  let courseref = firebase.firestore().collection("courses").orderBy("title").startAfter(start).limit(2);
+  let courseref = firebase.firestore().collection("courses"); //.orderBy("title").startAfter(start).limit(2);
+  let searchcourseref = firebase.firestore().collection("courses").orderBy("title");
   const filters = ["All Grades", "kindergarten", "grade-1", "grade-2", "grade-3", "grade-4", "grade-5", "grade-6", "grade-7", "grade-8", "teacher", "parent"];
 
   function getCourses(refvar) {
@@ -35,15 +43,29 @@ export default function Courses() {
         if (doc.data().published) {
           const course = doc.data();
           console.log(doc.data().title);
-          if (!doc.data().defaultCover) {
+          // if (!doc.data().defaultCover) {
+          //   var coverRef = storageRef.ref(`${course.id}/${course.id}.jpeg`);
+          //   coverRef
+          //     .getDownloadURL()
+          //     .then((URL) => {
+          //       course.url = URL;
+          //     })
+          // } else {
+          //   course.url = "../defaultcourseimage.png";
+          // }
+          setLoading(false);
+          if (!course.defaultCover) {
             var coverRef = storageRef.ref(`${course.id}/${course.id}.jpeg`);
             coverRef
               .getDownloadURL()
               .then((URL) => {
+                setLoading(true);
                 course.url = URL;
+                setURLFunc(URL);
               })
               .then(() => {
-                //console.log(course.url)
+                setLoader(0);
+                setLoading(false);
               });
           } else {
             course.url = "../defaultcourseimage.png";
@@ -52,9 +74,10 @@ export default function Courses() {
         }
       });
       setCourses(items);
-      courseref.get().then((documentSnapshots) => {
-        setStart(documentSnapshots.docs[documentSnapshots.docs.length - 1]);
-      });
+      setNewCourses(items);
+      // courseref.get().then((documentSnapshots) => {
+      //   setStart(documentSnapshots.docs[documentSnapshots.docs.length - 1]);
+      // });
 
       //searchRef.value = 'a'
 
@@ -64,7 +87,7 @@ export default function Courses() {
       //   // setSearchValue('')
       //   searchCourses();
       //   // resetSearch()
-      setLoading(false);
+
       // }, 200);
       // setSearchValue('a')
       // searchCourses()
@@ -102,30 +125,20 @@ export default function Courses() {
   };
 
   function handleNext() {
-    courseref.get().then((documentSnapshots) => {
-      // Get the last visible document
-      var lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-      console.log("last", lastVisible);
-      setStart(lastVisible);
+    if (end < courses.length) {
+      setStart(start + querySize);
+      setEnd(end + querySize);
+    }
 
-      // Construct a new query starting at this document,
-      // get the next 25 cities.
-      var next = firebase.firestore().collection("courses").orderBy("title").startAfter(start).limit(2);
-      courseref = next;
-      console.log(courseref === next);
-      getCourses(next);
-    });
+    console.log(start, end);
   }
+
   function handlePrev() {
-    courseref.get().then((documentSnapshots) => {
-      var lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-      console.log("last", lastVisible);
-      setStart(lastVisible);
-      var next = firebase.firestore().collection("courses").orderBy("title").endBefore(start).limit(2);
-      courseref = next;
-      console.log(courseref === next);
-      getCourses(next);
-    });
+    if (start > 0) {
+      setStart(start - querySize);
+      setEnd(end - querySize);
+    }
+    console.log(start, end);
   }
 
   const handleGrade = (e) => {
@@ -159,34 +172,47 @@ export default function Courses() {
   const handleSync = (e) => {
     console.log(e.target.value);
     temp = [];
-
-    courses.map((c) => {
-      let s = "";
-      if (e.target.value === "") {
-        s = "";
+    try {
+      courses.map((c) => {
+        let s = "";
+        if (e.target.value === "All Delivery Methods") {
+          s = "";
+          setFiltered(false);
+        } else {
+          s = c.sync === (e.target.value === "sync");
+        }
+        if (s) {
+          temp.push(c);
+        }
+      });
+      console.log(temp.length);
+      setNewCourses([...temp]);
+      if (temp.length > 0) {
+        setFiltered(true);
+        setAlert(null);
       } else {
-        s = c.sync === (e.target.value === "sync");
+        setFiltered(false);
+        if (e.target.value !== "All Delivery Methods") {
+          setAlert("No courses under this category exists! Try another!");
+        } else {
+          setFiltered(false);
+        }
       }
-      if (s) {
-        temp.push(c);
-      }
-    });
-    console.log(temp.length);
-    setNewCourses([...temp]);
-    if (temp.length > 0) {
-      setFiltered(true);
-      setAlert(null);
-    } else {
-      setFiltered(false);
-      if (e.target.value !== "Dev") {
-        setAlert("No courses under this category exists! Try another!");
-      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   function resetSearch() {
     setFiltered(false);
     setSearchValue("");
+    gradeRef.current.value = "All Grades";
+    syncRef.current.value = "All Delivery Methods";
+  }
+
+  function setURLFunc(url) {
+    setLoader(0);
+    console.log(url);
   }
 
   function titleMaker(title) {
@@ -228,11 +254,11 @@ export default function Courses() {
           Reset Search
         </Button>
       </div>
-      <div className="d-flex justify-content-center">
-        <div className="w-75">
+      <div className="row justify-content-center">
+        <div className="col-sm-12 col-md-6">
           <h5 className="mt-2 text-shblue text-center">Filter by grade:</h5>
           <div className="d-flex justify-content-center">
-            <select className="mb-3 mt-2 d-flex form-select justify-content-center w-25" onChange={handleGrade} defaultValue="0">
+            <select className="mb-3 mt-2 d-flex form-select justify-content-center w-25" onChange={handleGrade} defaultValue="0" ref={gradeRef}>
               {filters.map((grade) => {
                 return (
                   <>
@@ -245,7 +271,7 @@ export default function Courses() {
             </select>
           </div>
         </div>
-        <div className="w-75">
+        <div className="col-sm-12 col-md-6">
           <OverlayTrigger
             data-placement="right"
             delay={{ hide: 450, show: 50 }}
@@ -261,8 +287,8 @@ export default function Courses() {
             </h5>
           </OverlayTrigger>
           <div className="d-flex justify-content-center">
-            <select className="mb-3 mt-2 d-flex form-select justify-content-center w-25" onChange={handleSync} defaultValue="0">
-              <option bsPrefix="button-shmenu" value="Dev">
+            <select className="mb-3 mt-2 d-flex form-select justify-content-center w-25" onChange={handleSync} defaultValue="0" ref={syncRef}>
+              <option bsPrefix="button-shmenu" value="All Delivery Methods">
                 All Delivery Methods
               </option>
               <option bsPrefix="button-shmenu" value="sync">
@@ -282,29 +308,46 @@ export default function Courses() {
       )}
 
       <div id="course-previews">
+        {console.log(filtered)}
         {
-          (filtered ? newCourses : courses).map((course) => (
-            <Card className="p-3 mx-5 mb-3">
-              <div className="row">
-                <div className="col-md-6 col-lg-3 overflow-hidden">
-                  {course.url ? (
-                    <img height="200" src={course.url} className="rep-photo" />
-                  ) : (
-                    <div className="d-flex justify-content-center align-items-center">
-                      <Spinner animation="border" className="" variant="primary" />
-                    </div>
-                  )}
+          (filtered ? newCourses : courses.slice(start, end)).map((course) => {
+            // if (!course.defaultCover) {
+            //   var coverRef = storageRef.ref(`${course.id}/${course.id}.jpeg`);
+            //   coverRef
+            //     .getDownloadURL()
+            //     .then((URL) => {
+            //       course.url = URL;
+            //       setURLFunc(URL);
+            //     })
+            //     .then(() => {
+            //       setLoader(0);
+            //     });
+            // } else {
+            //   course.url = "../defaultcourseimage.png";
+            // }
+            return (
+              <Card className="p-3 mx-5 mb-3">
+                <div className="row">
+                  <div className="col-md-6 col-lg-3 overflow-hidden">
+                    {course.url ? (
+                      <img height="200" src={course.url} className="rep-photo" />
+                    ) : (
+                      <div className="d-flex justify-content-center align-items-center">
+                        <Spinner animation="border" className="" variant="primary" />
+                      </div>
+                    )}
+                  </div>
+                  <div key={course.id} className="col-md-6 col-lg-9 mt-3 mt-md-0">
+                    <h2>{course.title}</h2>
+                    <p>{course.description}</p>
+                    <Link to={`/course-listing/${course.id}`}>
+                      <Button bsPrefix="button-sh">View Course</Button>
+                    </Link>
+                  </div>
                 </div>
-                <div key={course.id} className="col-md-6 col-lg-9 mt-3 mt-md-0">
-                  <h2>{course.title}</h2>
-                  <p>{course.description}</p>
-                  <Link to={`/course-listing/${course.id}`}>
-                    <Button bsPrefix="button-sh">View Course</Button>
-                  </Link>
-                </div>
-              </div>
-            </Card>
-          ))
+              </Card>
+            );
+          })
           // : courses.map((course) => (
           //     <Card className="p-3 mx-5 mb-3">
           //         <div className="row">
@@ -323,8 +366,8 @@ export default function Courses() {
         }
       </div>
       <Pagination className="d-flex justify-content-center">
-        <Pagination.Prev onClick={handlePrev}> </Pagination.Prev>
-        <Pagination.Next onClick={handleNext}> </Pagination.Next>
+        {start > 0 && !filtered && <Pagination.Prev onClick={handlePrev}> </Pagination.Prev>}
+        {end < courses.length && !filtered && <Pagination.Next onClick={handleNext}> </Pagination.Next>}
       </Pagination>
     </div>
   );

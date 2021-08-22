@@ -135,17 +135,18 @@ export default function Listing() {
         <h4 className="text-center text-secondary mb-4">Estimated Time to Complete: {course.timeline} hours</h4>
       </div>
       <div className="row justify-content-center my-4">
-        <div className="col-6 text-white is-shblue p-4 rounded">
+        <div className="col-lg-6 col-sm-12 text-white is-shblue p-4 rounded">
           <p>{course.description}</p>
           <h5 className="mt-3">
             Includes {course.modules} Learning Modules{course.sync && " And Live Lessons"}!
           </h5>
           <h6 className="mb-3">Perfect for:</h6>
-          {course.grades.map((grade) => {
+          {course.grades.map((grade, index) => {
             return (
               <>
                 <Badge bsPrefix="button-sh">{titleMaker(grade)}</Badge>
                 <span> </span>
+                {index === 3 && <br />}
               </>
             );
           })}
@@ -160,7 +161,7 @@ export default function Listing() {
             </div>
           </div> */}
         </div>
-        <div className="col-4 text-center">
+        <div className="col-sm-12 col-md-4 text-center">
           {confirm && <Alert variant="success">{confirm}</Alert>}
           {currentUser ? (
             kids ? (

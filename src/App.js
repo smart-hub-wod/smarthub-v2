@@ -21,6 +21,7 @@ import ParentFAQ from "./parentfaq";
 import TeacherFAQ from "./teacherfaq";
 import Lesson from "./lesson-module";
 import StudentDash from "./student-dash";
+import AdminProfile from "./adminProfile";
 import Cart from "./cart";
 import ForgotPassword from "./forgot-password";
 import Checkout from "./checkout";
@@ -53,23 +54,15 @@ function App() {
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/settings" component={Settings} />
             <AdminRoute exact path="/add-course" component={AddCourse} />
+            <AdminRoute exact path="/add-profile" component={AdminProfile} />
             <AdminRoute exact path="/edit-course/:id" component={EditCourse} />
             <PrivateRoute exact path="/lesson/:id/:child" component={Lesson} />
-            <PrivateRoute
-              path="/student-dashboard/:id"
-              component={StudentDash}
-            />
+            <PrivateRoute path="/student-dashboard/:id" component={StudentDash} />
             <DevRoute path="/add-admin" component={AddAdmin} />
             <DevRoute path="/add-promo" component={AddPromo} />
             <PrivateRoute path="/cart" component={Cart} />
-            <PrivateRoute
-              path="/certificate/:child/:course"
-              component={Certificate}
-            />
-            <PrivateRoute
-              path="/certificate-print/:child/:course"
-              component={CertificateCard}
-            />
+            <PrivateRoute path="/certificate/:child/:course" component={Certificate} />
+            <PrivateRoute path="/certificate-print/:child/:course" component={CertificateCard} />
             <PrivateRoute path="/checkout" component={Checkout} />
             <Route exact path="/" component={Home} />
             <Route exact path="/forgot-password" component={ForgotPassword} />

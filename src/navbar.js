@@ -3,6 +3,7 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
 import logo from "./assets/smarthub-logo.png";
+import { CartFill } from "react-bootstrap-icons";
 
 export default function NavBar() {
   const { currentUser } = useAuth();
@@ -29,12 +30,7 @@ export default function NavBar() {
       <Container fluid className="d-flex justify-content-between">
         <Navbar.Brand>
           <Link to="/">
-            <img
-              src={logo}
-              height="50"
-              className="d-inline-block align-top"
-              alt="Smart Hub logo"
-            />
+            <img src={logo} height="50" className="d-inline-block align-top" alt="Smart Hub logo" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle
@@ -43,11 +39,7 @@ export default function NavBar() {
           onClick={toggleToggl}
           //   bsPrefix={{ }}
         />
-        <Navbar.Collapse
-          id="smarthub-nav"
-          className="justify-content-between"
-          style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}
-        >
+        <Navbar.Collapse id="smarthub-nav" className="justify-content-between" style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}>
           <div>
             <Nav navbarScroll={true}>
               <Link to="/about" className="link nav-text mx-4">
@@ -56,9 +48,9 @@ export default function NavBar() {
               <Link to="/courses" className="link nav-text mx-4">
                 <div className="ms-2 me-3">Courses</div>
               </Link>
-              <Link to="/meet-the-team" className="link nav-text mx-4">
+              {/* <Link to="/meet-the-team" className="link nav-text mx-4">
                 <div className="ms-2 me-3">Meet the Team</div>
-              </Link>
+              </Link> */}
               <Link to="/student-zone" className="link nav-text mx-4">
                 <div className="ms-2 me-3">Student Zone</div>
               </Link>
@@ -83,7 +75,7 @@ export default function NavBar() {
                 </Nav.Link>
                 <Nav.Link>
                   <Link to="/cart" className="link">
-                    My Cart
+                    <CartFill color="white" size={30} />
                   </Link>
                 </Nav.Link>
               </Nav>
@@ -99,12 +91,7 @@ export default function NavBar() {
 
                   // className={toggled ? "text-white" : ""}
                 >
-                  <Link
-                    to="/signup"
-                    className={
-                      !toggled ? "text-sh-blue nounder" : "text-shblue nounder"
-                    }
-                  >
+                  <Link to="/signup" className={!toggled ? "text-sh-blue nounder" : "text-shblue nounder"}>
                     Sign Up
                   </Link>
                 </Nav.Link>

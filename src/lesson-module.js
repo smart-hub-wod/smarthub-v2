@@ -100,9 +100,14 @@ export default function Lesson() {
             {course.lessons.map((lessonNum, index) => {
               return (
                 <>
-                  <h5 key={index} onClick={() => handleLessonChange(index)}>
+                  {/* <h5 key={index} onClick={() => handleLessonChange(index)}>
                     {">"} {lessonNum}
                   </h5>
+                  {index !== course.lessons.length - 1 && <hr />} */}
+                  <Button bsPrefix="button-sh">
+                    <strong>{lessonNum}</strong>
+                  </Button>
+                  <br />
                   {index !== course.lessons.length - 1 && <hr />}
                 </>
               );
@@ -168,7 +173,11 @@ function ContentBox(props) {
   return (
     <>
       {props.lssn === -1 ? (
-        <p>Welcome! Click a lesson on the left to begin!</p>
+        <>
+          <h1 className="text-shblue">Welcome!</h1>
+          <p>We're so excited to see you! Watch our welcome video below and click a lesson on the left to begin!</p>
+          <iframe src={`https://drive.google.com/file/d/1cMimNo_yLZ586mwCOSX2UxmTrPMY_FZh/preview`} width="600" height="315" allow="autoplay"></iframe>
+        </>
       ) : (
         <>
           <h3 className="text-shblue">{props.courseInfo.lessons[props.lssn]}</h3>

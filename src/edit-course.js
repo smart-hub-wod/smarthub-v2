@@ -316,8 +316,8 @@ export default function EditCourse() {
               </p>
               <Form.Group id="sync" className="mb-3 form-floating" onChange={handleSync}>
                 <div className="mb-3">
-                  <Form.Check inline label="Yes it will have live sessions" name="group3" type="radio" id="yessync" defaultChecked={course?.sync} />
-                  <Form.Check inline label="No it is entirely asynchronous" name="group3" type="radio" id="nosync" defaultChecked={!course?.sync} />
+                  <Form.Check inline label="Yes it will have live sessions" name="group8" type="radio" id="yessync" defaultChecked={course?.sync} />
+                  <Form.Check inline label="No it is entirely asynchronous" name="group8" type="radio" id="nosync" defaultChecked={!course?.sync} />
                 </div>
               </Form.Group>
               <p>

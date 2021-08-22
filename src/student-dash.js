@@ -61,9 +61,9 @@ export default function StudentDash() {
             child.courses.length > 0 ? (
               child.courses.map((course) => {
                 return (
-                  <Card className="p-3 is-shblue mb-3 text-white w-50">
+                  <Card className="p-3 is-shblue mb-3 text-white">
                     <Card.Body>
-                      <h3>{titleMaker(course)}</h3>
+                      <h5>{titleMaker(course)}</h5>
                       <Link to={`/lesson/${course}/${id}`}>
                         <Button bsPrefix="button-sh" className="mt-2">
                           Continue to course!
@@ -84,9 +84,9 @@ export default function StudentDash() {
             child.complete.length > 0 ? (
               child.complete.map((course) => {
                 return (
-                  <Card className="p-3 is-shblue mb-3 text-white w-50">
+                  <Card className="p-3 is-shblue mb-3 text-white">
                     <Card.Body>
-                      <h3>{titleMaker(course)}</h3>
+                      <h5>{titleMaker(course)}</h5>
                       <Link to={`/lesson/${course}/${id}`}>
                         <Button bsPrefix="button-sh" className="mt-2">
                           Revisit Course!

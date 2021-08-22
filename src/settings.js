@@ -205,7 +205,7 @@ export default function Settings() {
           <Modal.Title>Are you sure you want to delete your account?</Modal.Title>
         </Modal.Header>
         <Modal.Body>This is a permanent! Your account can not be recovered!</Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="d-flex justify-content-center">
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
