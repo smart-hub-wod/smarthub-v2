@@ -37,6 +37,14 @@ p {
   border-radius: 5px;
   border: none;
 }
+
+.rating-button {
+  background-color: #0b3f84;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: none;
+}
 .button-shmenu {
   background-color: #fe5c36;
   color: white;
@@ -80,8 +88,7 @@ p {
   color: white !important;
   border: 0 solid white;
   border-left-width: 5px;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
-  
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
 .nav-text:hover {
@@ -100,7 +107,6 @@ p {
 .nav-text > .link:hover {
   color: white;
 }
-
 
 #footer .nav-text {
   font-size: 0.9rem;
@@ -279,7 +285,7 @@ p {
   font-size: 1.1rem;
 }
 
-.background-video-container{
+.background-video-container {
   height: 100vh;
   width: 100%;
   overflow-y: hidden;
@@ -375,17 +381,13 @@ p {
   transform: rotate(10.42deg);
 }
 
-
-
- @media (max-width: 768px) {
-
-    [data-aos="instructor-spin1"].aos-animate {
-      transform: rotate(0deg);
-    }
-    [data-aos="instructor-spin2"].aos-animate {
-      transform: rotate(0deg);
-    }
-
+@media (max-width: 768px) {
+  [data-aos="instructor-spin1"].aos-animate {
+    transform: rotate(0deg);
+  }
+  [data-aos="instructor-spin2"].aos-animate {
+    transform: rotate(0deg);
+  }
 }
 
 .instructor-img {
@@ -508,7 +510,6 @@ p {
   margin: 0 5rem !important;
 }
 
-
 /* Student page starts */
 
 #student-page .background-video {
@@ -523,11 +524,10 @@ p {
   height: 100vh;
   width: 100%;
   overflow-y: hidden;
-  
 }
 
 #student-page .subtitle-container {
-  color:white;
+  color: white;
   position: relative;
   top: 50vh;
   background-color: black;

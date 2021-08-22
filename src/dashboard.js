@@ -92,7 +92,7 @@ export default function Dashboard() {
             cartTotal: 0,
             promos: [],
           });
-          setDisplayName(currentUser.email);
+          setDisplayName(currentUser.displayName ? currentUser.displayName : currentUser.email);
           getUser();
           setLoading(false);
         }
@@ -250,6 +250,7 @@ export default function Dashboard() {
           <Modal.Title>Add New Student</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <p>The student's name entered will be displayed on future certificates and can not be changed after this point.</p>
           <Form.Group id="name" className="mb-3 form-floating">
             <Form.Control type="text" ref={nameRef} className="form-control" placeholder="name" id="InputName" aria-describedby="name" required />
             <Form.Label for="InputName" className="form-label floatingInput">

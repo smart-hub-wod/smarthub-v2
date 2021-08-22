@@ -2,11 +2,12 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
+import { Google } from "react-bootstrap-icons";
 
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -24,6 +25,19 @@ export default function Login() {
     }
     setLoading(false);
   }
+  async function handleGoogle(e) {
+    e.preventDefault();
+
+    try {
+      setError("");
+      setLoading(true);
+      await googleLogin();
+      history.push("/dashboard");
+    } catch {
+      setError("Failed to sign in");
+    }
+    setLoading(false);
+  }
 
   return (
     <>
@@ -32,6 +46,13 @@ export default function Login() {
           <Card.Body>
             <h1 className="text-center text-shblue mb-3 ">LOGIN</h1>
             {error && <Alert variant="danger">{error}</Alert>}
+            <Button bsPrefix="button-sh" className="auth-btn mt-2 mb-2" disabled={loading} onClick={handleGoogle}>
+              <p>
+                Sign In with Google
+                <br /> <Google color="white" size={20} />
+              </p>
+            </Button>
+            <p className="text-center">or</p>
             <Form onSubmit={handleSubmit}>
               <Form.Group id="email" className="mb-3 mt-4 form-floating">
                 <Form.Control type="email" ref={emailRef} className="form-control" placeholder="name@example.com" id="InputEmail" aria-describedby="email" required />

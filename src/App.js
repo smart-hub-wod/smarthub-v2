@@ -83,8 +83,8 @@ function App() {
             {/* Add Routes Here! */}
           </Switch>
           {/* </PayPalScriptProvider> */}
+          <Footer />
         </AuthProvider>
-        <Footer />
       </Router>
     </>
   );

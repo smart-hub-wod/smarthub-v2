@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
+import { Google } from "react-bootstrap-icons";
 
 export default function Signup() {
   const emailRef = useRef();
@@ -9,7 +10,7 @@ export default function Signup() {
   const passwordConfirmRef = useRef();
   // const nameRef = useRef()
   const termsRef = useRef();
-  const { signup } = useAuth();
+  const { signup, googleLogin } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -37,6 +38,23 @@ export default function Signup() {
     setLoading(false);
   }
 
+  async function handleGoogle(e) {
+    e.preventDefault();
+    if (!termsRef.current.checked) {
+      return setError("Please agree to the terms and conditions");
+    }
+
+    try {
+      setError("");
+      setLoading(true);
+      await googleLogin();
+      history.push("/dashboard");
+    } catch {
+      setError("Failed to create an account");
+    }
+    setLoading(false);
+  }
+
   // function addUser(username) {
   //     firebase.firestore().collection("users").doc(email).set({
   //         name: username,
@@ -52,6 +70,13 @@ export default function Signup() {
           <Card.Body>
             <h1 className="text-center text-shblue mb-4a">SIGN UP</h1>
             {error && <Alert variant="danger">{error}</Alert>}
+            <Button bsPrefix="button-sh" className="auth-btn mt-2 mb-2" disabled={loading} onClick={handleGoogle}>
+              <p>
+                Sign Up with Google
+                <br /> <Google color="white" size={20} />
+              </p>
+            </Button>
+            <p className="text-center">or</p>
             <Form onSubmit={handleSubmit}>
               {/* <Form.Group id="name" className="mt-4 mb-3 form-floating">
                             <Form.Control type="text" ref={nameRef} className="form-control" placeholder="Your Name" id="InputName" aria-describedby="name" required/>

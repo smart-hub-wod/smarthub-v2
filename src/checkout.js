@@ -49,6 +49,7 @@ export default function Checkout() {
             cartref.update({
               [`children.${key}.courses`]: firebase.firestore.FieldValue.arrayUnion(c),
               [`cart.${doc.data().children[key].name}`]: firebase.firestore.FieldValue.arrayRemove(c),
+              [`cartTotal`]: 0,
             });
           });
           // cartref.update({

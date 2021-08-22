@@ -11,7 +11,7 @@ export default function Settings() {
   const passwordDeleteRef = useRef();
   const passwordConfirmRef = useRef();
   const nameRef = useRef();
-  const { currentUser, updateEmail, updatePassword, setDisplayName, deleteUser, login } = useAuth();
+  const { currentUser, updateEmail, updatePassword, setDisplayName, deleteUser, login, googleLogin } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [URL, setURL] = useState();
@@ -40,16 +40,23 @@ export default function Settings() {
     getAdmin();
   }, []);
 
+  console.log(currentUser);
+
   async function handleDelete() {
     console.log("deleting");
     try {
       setError("");
       setLoading(true);
-      await login(currentUser.email, passwordDeleteRef.current.value);
-      await deleteUser();
+      if (currentUser.providerData[0].providerId === "password") {
+        await login(currentUser.email, passwordDeleteRef.current.value);
+      } else {
+        await googleLogin();
+      }
+
       await userRef.delete().then(() => {
-        history.push("/signup");
+        deleteUser();
       });
+      history.push("/signup");
     } catch {
       setError("Failed to delete account");
     }
@@ -165,7 +172,7 @@ export default function Settings() {
 
             <Form onSubmit={handleSubmit}>
               <Form.Group id="name" className="mb-3 form-floating">
-                <Form.Control type="text" ref={nameRef} className="form-control" placeholder="name" id="InputName" aria-describedby="name" required defaultValue={currentUser.displayName} />
+                <Form.Control type="text" ref={nameRef} className="form-control" placeholder="name" id="InputName" aria-describedby="name" required defaultValue={currentUser.displayName ? currentUser.displayName : currentUser.email} />
                 <Form.Label for="InputName" className="form-label floatingInput">
                   New Display Name
                 </Form.Label>
@@ -208,13 +215,15 @@ export default function Settings() {
         </Modal.Header>
         <Modal.Body>
           This is a permanent! Your account can not be recovered! <br />
-          Enter your password to confirm your decision.
-          <Form.Group id="name" className="mb-3 form-floating">
-            <Form.Control type="password" ref={passwordDeleteRef} className="form-control" placeholder="pword" id="InputPassConfirm" aria-describedby="password" required />
-            <Form.Label for="InputPassConfirm" className="form-label floatingInput">
-              Confirm Password
-            </Form.Label>
-          </Form.Group>
+          {currentUser.providerData[0].providerId === "password" && <span>Enter your password to confirm your decision.</span>}
+          {currentUser.providerData[0].providerId === "password" && (
+            <Form.Group id="name" className="mb-3 form-floating">
+              <Form.Control type="password" ref={passwordDeleteRef} className="form-control" placeholder="pword" id="InputPassConfirm" aria-describedby="password" required />
+              <Form.Label for="InputPassConfirm" className="form-label floatingInput">
+                Confirm Password
+              </Form.Label>
+            </Form.Group>
+          )}
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-center">
           <Button variant="secondary" onClick={handleClose}>

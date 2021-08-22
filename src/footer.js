@@ -1,11 +1,18 @@
 import React from "react";
 import { Nav, Container, Row, Col, Button } from "react-bootstrap";
-import { Facebook, Instagram, Linkedin } from "react-bootstrap-icons";
+import { Facebook, Instagram, Linkedin, EmojiSmileFill, EmojiFrownFill, EmojiNeutralFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
+// import { useAuth } from "./contexts/AuthContext.js";
 import logo from "./assets/smarthub-logo.png";
 import { InstagramMedia } from "react-instagram-media";
 
 export default function Footer() {
+  // const { currentUser } = useAuth();
+
+  // function handleRating(e) {
+  //   console.log(e.target.id);
+  // }
+
   return (
     <footer id="footer">
       {/* <Container fluid className="is-shblue">
@@ -58,6 +65,22 @@ export default function Footer() {
                 </Nav.Link>
               </Col>
             </Row>
+            {/* {currentUser && (
+              <>
+                <h2 className="mt-4">Enjoying Smart Hub so far?</h2>
+                <Button bsPrefix="rating-button" onClick={handleRating} id="happy">
+                  <p>
+                    <EmojiSmileFill color="white" size={30} />
+                  </p>
+                </Button>
+                <Button bsPrefix="rating-button" onClick={handleRating} id="neutral">
+                  <EmojiNeutralFill color="white" size={30} />
+                </Button>
+                <Button bsPrefix="rating-button" onClick={handleRating} id="sad">
+                  <EmojiFrownFill color="white" size={30} />
+                </Button>
+              </>
+            )} */}
           </Col>
           <Col xs={4}>
             <h2 className="text-white"> Follow Us: </h2>
