@@ -150,7 +150,7 @@ export default function Courses() {
       if (e.target.value === "") {
         s = "";
       } else {
-        s = c.grades.includes(e.target.value);
+        s = c.grades.includes(e.target.value) && (syncRef.current.value === "All Delivery Methods" || c.sync === (syncRef.current.value === "sync"));
       }
       if (s) {
         temp.push(c);
@@ -179,7 +179,7 @@ export default function Courses() {
           s = "";
           setFiltered(false);
         } else {
-          s = c.sync === (e.target.value === "sync");
+          s = c.sync === (e.target.value === "sync") && (gradeRef.current.value === "All Grades" || c.grades.includes(gradeRef.current.value));
         }
         if (s) {
           temp.push(c);

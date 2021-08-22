@@ -96,7 +96,7 @@ export default function Lesson() {
           )}
         </div>
         <div className="row justify-content-center">
-          <div className="col-3 is-shblue text-white pt-3 text-center rounded-end">
+          <div className="col-md-3 col-sm-12 is-shblue text-white pt-3 text-center rounded-end">
             {course.lessons.map((lessonNum, index) => {
               return (
                 <>
@@ -104,7 +104,7 @@ export default function Lesson() {
                     {">"} {lessonNum}
                   </h5>
                   {index !== course.lessons.length - 1 && <hr />} */}
-                  <Button bsPrefix="button-sh">
+                  <Button bsPrefix="button-sh" key={index} onClick={() => handleLessonChange(index)}>
                     <strong>{lessonNum}</strong>
                   </Button>
                   <br />
@@ -114,7 +114,7 @@ export default function Lesson() {
             })}
             <br />
           </div>
-          <div className="col-9 px-5 pt-4">
+          <div className="col-md-9 col-sm-12 px-5 pt-4">
             <ContentBox lssn={currentLesson} courseInfo={course} child={child} courseid={id} userid={currentUser.uid} />
           </div>
         </div>
@@ -144,15 +144,15 @@ function ContentBox(props) {
     if (Object.keys(lessn)[0] === "article") {
       content = lessn["article"];
     } else if (Object.keys(lessn)[0] === "video") {
-      content = <iframe width="560" height="315" src={`https://www.youtube.com/embed/${lessn["video"]}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>;
+      content = <iframe className="w-100" height="400" src={`https://www.youtube.com/embed/${lessn["video"]}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>;
     } else if (Object.keys(lessn)[0] === "media") {
-      content = <iframe src={`${lessn["media"]}preview`} width="600" height="315" allow="autoplay"></iframe>;
+      content = <iframe src={`${lessn["media"]}preview`} className="w-100" height="315" allow="autoplay"></iframe>;
     } else if (Object.keys(lessn)[0] === "pdf") {
       //https://drive.google.com/file/d/1NHmZf-mZ4Si5vscKPcD_Tz9r02C1eZ_g/view
-      content = <iframe src={`${lessn["pdf"]}preview`} width="640" height="480" allow="autoplay"></iframe>;
+      content = <iframe src={`${lessn["pdf"]}preview`} className="w-100" height="480" allow="autoplay"></iframe>;
     } else if (Object.keys(lessn)[0] === "quiz") {
       content = (
-        <iframe src={`${lessn["quiz"]}`} width="640" height="1316" frameborder="0" marginheight="0" marginwidth="0">
+        <iframe src={`${lessn["quiz"]}`} className="w-100" height="1316" frameborder="0" marginheight="0" marginwidth="0">
           Loading…
         </iframe>
       );
@@ -173,16 +173,16 @@ function ContentBox(props) {
   return (
     <>
       {props.lssn === -1 ? (
-        <>
+        <div className="mb-4">
           <h1 className="text-shblue">Welcome!</h1>
-          <p>We're so excited to see you! Watch our welcome video below and click a lesson on the left to begin!</p>
+          <p className="mb-2">We're so excited to see you! Watch our welcome video below and click a lesson on the left to begin!</p>
           <iframe src={`https://drive.google.com/file/d/1cMimNo_yLZ586mwCOSX2UxmTrPMY_FZh/preview`} width="600" height="315" allow="autoplay"></iframe>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="mb-4">
           <h3 className="text-shblue">{props.courseInfo.lessons[props.lssn]}</h3>
           {content}
-        </>
+        </div>
       )}
     </>
   );

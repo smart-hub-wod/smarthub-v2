@@ -157,7 +157,7 @@ export default function Checkout() {
               <Form.Group id="text" className="mb-3 mt-4 form-floating">
                 <Form.Control type="text" ref={promoRef} className="form-control" placeholder="Enter your promo code" id="InputPromo" aria-describedby="promocode" required />
                 <Form.Label for="InputPromo" className="form-label floatingInput">
-                  Have a promo code? Enter it here!
+                  Enter Promo Code
                 </Form.Label>
               </Form.Group>
               <Button bsPrefix="button-sh" className="mt-1" type="submit">

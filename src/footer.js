@@ -17,7 +17,7 @@ export default function Footer() {
         className="is-shblue text-white position-sticky bottom-0 end-0 pt-5"
       >
         <Row className="" style={{ margin: "0 5rem" }}>
-          <Col xs={12} sm={4}>
+          <Col sm={4}>
             <img className="logo" src={logo} alt="logo" />
 
             <h2 className="mt-3"> Links: </h2>

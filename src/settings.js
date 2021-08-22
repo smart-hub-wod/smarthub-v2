@@ -8,9 +8,10 @@ import "firebase/storage";
 export default function Settings() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const passwordDeleteRef = useRef();
   const passwordConfirmRef = useRef();
   const nameRef = useRef();
-  const { currentUser, updateEmail, updatePassword, setDisplayName, deleteUser } = useAuth();
+  const { currentUser, updateEmail, updatePassword, setDisplayName, deleteUser, login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [URL, setURL] = useState();
@@ -44,12 +45,13 @@ export default function Settings() {
     try {
       setError("");
       setLoading(true);
+      await login(currentUser.email, passwordDeleteRef.current.value);
       await deleteUser();
       await userRef.delete().then(() => {
         history.push("/signup");
       });
     } catch {
-      setError("Failed to create an account");
+      setError("Failed to delete account");
     }
     setLoading(false);
   }
@@ -204,7 +206,16 @@ export default function Settings() {
         <Modal.Header>
           <Modal.Title>Are you sure you want to delete your account?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>This is a permanent! Your account can not be recovered!</Modal.Body>
+        <Modal.Body>
+          This is a permanent! Your account can not be recovered! <br />
+          Enter your password to confirm your decision.
+          <Form.Group id="name" className="mb-3 form-floating">
+            <Form.Control type="password" ref={passwordDeleteRef} className="form-control" placeholder="pword" id="InputPassConfirm" aria-describedby="password" required />
+            <Form.Label for="InputPassConfirm" className="form-label floatingInput">
+              Confirm Password
+            </Form.Label>
+          </Form.Group>
+        </Modal.Body>
         <Modal.Footer className="d-flex justify-content-center">
           <Button variant="secondary" onClick={handleClose}>
             Cancel

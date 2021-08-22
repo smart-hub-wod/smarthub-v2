@@ -151,10 +151,10 @@ export default function Dashboard() {
               <p>Welcome! Here is your dashboard to manage your students! Here you can manage and access each student’s account. </p>
               <br />
               <div className="row justify-content-between">
-                <div className="col-4">
+                <div className="col-md-4 col-sm-12">
                   <h3 className="text-shblue">My Students</h3>
                 </div>
-                <div className="col-4">
+                <div className="col-md-4 col-sm-12">
                   <Button bsPrefix="button-sh" className="float-end" onClick={handleShow}>
                     Add New Student
                   </Button>
@@ -246,7 +246,7 @@ export default function Dashboard() {
       </div>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton className="is-shblue text-white">
+        <Modal.Header className="is-shblue text-white">
           <Modal.Title>Add New Student</Modal.Title>
         </Modal.Header>
         <Modal.Body>
