@@ -4,6 +4,9 @@ import { ArrowDownSquareFill, ArrowUpSquareFill } from "react-bootstrap-icons";
 
 export default function ParentFAQ() {
   const [clicked, setClicked] = useState([false, false, false]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   var faq = [
     {

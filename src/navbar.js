@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
+import firebase from "firebase/app";
+
 import logo from "./assets/smarthub-logo.png";
 import { CartFill } from "react-bootstrap-icons";
 
 export default function NavBar() {
   const { currentUser } = useAuth();
+  const [price, setPrice] = useState(0);
+  const cartref = firebase.firestore().collection("users").doc(currentUser.uid);
 
   var [toggled, setToggled] = useState(false);
 
@@ -18,6 +22,18 @@ export default function NavBar() {
     }
     console.log(toggled);
   }
+
+  async function getCart() {
+    await cartref.onSnapshot((doc) => {
+      if (doc.exists) {
+        setPrice(doc.data().cartTotal);
+      }
+    });
+  }
+
+  useEffect(() => {
+    getCart();
+  }, []);
 
   return (
     <Navbar
@@ -75,7 +91,12 @@ export default function NavBar() {
                 </Nav.Link>
                 <Nav.Link>
                   <Link to="/cart" className="link">
-                    <CartFill color="white" size={30} />
+                    <CartFill color="white" size={25} />
+                    {price > 0 && (
+                      <span class="position-absolute top-75 start-75 translate-middle p-2 badge-sh rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                      </span>
+                    )}
                   </Link>
                 </Nav.Link>
               </Nav>

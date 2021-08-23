@@ -99,6 +99,7 @@ export default function Courses() {
   useEffect(() => {
     getCourses(courseref);
     console.log("hello");
+    window.scrollTo(0, 0);
   }, []);
 
   function searchCourses() {

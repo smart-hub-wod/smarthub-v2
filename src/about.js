@@ -11,6 +11,7 @@ import AOS from "aos";
 export default function About() {
   useEffect(() => {
     AOS.init();
+    window.scrollTo(0, 0);
   });
 
   return (
@@ -20,18 +21,9 @@ export default function About() {
           className="top-catcher-container"
           // style={{ backgroundImage: "url(../about-video.gif)" }}
         >
-          <video
-            autoPlay={true}
-            loop={true}
-            muted={true}
-            src="../about-video.mp4"
-            className="top-catcher-video"
-          />
+          <video autoPlay={true} loop={true} muted={true} src="../about-video.mp4" className="top-catcher-video" />
 
-          <h1 style={{ marginTop: "10rem", fontSize: "4rem", width: "70%" }}>
-            {" "}
-            SmartHub is Our Solution To One Of The Educational Problem{" "}
-          </h1>
+          <h1 style={{ marginTop: "10rem", fontSize: "4rem", width: "70%" }}> SmartHub is Our Solution To One Of The Educational Problem </h1>
         </section>
 
         <div className="w-100 is-white">
@@ -39,25 +31,14 @@ export default function About() {
             <section className="introduce">
               <Row>
                 <Col md={6}>
-                  <h2
-                    className="text-shblue mt-5 mb-3"
-                    style={{ fontWeight: "800", fontSize: "2.5rem" }}
-                  >
+                  <h2 className="text-shblue mt-5 mb-3" style={{ fontWeight: "800", fontSize: "2.5rem" }}>
                     {" "}
                     Who We Are{" "}
                   </h2>
                   <p className="mb-5 text-shblue">
                     {" "}
-                    Smart Hub is a new and exciting STEM-based virtual learning
-                    platform for elementary school children. We provide children
-                    with simplified course materials to help them gain real-life
-                    experience and hands-on learning. Smart Hub makes online
-                    learning fun and accessible by providing flexible learning
-                    opportunities, engaging lessons and kid-friendly STEM
-                    material. Our courses are developed and reviewed by Ontario
-                    College of Teachers (OCT) certified teachers and will aid
-                    your child in learning complex STEM materials in a
-                    simplified manner.{" "}
+                    Smart Hub is a new and exciting STEM-based virtual learning platform for elementary school children. We provide children with simplified course materials to help them gain real-life experience and hands-on learning. Smart Hub makes online learning fun and accessible by providing
+                    flexible learning opportunities, engaging lessons and kid-friendly STEM material. Our courses are developed and reviewed by Ontario College of Teachers (OCT) certified teachers and will aid your child in learning complex STEM materials in a simplified manner.{" "}
                   </p>
                 </Col>
                 <Col md={6}>
@@ -65,8 +46,7 @@ export default function About() {
                     className="p-3 is-shblue my-4"
                     style={{
                       borderRadius: "2rem",
-                      boxShadow:
-                        "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px",
+                      boxShadow: "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px",
                     }}
                   >
                     <Player playsInline src="../intro_video.mp4">
@@ -81,10 +61,7 @@ export default function About() {
         </div>
         <section className="value-section">
           <Container className="value-container py-5">
-            <h2
-              className="text-white text-center mt-2 mb-5"
-              style={{ fontWeight: "800", fontSize: "3rem" }}
-            >
+            <h2 className="text-white text-center mt-2 mb-5" style={{ fontWeight: "800", fontSize: "3rem" }}>
               {" "}
               Our Focus{" "}
             </h2>
@@ -92,83 +69,38 @@ export default function About() {
               <Col lg={4} md={6}>
                 <Card data-aos="fade-right">
                   <Card.Title> Engaging Contents </Card.Title>
-                  <EmojiHeartEyes
-                    className="w-100 justify-content-center my-2"
-                    size={70}
-                  />
-                  <Card.Body>
-                    {" "}
-                    One of the problems with virtual learning was the lack of
-                    the focus. However, our instructors only teach very
-                    interesting STEM concepts that will initiate child's
-                    curiousity{" "}
-                  </Card.Body>
+                  <EmojiHeartEyes className="w-100 justify-content-center my-2" size={70} />
+                  <Card.Body> One of the problems with virtual learning was the lack of the focus. However, our instructors only teach very interesting STEM concepts that will initiate child's curiousity </Card.Body>
                 </Card>
               </Col>
               <Col lg={4} md={6}>
                 <Card data-aos="fade-left">
                   <Card.Title> Accountability </Card.Title>
-                  <Alarm
-                    className="w-100 justify-content-center my-2"
-                    size={70}
-                  />
-                  <Card.Body>
-                    {" "}
-                    One of the problems of online courses is that there's no
-                    Accountability. However, we send detailed notification to
-                    parents about child's progress, making the course
-                    accountable for your child{" "}
-                  </Card.Body>
+                  <Alarm className="w-100 justify-content-center my-2" size={70} />
+                  <Card.Body> One of the problems of online courses is that there's no Accountability. However, we send detailed notification to parents about child's progress, making the course accountable for your child </Card.Body>
                 </Card>
               </Col>
               <Col lg={4} md={6}>
                 <Card data-aos="fade-right">
                   <Card.Title> Hands on learning </Card.Title>
                   {/* <Book className="w-100 justify-content-center my-2" size={70} /> */}
-                  <FontAwesomeIcon
-                    className="w-100 justify-content-center my-2"
-                    icon={faHandsWash}
-                    size="5x"
-                  />
-                  <Card.Body>
-                    {" "}
-                    Knowledge is only potential, it becomes power when we use
-                    it. So, our courses aren't just videos, and articles, we
-                    have tutorials for child to do some experiments, and gain
-                    real-life experiences{" "}
-                  </Card.Body>
+                  <FontAwesomeIcon className="w-100 justify-content-center my-2" icon={faHandsWash} size="5x" />
+                  <Card.Body> Knowledge is only potential, it becomes power when we use it. So, our courses aren't just videos, and articles, we have tutorials for child to do some experiments, and gain real-life experiences </Card.Body>
                 </Card>
               </Col>
             </Row>
             <Row className="row2">
               <Col className="d-flex justify-content-end" lg={6} md={6}>
                 <Card data-aos="fade-right" className="me-5">
-                  <Card.Title> Experienced Instructors </Card.Title>{" "}
-                  <PersonCheck
-                    className="w-100 justify-content-center my-2"
-                    size={70}
-                  />
-                  <Card.Body>
-                    {" "}
-                    Our instructors are highly specialized people in child's
-                    education.{" "}
-                  </Card.Body>
+                  <Card.Title> Experienced Instructors </Card.Title> <PersonCheck className="w-100 justify-content-center my-2" size={70} />
+                  <Card.Body> Our instructors are highly specialized people in child's education. </Card.Body>
                 </Card>
               </Col>
               <Col lg={6} md={6}>
                 <Card data-aos="fade-left" className="ms-5">
                   <Card.Title> Life Lessons </Card.Title>
-                  <FontAwesomeIcon
-                    className="w-100 justify-content-center my-2"
-                    icon={faChild}
-                    size="5x"
-                  />
-                  <Card.Body>
-                    {" "}
-                    We also teach our students, not only about STEM but how to
-                    independantly learn STEM knowledge to themselves and how to
-                    thrive with the knowledge later in future!{" "}
-                  </Card.Body>
+                  <FontAwesomeIcon className="w-100 justify-content-center my-2" icon={faChild} size="5x" />
+                  <Card.Body> We also teach our students, not only about STEM but how to independantly learn STEM knowledge to themselves and how to thrive with the knowledge later in future! </Card.Body>
                 </Card>
               </Col>
             </Row>

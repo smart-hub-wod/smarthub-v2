@@ -126,6 +126,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     getUser();
+    window.scrollTo(0, 0);
   }, []);
 
   if (loading) {

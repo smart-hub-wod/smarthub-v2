@@ -32,6 +32,7 @@ export default function StudentDash() {
   useEffect(() => {
     getChild();
     console.log(child);
+    window.scrollTo(0, 0);
   }, []);
 
   function titleMaker(title) {

@@ -37,14 +37,11 @@ p {
   border-radius: 5px;
   border: none;
 }
-
-.rating-button {
-  background-color: #0b3f84;
+.badge-sh {
+  background-color: #fe5c36;
   color: white;
-  padding: 5px 15px;
-  border-radius: 5px;
-  border: none;
 }
+
 .button-shmenu {
   background-color: #fe5c36;
   color: white;

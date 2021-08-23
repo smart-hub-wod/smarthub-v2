@@ -82,6 +82,10 @@ export default function Listing() {
     // cartref.update({
     //     cart: firebase.firestore.FieldValue.arrayUnion(course.id)
     // });
+    if (nameBar.value === "prompt") {
+      setConfirm(`Please select a student first!`);
+      return "";
+    }
 
     cartref.get().then((doc) => {
       if (doc.exists) {
@@ -146,7 +150,13 @@ export default function Listing() {
               <>
                 <Badge bsPrefix="button-sh">{titleMaker(grade)}</Badge>
                 <span> </span>
-                {index === 3 && <br />}
+
+                {index === 3 && (
+                  <>
+                    <br />
+                    <br />
+                  </>
+                )}
               </>
             );
           })}
@@ -169,6 +179,7 @@ export default function Listing() {
                 {kids ? (
                   Object.keys(kids["children"]).length > 0 ? (
                     <select className="form-select mb-3" defaultValue="0" aria-label="Default select example" id="nameSelect">
+                      <option value="prompt">Select a student</option>
                       {kids ? (
                         Object.keys(kids["children"]).map((kid) => {
                           return (
