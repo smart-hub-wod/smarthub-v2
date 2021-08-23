@@ -14,7 +14,7 @@ export default function Courses() {
   const [newCourses, setNewCourses] = useState([]);
   var temp = [];
   const [searchValue, setSearchValue] = useState("");
-  const querySize = 4;
+  const querySize = 25;
 
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(querySize);
