@@ -10,7 +10,7 @@ import { CartFill } from "react-bootstrap-icons";
 export default function NavBar() {
   const { currentUser } = useAuth();
   const [price, setPrice] = useState(0);
-  const cartref = firebase.firestore().collection("users").doc(currentUser.uid);
+  const cartref = currentUser ? firebase.firestore().collection("users").doc(currentUser.uid) : "";
 
   var [toggled, setToggled] = useState(false);
 
@@ -24,11 +24,13 @@ export default function NavBar() {
   }
 
   async function getCart() {
-    await cartref.onSnapshot((doc) => {
-      if (doc.exists) {
-        setPrice(doc.data().cartTotal);
-      }
-    });
+    if (currentUser) {
+      await cartref.onSnapshot((doc) => {
+        if (doc.exists) {
+          setPrice(doc.data().cartTotal);
+        }
+      });
+    }
   }
 
   useEffect(() => {
