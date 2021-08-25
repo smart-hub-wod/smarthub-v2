@@ -62,8 +62,19 @@ export default function Privacy() {
       title: "No Guarantee",
       text: "The client acknowledges and agrees that West Oak Design Inc. cannot guarantee the results or effectiveness of any of the services rendered or to be rendered. Rather, services shall be executed in a professional manner and in accordance with good industry practice. Best efforts will be used but no results are promised.",
     },
+    {
+      title: "Acknowledgment",
+      text: "",
+    },
   ];
-
+  // thought for later
+  // function stringToHTML(str) {
+  //   var parser = new DOMParser();
+  //   var html = parser.parseFromString(str, "text/html");
+  //   var newElem = document.createElement("div");
+  //   newElem.innerHTML = html.body;
+  //   return newElem;
+  // }
   //   add id to each elements
   policy.forEach((elem) => {
     elem.id = toCamelCase(elem.title);
@@ -74,30 +85,6 @@ export default function Privacy() {
     }
   });
 
-  //   function addLink() {
-  //     policy.forEach((elem) => {
-  //         console.log(elem.title);
-  //         return (
-  //           <a className="my-3 link-text" href={`#${elem.id}`}>
-  //             {elem.title}
-  //           </a>
-  //         );
-  //       })
-  //   }
-
-  function addShopping(arr) {
-    arr.text.map((shop) => {
-      return (
-        <>
-          <h2 className="heading-text text-shblue py-4 ps-3" id={shop.id}>
-            {shop.title}
-          </h2>
-          <p> {shop.text} </p>
-        </>
-      );
-    });
-  }
-
   return (
     <>
       <h1 className="text-shblue pt-5 text-center">Terms and Conditions</h1>
@@ -107,12 +94,13 @@ export default function Privacy() {
           marginTop: "3rem",
           width: "60%",
           border: "1px solid grey",
-          boxShadow: "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+          boxShadow:
+            "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
           borderRadius: "10px",
           padding: "2rem",
         }}
       >
-        <h2> Link to the Sections </h2>
+        <h2 className="text-shblue"> Link to the Sections </h2>
         <nav className="ms-3">
           {policy.map((elem) => (
             <a className="my-3 link-text" href={`#${elem.id}`}>
@@ -132,6 +120,18 @@ export default function Privacy() {
                   }}
                 />
                 <h2 className="heading-text text-shblue pb-4">{elem.title}</h2>
+                {elem.title === "Acknowledgment" && (
+                  <p className="ms-3">
+                    Animated Icons by{" "}
+                    <a
+                      href="https://lordicon.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Lordicon.com
+                    </a>
+                  </p>
+                )}
 
                 {elem.title !== "About Shopping" ? (
                   <p> {elem.text} </p>
@@ -139,33 +139,18 @@ export default function Privacy() {
                   elem.text.map((shop) => {
                     return (
                       <div id={shop.id}>
-                        <h2 className="subHeading-text text-shblue ps-3 pb-2">{shop.title}</h2>
+                        <h2 className="subHeading-text text-shblue ps-3 pb-2 mt-4">
+                          {shop.title}
+                        </h2>
                         <p className="px-5"> {shop.text} </p>
                       </div>
                     );
                   })
                 )}
-                {/* <hr
-                  style={{
-                    marginBottom: "50px",
-                    borderWidth: "0"
-                  }}
-                /> */}
               </div>
             </>
           );
         })}
-
-        {/* <h2 className="heading-text text-shblue py-4" id="DescriptionOfService">
-          {" "}
-          Description of Service
-        </h2>
-        <p>
-          Provision of information technology research, development, design
-          consulting or product development, and/or software product
-          development, loan/rental, access or maintenance of any of the above
-          listed products and services.
-        </p> */}
       </Container>
     </>
   );

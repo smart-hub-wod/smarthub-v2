@@ -23,7 +23,7 @@ p {
 }
 
 .heading-text {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 .text-shblue {
@@ -58,12 +58,37 @@ p {
   color: #fff;
 }
 .signup-nav {
-  border: 5px solid #0b3f84;
-  transition-property: ease-in;
-  transition-delay: 0ms;
+  transform: rotate(0deg);
+
+
 }
 .signup-nav:hover {
-  border: 5px solid #0f53ba83;
+  position: relative;
+  animation: signup-ani 1.5s cubic-bezier(0, 2.01, 0.63, 1.23) 1;
+  
+}
+
+@keyframes signup-ani {
+  25% {
+    transform: rotate(45deg);
+    padding: 15px;
+  }
+
+  50%{
+    transform: rotate(-45deg);
+    padding: 5px;
+  }
+  75%{
+    
+  }
+  100%{
+    transform: rotate(0deg);
+  }
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+  position: static !important;
+  
 }
 
 @media (max-width: 991.98px) {
@@ -71,6 +96,34 @@ p {
     height: 150;
   }
 }
+
+/* @media (min-width: 1200px ) {
+  .navbar-expand-lg {
+    flex-wrap: nowrap!important;
+    justify-content: flex-start!important;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    display: none!important;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    display: flex!important;
+    flex-basis: auto;
+
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow-y: visible!important;
+
+  }
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: row!important;
+
+  }
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: .5rem!important;
+    padding-left: .5rem!important;
+  }
+} */
+
 
 .iconstext {
   font-size: 10px;
@@ -113,8 +166,8 @@ p {
 }
 
 #footer .logo {
-  width: 300px;
-  height: 60px;
+  width: 320px;
+  height: 90px;
   object-fit: cover;
 }
 
@@ -149,7 +202,7 @@ p {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -167,7 +220,7 @@ p {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -271,7 +324,7 @@ p {
 }
 
 #privacy-policy .subHeading-text {
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-weight: 600;
 }
 
@@ -305,6 +358,8 @@ p {
   }
 }
 
+*/
+
 .slide-top {
   animation: slideTop 1s cubic-bezier(0.41, -0.32, 0, 1.65);
 }
@@ -313,7 +368,7 @@ p {
   0% {
     margin-top: -300px;
   }
-} */
+} 
 
 .shape {
   height: 40px;
@@ -481,6 +536,9 @@ p {
 #about-us .card-title {
   font-weight: 600;
   font-size: 1.6rem;
+}
+#about-us .focus-icon {
+  width: 55%; 
 }
 
 .value-section {

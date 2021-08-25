@@ -10,7 +10,9 @@ import { CartFill } from "react-bootstrap-icons";
 export default function NavBar() {
   const { currentUser } = useAuth();
   const [price, setPrice] = useState(0);
-  const cartref = currentUser ? firebase.firestore().collection("users").doc(currentUser.uid) : "";
+  const cartref = currentUser
+    ? firebase.firestore().collection("users").doc(currentUser.uid)
+    : "";
 
   var [toggled, setToggled] = useState(false);
 
@@ -43,12 +45,17 @@ export default function NavBar() {
       //   onToggle={toggleToggl}
       collapseOnSelect
       className="is-shblue sticky-top"
-      expand="md"
+      expand="xl"
     >
       <Container fluid className="d-flex justify-content-between">
         <Navbar.Brand>
           <Link to="/">
-            <img src={logo} height="50" className="d-inline-block align-top" alt="Smart Hub logo" />
+            <img
+              src={logo}
+              height="50"
+              className="d-inline-block align-top"
+              alt="Smart Hub logo"
+            />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle
@@ -57,7 +64,11 @@ export default function NavBar() {
           onClick={toggleToggl}
           //   bsPrefix={{ }}
         />
-        <Navbar.Collapse id="smarthub-nav" className="justify-content-between" style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}>
+        <Navbar.Collapse
+          id="smarthub-nav"
+          className="justify-content-between"
+          style={!toggled ? { margin: "0 1rem 0 5rem" } : {}}
+        >
           <div>
             <Nav navbarScroll={true}>
               <Link to="/about" className="link nav-text mx-4">
@@ -70,13 +81,13 @@ export default function NavBar() {
                 <div className="ms-2 me-3">Meet the Team</div>
               </Link> */}
               <Link to="/student-zone" className="link nav-text mx-4">
-                <div className="ms-2 me-3">Student Zone</div>
+                <div className="ms-2 me-3">Student</div>
               </Link>
               <Link to="/parent-faq" className="link nav-text mx-4">
-                <div className="ms-2 me-3">Parent Zone</div>
+                <div className="ms-2 me-3">Parent</div>
               </Link>
               <Link to="/teacher-faq" className="link nav-text mx-4 nav-link">
-                <div className="ms-2 me-3">Teacher Zone</div>
+                <div className="ms-2 me-3">Teacher</div>
               </Link>
             </Nav>
           </div>
@@ -110,11 +121,11 @@ export default function NavBar() {
                   </Link>
                 </Nav.Link>
                 <Nav.Link
-                  className="is-white rounded sign-up"
-
-                  // className={toggled ? "text-white" : ""}
+                  className={
+                    toggled ? "is-white rounded" : "is-white rounded signup-nav"
+                  }
                 >
-                  <Link to="/signup" className={!toggled ? "text-sh-blue nounder" : "text-shblue nounder"}>
+                  <Link to="/signup" className="nounder text-shblue">
                     Sign Up
                   </Link>
                 </Nav.Link>
