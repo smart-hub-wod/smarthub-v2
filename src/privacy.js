@@ -86,7 +86,7 @@ export default function Privacy() {
   });
 
   return (
-    <>
+    <div className="mb-5">
       <h1 className="text-shblue pt-5 text-center">Terms and Conditions</h1>
       <Container
         id="privacy-policy"
@@ -152,6 +152,6 @@ export default function Privacy() {
           );
         })}
       </Container>
-    </>
+    </div>
   );
 }

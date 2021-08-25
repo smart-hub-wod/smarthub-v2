@@ -22,6 +22,10 @@ p {
   background-color: white !important;
 }
 
+.rounded-more {
+  border-radius: 50px;
+}
+
 .heading-text {
   font-size: 3rem;
 }
@@ -192,6 +196,10 @@ p {
   background-color: transparent;
 }
 
+.shblue-container {
+  
+}
+
 /* Courses */
 .active {
   color: #fe5c36;
@@ -316,6 +324,7 @@ p {
 #privacy-policy .heading-text {
   margin-top: 1rem;
   font-weight: 600;
+  font-size: 2rem;
 }
 
 #privacy-policy .link-text {
@@ -347,6 +356,10 @@ p {
   width: 100%;
   object-fit: cover;
   z-index: -9999;
+}
+
+.bg-video { 
+  
 }
 /* .fade-in {
   animation: fade 0.9s ease-in;

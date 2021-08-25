@@ -116,7 +116,7 @@ export default function Footer() {
             </h2>
             <Button className="button-sh mt-3"> Smarthub News Letter</Button>
           </Col>
-          {/* https://www.instagram.com/p/CSz1MWppXR/?utm_source=ig_web_copy_link */}
+          {/* https://www.instagram.com/p/CSz1MWtppXR/?utm_source=ig_web_copy_link */}
           <Col xs={4}>
             <InstagramEmbed
               url="https://instagr.am/p/Zw9o4/"
@@ -129,7 +129,7 @@ export default function Footer() {
               onSuccess={() => {}}
               onAfterRender={() => {}}
               onFailure={() => {
-                return <p> posting failed </p>;
+                return <p> posting failed</p>;
               }}
             />
 
