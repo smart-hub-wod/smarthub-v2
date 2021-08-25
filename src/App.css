@@ -602,3 +602,8 @@ p {
   padding: 3rem 6rem;
   background-attachment: fixed;
 }
+
+#student-page .button-sh:hover {
+  background-color: #0b3f84;
+  
+}
