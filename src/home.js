@@ -71,6 +71,7 @@ export default function Home() {
               src="../land-1pic.png"
               alt="1 landing page pic"
             />
+            {/* <video className="slide-top" src="../laptop-video.mp4" autoPlay /> */}
 
             <img
               style={{ right: "3rem", top: "8.11rem", zIndex: "1" }}

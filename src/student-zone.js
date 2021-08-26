@@ -26,11 +26,14 @@ export default function StudentZone() {
   //
 
   return (
-    <div id="student-page" style={{ flexDirection: "column" }}>
+    <div id="student-page">
       {yesBtn ? (
         <AwesomeSTEM />
       ) : (
-        <div className="d-flex text-center mb-5">
+        <div
+          className="d-flex text-center mb-5"
+          style={{ flexDirection: "column" }}
+        >
           <h1 className="heading-text my-5 text-shblue">
             {" "}
             Hey!!! Do You Know What Is The STEM?{" "}

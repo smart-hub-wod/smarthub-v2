@@ -214,8 +214,8 @@ export default function ParentFAQ() {
                 </h1>
                 <p className="text-white">
                   {" "}
-                  We can definitely Satisfy your child's questions. In fact,
-                  that's how the children's learn...
+                  Our experienced instructors can answer your child's question
+                  deep enough that you child brights his/her mind with "Ah-ha".
                 </p>
               </Col>
             </Row>

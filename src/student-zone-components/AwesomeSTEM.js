@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import { Player, BigPlayButton } from "video-react";
 
 export default function AwesomeSTEM() {
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     document
+  //       .getElementById("student-zone-header")
+  //       .setAttribute("className", "appear");
+  //   }, 5000);
+  // }, []);
+
+  function handleClick() {}
   return (
     <div id="stem-carousel">
-      <h1>
+      <h1
+        id="student-zone-header"
+        className="text-center text-shblue"
+        onClick={handleClick}
+      >
         {" "}
         Watch these awesome videos to see how the STEM is used in our real life!{" "}
       </h1>
@@ -24,32 +37,45 @@ export default function AwesomeSTEM() {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <Carousel.Caption style={{ color: "black" }}>
+            <h3>Nanotechnology</h3>
+            <p>Above is the use of nanotechnology Cool eh?</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <Player
-            playsInline
-            src="https://www.youtube.com/watch?v=5GWhwUN9iaY"
-          />
+          <iframe
+            className="carousel"
+            src={`https://www.youtube.com/embed/5GWhwUN9iaY`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
 
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <Player
-            playsInline
-            src="https://www.youtube.com/watch?v=5GWhwUN9iaY"
-          />
-
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
+          <Carousel.Caption style={{ color: "black" }}>
+            <h3>Mechanical Engineering </h3>
             <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              {" "}
+              Above is the use of Mechanical Engineering in life. Above
+              technology is called ....
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <iframe
+            className="carousel"
+            src={`https://www.youtube.com/embed/5GWhwUN9iaY`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+
+          <Carousel.Caption style={{ color: "black" }}>
+            <h3> Artificial Intelligence </h3>
+            <p>
+              Currently, A.I is developed to the point where we can have an
+              actual person who is computer.
             </p>
           </Carousel.Caption>
         </Carousel.Item>

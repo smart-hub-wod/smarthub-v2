@@ -22,6 +22,19 @@ p {
   background-color: white !important;
 }
 
+.hide {
+  visibility: hidden;
+}
+
+.appear {
+  visibility: visible!important;
+  display: block!important;
+}
+
+.hide-hard {
+  display: none;
+}
+
 .rounded-more {
   border-radius: 50px;
 }
@@ -374,6 +387,11 @@ p {
 */
 
 .slide-top {
+
+  /* width: 100%;
+  height: 55%;
+  object-fit: cover; */
+ 
   animation: slideTop 1s cubic-bezier(0.41, -0.32, 0, 1.65);
 }
 
@@ -614,4 +632,21 @@ p {
   width: 100%;
   height: 100vh;
   
+}
+
+h1#student-zone-header {
+  animation: student-header-ani 2s ease-in 4s forwards;
+}
+
+@keyframes student-header-ani {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    margin: 0;
+    height: 0;
+    
+  }
 }
