@@ -27,19 +27,18 @@ function MeetTeam(props) {
     {
       name: "Alikhan",
       intro:
-        "Lorem iscelerisque fermentum duiaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelleaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelle faucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pellentesque sit amet porttitor eget dolor. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Praesent tristique magna sit amet purus gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam.",
+        "I am Alikhan Nazarani, I enjoy spending time exploring my passion for artificial intelligence and robotics which I fuse with my business interests to learn more about the applications of these technologies in our fast paced society.",
       profileImg: "../instructors/alikhan.png",
     },
     {
       name: "Anila Shawkat",
-      intro:
-        "I am Alikhan Nazarani, I enjoy spending time exploring my passion for artificial intelligence and robotics which I fuse with my business interests to learn more about the applications of these technologies in our fast paced society.",
+      intro: "",
       profileImg: "../instructors/anila.png",
     },
     {
       name: "Zayan Hussain",
       intro:
-        "Lorem iscelerisque fermentum duiaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelleaucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pelle faucibuselis donec et se in. Lacinia quis vel eros donec ac odio tempor orci. Pellentesque sit amet porttitor eget dolor. Ut faucibus pulvinar elementum integer enim neque volutpat ac tincidunt. Praesent tristique magna sit amet purus gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam.",
+        "Zayan is a fintech enthusiast who’s really interested in building products that drive impact.",
 
       profileImg: "../instructors/zayan.jpg",
     },
@@ -237,7 +236,10 @@ function MeetTeam(props) {
             return "";
           })}
         </Row>
-        <hr className="is-shblue pt-3 mt-5 " />
+        <hr
+          className="is-white mt-5 mb-3"
+          style={{ border: "dashed #0b3f84", borderWidth: "1.3rem 0 0 0" }}
+        />
         <Row className="justify-content-center">
           {members.map((member) => {
             if (member.team === "Business Development Associate") {

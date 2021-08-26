@@ -89,8 +89,8 @@ export default function ParentFAQ() {
 
       <section className="">
         <div className="text-center">
-          <h1 className="heading-text text-shblue mt-4">Parent FAQ</h1>
-          <p className="text-shblue">Welcome!</p>
+          <h1 className="heading-text text-shblue mt-4">Welcome, Parents</h1>
+          <p className="text-shblue">We have some questions for you.</p>
         </div>
       </section>
 

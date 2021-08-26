@@ -457,8 +457,10 @@ p {
 
 .instructor-img {
   float: left;
-  width: 45%;
-  height: auto;
+  width: 45%; 
+  object-fit:scale-down;
+  height: 160px;
+  
 
   /* border: 5px solid brown; */
   /* background-color: aqua; */
@@ -605,5 +607,11 @@ p {
 
 #student-page .button-sh:hover {
   background-color: #0b3f84;
+  
+}
+
+#stem-carousel .carousel {
+  width: 100%;
+  height: 100vh;
   
 }

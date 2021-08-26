@@ -112,9 +112,9 @@ export default function Footer() {
             </div>
             <h2 style={{ marginTop: "6.8rem" }}>
               {" "}
-              Subscribe Smarthub News Letter:{" "}
+              Please Give Us Your Feedback!{" "}
             </h2>
-            <Button className="button-sh mt-3"> Smarthub News Letter</Button>
+            <Button className="button-sh mt-3"> Evaluate Smarthub</Button>
           </Col>
           {/* https://www.instagram.com/p/CSz1MWtppXR/?utm_source=ig_web_copy_link */}
           <Col xs={4}>

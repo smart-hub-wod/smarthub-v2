@@ -150,10 +150,7 @@ export default function About() {
             </Row>
             <Row className="row2">
               <Col className="d-flex justify-content-end" lg={6} md={6}>
-                <Card
-                  data-aos="fade-right d-flex justify-content-center"
-                  className="me-5"
-                >
+                <Card data-aos="fade-right" className="me-5">
                   <Card.Title> Experienced Instructors </Card.Title>
                   <div className="d-flex justify-content-center">
                     <img
