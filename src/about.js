@@ -31,7 +31,9 @@ export default function About() {
 
           <h1 style={{ marginTop: "10rem", fontSize: "4rem", width: "70%" }}>
             {" "}
-            SmartHub is Our Solution To One Of The Educational Problem{" "}
+            ​​Smart Hub is Our Solution to the Lack of Online STEM Material for
+            Young Learners. At Smart Hub we Provide Easy Access to STEM
+            Materials for Young Learners{" "}
           </h1>
         </section>
 

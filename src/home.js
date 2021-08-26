@@ -94,12 +94,12 @@ export default function Home() {
           <Col lg={6}>
             <h1>Our Mission</h1>
             <p className="mission-res">
-              The mission of Smart Hub is to provide course materials on
-              STEM-related real-life applications such as biomedical
-              engineering, software engineering and quantum computing in a
-              simplified and understandable manner for elementary school
+              <strong>Smart Hub</strong>’s mission is to provide course
+              materials on STEM-related real-life applications such as
+              biomedical engineering, software engineering and quantum computing
+              in a simplified and understandable manner for elementary school
               children to get a head start on their future interests and
-              careers!
+              careers.
             </p>
           </Col>
         </Row>
