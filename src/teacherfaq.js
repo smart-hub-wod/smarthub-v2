@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Accordion, Card, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AOS from "aos";
+import { Arrow90degDown } from "react-bootstrap-icons";
 
 export default function ParentFAQ() {
   // const [clicked, setClicked] = useState([false, false, false]);
@@ -173,6 +174,11 @@ export default function ParentFAQ() {
                           eventKey={index + 1}
                           className="w-100 text-start"
                         >
+                          <Arrow90degDown
+                            className="d-inline float-end"
+                            color="white"
+                            size={20}
+                          />
                           <h2
                             className="text-white"
                             style={{ fontSize: "1.3rem", fontWeight: "600" }}
