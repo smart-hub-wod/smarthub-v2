@@ -22,24 +22,25 @@ export default function Contact() {
       {/* Message part start  */}
       <h2 className="text-shblue" style={{ fontWeight: "600" }}>
         {" "}
-        Send us your Message{" "}
+        Send us a Message{" "}
       </h2>
 
       <p>
         {" "}
-        When your send your email, please indicate the brief topic of your query
-        on the email title.
-        <br /> We take emails from 8 am to 3 pm. <br /> Mail us to{" "}
-        <a href="mailTo:smarthubteam@onamap.ca"> here </a>
+        When you send your email, please indicate the brief topic of your query
+        in the subject line.
+        {/* <br /> We take emails from 8 am to 3 pm. <br /> Mail us to{" "} */}
+        <br />
+        <a href="mailTo:smarthub@onamap.ca"> Email us here </a>
       </p>
 
       {/* Call part start */}
 
       <h2 className="text-shblue" style={{ fontWeight: "600" }}>
         {" "}
-        Send us your Call{" "}
+        Call us{" "}
       </h2>
-      <p>Our phone service is open from 8am - 3pm EST </p>
+      {/* <p>Our phone service is open </p> */}
       <Row>
         <Col xs={1}>
           <PhoneVibrate size={100}> </PhoneVibrate>
@@ -47,21 +48,23 @@ export default function Contact() {
         <Col xs={10} className="ps-5">
           <p style={{ display: "inline", fontSize: "1.5rem" }}>
             {" "}
-            Canada (+1) <br /> 920-025-5020{" "}
+            Canada (+1) <br />
+            437-886-6354{" "}
           </p>
         </Col>
       </Row>
-      <p> We are waiting for your call</p>
+      <p> We are ready for your call.</p>
 
       {/* Intructor contact start */}
 
       <h2 className="text-shblue"> Contact your instructor </h2>
 
-      <p> Your instructor will be available when you put your request. </p>
+      <p> Your instructor will be available during your course. </p>
+      <p> Please consult course information to contact instructors. </p>
 
-      <h2 className="text-shblue"> More information about Company </h2>
+      <h2 className="text-shblue"> Company Information </h2>
 
-      <a href=""> About West Oak Design Inc. </a>
+      <a href=""> About Design Chêne Ouest Inc. </a>
 
       <p></p>
 

@@ -88,8 +88,7 @@ export default function ParentFAQ() {
 
       <section className="">
         <div className="text-center">
-          <h1 className="heading-text text-shblue mt-4">Welcome, Parents</h1>
-          <p className="text-shblue">We have some questions for you.</p>
+          <h1 className="heading-text text-shblue mt-4">Welcome Parents</h1>
         </div>
       </section>
 
@@ -144,8 +143,8 @@ export default function ParentFAQ() {
                 <p className="text-white">
                   {" "}
                   We have variety of different STEM courses. Your child could be
-                  exposed into various STEM fields, and might find their
-                  interest in their early age.
+                  exposed to various STEM fields, and might find their interest
+                  in their early age.
                 </p>
               </Col>
             </Row>
@@ -191,15 +190,14 @@ export default function ParentFAQ() {
               </Col>
               <Col>
                 <h1 className="text-white mt-4">
-                  {" "}
-                  Don't Buy Into Online Learning?{" "}
+                  A Better Way to Learn Online
                 </h1>
                 <p className="text-white">
                   {" "}
                   Smart Hub makes online learning fun and exciting for all
                   children! Your child will spend most of their time on making
-                  or experimenting something rather than seating, and reading
-                  some article.
+                  or experimenting something rather than sitting, and reading
+                  some articles.
                 </p>
               </Col>
             </Row>
@@ -210,13 +208,12 @@ export default function ParentFAQ() {
           <Row data-aos="fade-left">
             <Col>
               <h1 className="mt-3 text-shblue">
-                Your Child Doesn't Seems to Be Interested In STEM?
+                Supporting Your Child's STEM Interests
               </h1>
               <p className="text-shblue">
                 {" "}
-                It could be a misconception, or your child probably didn't
-                understood concepts. Smart Hub allows your child to explore the
-                how things work through easy-to-understand learning materials.
+                Smart Hub allows your child to explore how things work through
+                easy-to-understand learning materials.
               </p>
             </Col>
             <Col>

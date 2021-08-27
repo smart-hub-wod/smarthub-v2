@@ -54,7 +54,7 @@ export default function StudentZone() {
             loop
           />
           <div className="text-center pt-4">
-            <h1 className="heading-text text-white">Welcome, Students</h1>
+            <h1 className="heading-text text-white">Welcome Students</h1>
           </div>
         </div>
 
