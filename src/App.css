@@ -47,6 +47,10 @@ p {
   color: #0b3f84;
 }
 
+.text-white {
+  color: white;
+}
+
 .button-sh {
   background-color: #fe5c36;
   color: white;
@@ -177,6 +181,7 @@ p {
 
 #footer .nav-text {
   font-size: 0.9rem;
+  width: 20rem;
   border-left-width: 0;
   border-right-width: 3px;
   /* max-height: auto; */
@@ -201,7 +206,7 @@ p {
 
 /* footer, navbar ends */
 
-/* Parent Page */
+/* Parent Page and Teacher Page */
 .sh-link {
   color: #0b3f84;
   border: none;
@@ -209,9 +214,88 @@ p {
   background-color: transparent;
 }
 
-.shblue-container {
+/* FAQ */
+
+#faq .card {
+  background-color:transparent;
+  border: none;
+  border-radius: 0;
   
 }
+
+#faq .card button {
+  border: none;
+  background-color: transparent;
+  border-bottom: 5px black;
+  border-bottom: 1px solid white;
+  border-radius: 5px;
+
+}
+
+#faq .accordion-container {
+  padding: 3rem 1rem;
+  border-radius: 4rem 0 0 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+#faq .st-intro video {
+  height: 400px;
+  width:100%;
+  object-fit: cover;
+
+}
+
+#faq .top-catcher {
+  
+  background-repeat: repeat;
+  background-attachment: fixed;
+  /* background-size: cover; */
+  background-size: cover;
+  background-position: center;
+  justify-content: flex-start;
+}
+
+/* Teacher Page  */
+
+#teacher-page .top-catcher {
+  align-items: flex-end;
+}
+
+.teacher-title {
+  background-color: #5181c07d;
+  width: 55%;
+
+}
+
+/* .teacher-title-tri {
+  height: 0;
+  width: 0;
+  border-left: 170px solid transparent;
+  border-bottom: 170px solid #5181c07d;
+  position: absolute;
+  
+} */
+
+
+
+#teacher-page .text-container {
+  padding: 2rem 10rem;
+  background-color: #5181c07d;
+}
+
+
+
+#teacher-page .heading-text {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.teacher-sub {
+  font-weight: 600;
+  font-size: 1.3rem
+}
+
 
 /* Courses */
 .active {
@@ -371,9 +455,6 @@ p {
   z-index: -9999;
 }
 
-.bg-video { 
-  
-}
 /* .fade-in {
   animation: fade 0.9s ease-in;
 }
@@ -388,6 +469,9 @@ p {
 
 .slide-top {
 
+  width: 80%;
+  
+  
   /* width: 100%;
   height: 55%;
   object-fit: cover; */
@@ -400,6 +484,26 @@ p {
     margin-top: -300px;
   }
 } 
+
+.home-laptop {
+  width: 100%;
+  height: 400px;
+  display:flex;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-image: url("./laptop-bg.png");
+  position: relative;
+  
+}
+
+.home-laptop video {
+  width: 485px!important;
+  height: 305px!important;
+  object-fit: fill;
+  position: relative;
+  top: 2rem;
+  left: -0.7rem;
+}
 
 .shape {
   height: 40px;
@@ -579,9 +683,6 @@ p {
   color: white;
 }
 
-.value-container {
-}
-
 .value-section .row {
   text-align: center;
   color: black;
@@ -606,6 +707,18 @@ p {
   width: 100%;
   object-fit: cover;
   z-index: -9999;
+}
+
+#student-page .background-video-container {
+  height: 80vh;
+  overflow-y: visible;
+}
+
+#student-page .container {
+  width: 65%;
+  padding: 0;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  
 }
 
 #student-page .holder-container {
@@ -635,7 +748,7 @@ p {
 }
 
 h1#student-zone-header {
-  animation: student-header-ani 2s ease-in 4s forwards;
+  animation: student-header-ani 1s ease-in 3s forwards;
 }
 
 @keyframes student-header-ani {
@@ -649,4 +762,31 @@ h1#student-zone-header {
     height: 0;
     
   }
+}
+
+.old-city {
+
+}
+
+.stem-video {
+  height: 100vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+.sr-only {
+  display: none;  
+}
+
+.carousel-control-prev-icon {
+  background-color: #0b3f84;
+  
+}
+
+.carousel-control-next-icon {
+  background-color: #0b3f84;
+}
+
+.carousel-caption {
+  color:white;
 }

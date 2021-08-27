@@ -66,11 +66,22 @@ export default function Home() {
             </div>
           </Col>
           <Col>
-            <img
-              className="slide-top"
-              src="../land-1pic.png"
-              alt="1 landing page pic"
-            />
+            <div className="home-laptop slide-top">
+              <video
+                muted
+                autoPlay
+                src="../student-videos/vanessa.mp4"
+                // className="is-shblue rounded-more"
+
+                style={{ width: "470px" }}
+              />
+              {/* <img
+                className="slide-top"
+                // src="../land-1pic.png"
+                src="../laptop-bg.png"
+                alt="1 landing page pic"
+              /> */}
+            </div>
             {/* <video className="slide-top" src="../laptop-video.mp4" autoPlay /> */}
 
             <img

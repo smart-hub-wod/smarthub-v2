@@ -10,7 +10,7 @@ export default function Contact() {
   return (
     <Container
       id="contact"
-      className="text-left"
+      className="text-left mb-5"
       style={{
         width: "60%",
       }}
@@ -24,13 +24,13 @@ export default function Contact() {
         {" "}
         Send us your Message{" "}
       </h2>
-      
+
       <p>
         {" "}
         When your send your email, please indicate the brief topic of your query
         on the email title.
-        <br /> We take emails from 8 am to 3 pm.{" "}
-        <br/> Mail us to <a href="mailTo:smarthubteam@onamap.ca"> here </a>
+        <br /> We take emails from 8 am to 3 pm. <br /> Mail us to{" "}
+        <a href="mailTo:smarthubteam@onamap.ca"> here </a>
       </p>
 
       {/* Call part start */}
@@ -55,15 +55,13 @@ export default function Contact() {
 
       {/* Intructor contact start */}
 
-      <h2 className= "text-shblue"> Contact your instructor </h2>
+      <h2 className="text-shblue"> Contact your instructor </h2>
 
       <p> Your instructor will be available when you put your request. </p>
 
       <h2 className="text-shblue"> More information about Company </h2>
-      
-      <a href=""> About West Oak Design Inc. </a>
 
-      
+      <a href=""> About West Oak Design Inc. </a>
 
       <p></p>
 

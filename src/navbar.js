@@ -81,13 +81,13 @@ export default function NavBar() {
                 <div className="ms-2 me-3">Meet the Team</div>
               </Link> */}
               <Link to="/student-zone" className="link nav-text mx-4">
-                <div className="ms-2 me-3">Student</div>
+                <div className="ms-2 me-3">Students</div>
               </Link>
               <Link to="/parent-faq" className="link nav-text mx-4">
-                <div className="ms-2 me-3">Parent</div>
+                <div className="ms-2 me-3">Parents</div>
               </Link>
               <Link to="/teacher-faq" className="link nav-text mx-4 nav-link">
-                <div className="ms-2 me-3">Teacher</div>
+                <div className="ms-2 me-3">Teachers</div>
               </Link>
             </Nav>
           </div>

@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
-import { Alarm, PersonCheck, EmojiHeartEyes } from "react-bootstrap-icons";
+import { Card, Col, Container, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // import { faChild, faHandsWash } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Player, BigPlayButton, LoadingSpinner } from "video-react";
-import MeetTeam from "./meet-team";
 import AOS from "aos";
 
 export default function About() {
@@ -18,7 +16,7 @@ export default function About() {
     <div>
       <div id="about-us">
         <section
-          className="top-catcher-container"
+          className="top-catcher-container text-start"
           // style={{ backgroundImage: "url(../about-video.gif)" }}
         >
           <video
@@ -29,11 +27,13 @@ export default function About() {
             className="top-catcher-video"
           />
 
-          <h1 style={{ marginTop: "10rem", fontSize: "4rem", width: "70%" }}>
+          <h1
+            className="ms-5"
+            style={{ marginTop: "3rem", fontSize: "3rem", width: "70%" }}
+          >
             {" "}
-            ​​Smart Hub is Our Solution to the Lack of Online STEM Material for
-            Young Learners. At Smart Hub we Provide Easy Access to STEM
-            Materials for Young Learners{" "}
+            ​​SmartHub offers STEM education to our youngest learners in
+            elementary school.
           </h1>
         </section>
 
@@ -201,9 +201,19 @@ export default function About() {
             </Link>
           </h2>
         </section> */}
-      </div>
 
-      <MeetTeam header={false} className="py-5" />
+        <div className="is-white py-3 d-flex justify-content-center">
+          <Link to="/meet-the-team">
+            <Button
+              style={{ padding: "0 5rem", fontSize: "3rem" }}
+              bsPrefix="button-sh"
+            >
+              {" "}
+              Meet Our Team{" "}
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

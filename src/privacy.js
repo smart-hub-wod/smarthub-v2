@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 
 function toCamelCase(str) {
@@ -16,7 +17,14 @@ function toCamelCase(str) {
 }
 
 export default function Privacy() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   var policy = [
+    {
+      title: "Disclaimer & Waiver",
+      text: "SmartHub is operated by Design Chêne Ouest Inc. All rights reserved. Licenses are granted to individuals only at this time. Corporate or education licenses can be requested by emailing smarthub@onamap.ca. Teachers are permitted to access and use materials in a classroom with a paid account subscription. Children must access the website and courses while supervised by a parent who has created an account. Parents must be 18 years of age or older and be able to use a credit card to make a payment on the website to access courses. Children may access their dashboards through the parent account only. A password is required to delete or make changes to your account. The content on this site comes from a variety of sources including third parties and does not represent the perspectives, viewpoints and ideas of Design Chêne Ouest Inc. or its affiliates. By registering for an account, you agree that you are over the age of 18 and waive all liability of any damages that may occur from use of this website or access to any courses on this site. Design Chêne Ouest Inc. and its associates and affiliates are not responsible for any damages caused as a result of participating in courses or using this website. We do not retain the personal information of minors beyond the name as input on the dashboard for identification purposes. No information collected is sold to third parties. For questions pertaining to the SmartHub website, programming, courses, and all other general inquiries, please email smarthub@onamap.ca. The policies on this website may be periodically updated with or without notice to the end user. I agree to the complete terms and conditions listed on this page upon creating an account and give permission for an account to be created on my behalf.",
+    },
     {
       title: "Description of Service",
       text: "Provision of information technology research, development, design consulting or product development, and/or software product development, loan/rental, access or maintenance of any of the above listed products and services.",

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Player, BigPlayButton } from "video-react";
 
 export default function AwesomeSTEM() {
@@ -11,17 +12,19 @@ export default function AwesomeSTEM() {
   //   }, 5000);
   // }, []);
 
-  function handleClick() {}
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div id="stem-carousel">
-      <h1
+      {/* <h1
         id="student-zone-header"
         className="text-center text-shblue"
-        onClick={handleClick}
       >
         {" "}
         Watch these awesome videos to see how the STEM is used in our real life!{" "}
-      </h1>
+      </h1> */}
       {/* prevent auto scrolling
        add subtitle
        use <Player> or what?
@@ -29,54 +32,107 @@ export default function AwesomeSTEM() {
         */}
       <Carousel className="carousel">
         <Carousel.Item>
-          <iframe
+          {/* <iframe
             className="carousel"
             src={`https://www.youtube.com/embed/5GWhwUN9iaY`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-          ></iframe>
-          <Carousel.Caption style={{ color: "black" }}>
-            <h3>Nanotechnology</h3>
-            <p>Above is the use of nanotechnology Cool eh?</p>
+          ></iframe> */}
+          {/* <Player src="../stem-videos/mechanic-eng.mp4" autoPlay loop muted>
+            <BigPlayButton position="top" />
+          </Player> */}
+
+          <video
+            className="stem-video"
+            controls
+            src="../stem-videos/mechanic-eng.mp4"
+            autoPlay
+          />
+
+          <Carousel.Caption>
+            <h3>Robotics </h3>
+            <p> You can also create robots, by taking robotics course. </p>
+            <div className="" style={{ margin: "" }}>
+              <Link to="/courses">
+                <Button bsPrefix="button-sh" className="mt-4">
+                  View Courses
+                </Button>
+              </Link>
+            </div>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <iframe
+          {/* <iframe
             className="carousel"
             src={`https://www.youtube.com/embed/5GWhwUN9iaY`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-          ></iframe>
+          ></iframe> */}
 
-          <Carousel.Caption style={{ color: "black" }}>
-            <h3>Mechanical Engineering </h3>
+          {/* <Player src="../stem-videos/system-eng.mp4" autoPlay loop muted>
+            <BigPlayButton position="top" />
+          </Player> */}
+
+          <video
+            className="stem-video"
+            controls
+            src="../stem-videos/system-eng.mp4"
+            autoPlay
+          />
+
+          <Carousel.Caption>
+            <h3> Systematic Engineering </h3>
             <p>
               {" "}
-              Above is the use of Mechanical Engineering in life. Above
-              technology is called ....
+              This type of engineers contruct a system in a way that robots
+              automatically produce all the products we need!
             </p>
+            <div className="" style={{ margin: "" }}>
+              <Link to="/courses">
+                <Button bsPrefix="button-sh" className="mt-4">
+                  View Courses
+                </Button>
+              </Link>
+            </div>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <iframe
+          <video
+            className="stem-video"
+            controls
+            src="../stem-videos/aerospace-eng.mp4"
+            autoPlay
+          />
+          {/* <iframe
             className="carousel"
             src={`https://www.youtube.com/embed/5GWhwUN9iaY`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-          ></iframe>
+          ></iframe> */}
 
-          <Carousel.Caption style={{ color: "black" }}>
-            <h3> Artificial Intelligence </h3>
+          {/* <Player className="" src="../stem-videos/aerospace-eng.mp4" autoPlay loop muted>
+            <BigPlayButton position="top" />
+          </Player> */}
+
+          <Carousel.Caption>
+            <h3> Aerospace Engineering </h3>
             <p>
-              Currently, A.I is developed to the point where we can have an
-              actual person who is computer.
+              We created amazing satellite that could travel nearly 54.6 million
+              kilometers away from the Earth.
             </p>
+            <div className="" style={{ margin: "" }}>
+              <Link to="/courses">
+                <Button bsPrefix="button-sh" className="mt-4">
+                  View Courses
+                </Button>
+              </Link>
+            </div>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

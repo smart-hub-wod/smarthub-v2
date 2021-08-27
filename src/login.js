@@ -1,10 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext.js";
 import { Google } from "react-bootstrap-icons";
 
 export default function Login() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login, googleLogin } = useAuth();

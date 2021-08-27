@@ -28,6 +28,8 @@ import Checkout from "./checkout";
 import AddAdmin from "./add-admin";
 import EditCourse from "./edit-course";
 import StudentZone from "./student-zone";
+import AwesomeSTEM from "./student-zone-components/AwesomeSTEM";
+
 // Add pages here!
 
 import { AuthProvider } from "./contexts/AuthContext";
@@ -57,11 +59,17 @@ function App() {
             <AdminRoute exact path="/add-profile" component={AdminProfile} />
             <AdminRoute exact path="/edit-course/:id" component={EditCourse} />
             <PrivateRoute exact path="/lesson/:id/:child" component={Lesson} />
-            <PrivateRoute path="/student-dashboard/:id" component={StudentDash} />
+            <PrivateRoute
+              path="/student-dashboard/:id"
+              component={StudentDash}
+            />
             <DevRoute path="/add-admin" component={AddAdmin} />
             <DevRoute path="/add-promo" component={AddPromo} />
             <PrivateRoute path="/cart" component={Cart} />
-            <PrivateRoute path="/certificate/:child/:course" component={Certificate} />
+            <PrivateRoute
+              path="/certificate/:child/:course"
+              component={Certificate}
+            />
             <PrivateRoute path="/checkout" component={Checkout} />
             <Route exact path="/" component={Home} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
@@ -77,7 +85,8 @@ function App() {
             <Route path="/parent-faq" component={ParentFAQ} />
             <Route path="/teacher-faq" component={TeacherFAQ} />
             <Route path="/contact-us" component={Contact} />
-            <Route path="/student-zone" component={StudentZone} />
+            <Route exact path="/student-zone" component={StudentZone} />
+            <Route path="/student-zone/awesome-stem" component={AwesomeSTEM} />
             <Route path="*" component={Page404} />
 
             {/* Add Routes Here! */}
