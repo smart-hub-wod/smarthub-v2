@@ -220,6 +220,7 @@ export default function EditCourse() {
         gradesArr.push(gradeid);
       }
     });
+    console.log(grades);
     setGrades(gradesArr);
   };
 
@@ -365,7 +366,7 @@ export default function EditCourse() {
               <p>
                 <strong>Grade Level</strong>
               </p>
-              <Form.Group id="gradelevel" className="mb-3 form-floating" onChange={handleCheck} ref={GradeRef}>
+              <Form.Group id="gradelevel" className="mb-3 form-floating" onClick={handleCheck} ref={GradeRef}>
                 <div className="mb-3">
                   {checkBoxes.map((grade) => {
                     return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} defaultChecked={course?.grades?.includes(grade)} />;
