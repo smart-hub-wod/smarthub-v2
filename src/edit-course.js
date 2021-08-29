@@ -348,13 +348,13 @@ export default function EditCourse() {
               <Form.Group id="starttime" className="mb-3 form-floating">
                 <Form.Control type="time" ref={StartTimeRef} className="form-control" placeholder="Start Time" id="InputStartTime" aria-describedby="id" />
                 <Form.Label for="InputStartTime" className="form-label floatingInput">
-                  Start Date
+                  Start Time
                 </Form.Label>
               </Form.Group>
               <Form.Group id="endtime" className="mb-3 form-floating">
                 <Form.Control type="time" ref={EndTimeRef} className="form-control" placeholder="End Time" id="InputEndTime" aria-describedby="id" />
                 <Form.Label for="InputEndTime" className="form-label floatingInput">
-                  End Date
+                  End Time
                 </Form.Label>
               </Form.Group>
               <Form.Group id="zoomlink" className="mb-3 form-floating">

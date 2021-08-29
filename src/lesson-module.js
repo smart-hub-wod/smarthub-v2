@@ -175,7 +175,7 @@ function ContentBox(props) {
       {props.lssn === -1 ? (
         <div className="mb-4">
           <h1 className="text-shblue">Welcome!</h1>
-          <p className="mb-2">We're so excited to see you! Watch our welcome video below and click a lesson on the left to begin!</p>
+          <p className="mb-2">We're so excited to see you! Navigate through your course by clicking on the orange tabs on the left to begin!</p>
           <iframe src={`https://drive.google.com/file/d/1cMimNo_yLZ586mwCOSX2UxmTrPMY_FZh/preview`} width="600" height="315" allow="autoplay"></iframe>
         </div>
       ) : (
