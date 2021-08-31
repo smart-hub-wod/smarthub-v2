@@ -18,7 +18,7 @@ export default function Home() {
         className="d-flex align-items-center justify-content-center pt-5"
       >
         <Row>
-          <Col style={{ paddingTop: "5rem" }}>
+          <Col md={6} style={{ paddingTop: "5rem" }}>
             <div className="text-shblue ms-5">
               <img
                 style={{ left: "25rem", top: "8.11rem", zIndex: "1" }}
@@ -51,9 +51,7 @@ export default function Home() {
                 alt="shape-pic"
               />
 
-              <h1 className="heading-text" style={{ width: "70%" }}>
-                A Head Start Into the Future
-              </h1>
+              <h1 className="heading-text">A Head Start Into the Future</h1>
               <h5>
                 Introduce your child into the world of STEM to fuel their
                 passion - with Smart Hub.
@@ -65,16 +63,11 @@ export default function Home() {
               </Link>
             </div>
           </Col>
-          <Col>
-            <div className="home-laptop slide-top">
-              <video
-                muted
-                autoPlay
-                src="../student-videos/vanessa.mp4"
-                // className="is-shblue rounded-more"
-
-                style={{ width: "470px" }}
-              />
+          <Col md={6}>
+            <div className="slide-top">
+              <div className="w-100">
+                <video muted autoPlay src="../student-videos/home-video.mp4" />
+              </div>
               {/* <img
                 className="slide-top"
                 // src="../land-1pic.png"
@@ -183,16 +176,18 @@ export default function Home() {
         className="d-flex justify-content-center text-center py-5 mt-5 is-shblue text-white"
       >
         <div className="row justify-content-evenly">
-          <div className="col-4">
+          <Col md={4}>
+            {/* Delete image and add Carousel below */}
             <img alt="" src="../octlogo.png" height="150" />
-          </div>
-          <div className="col-4">
+          </Col>
+
+          <Col md={4}>
             <h1>Trustworthy Content</h1>
             <p>
               All courses have been reviewed by Ontario College of Teachers
               (OCT) certified teachers.
             </p>
-          </div>
+          </Col>
         </div>
       </Container>
       <Container

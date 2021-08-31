@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Accordion, Card, Container, Row, Col } from "react-bootstrap";
 import AOS from "aos";
-import { Player, BigPlayButton } from "video-react";
 import { Arrow90degDown } from "react-bootstrap-icons";
 
 export default function ParentFAQ() {
@@ -94,19 +93,16 @@ export default function ParentFAQ() {
 
       <section className="st-intro text-center">
         <Container className="mt-5">
-          <Row data-aos="fade-in">
-            <Col>
+          <Row>
+            <Col lg={6}>
               <video
                 className="w-100 p-3 is-shblue rounded-more"
                 src="../parent-faq.mp4"
                 controls
               />
-              {/* <Player src="../parent-faq.mp4" className="" fluid={false}>
-                <BigPlayButton position="center" />
-              </Player> */}
             </Col>
 
-            <Col>
+            <Col lg={6}>
               <h1 className="mt-3 text-shblue">Introduction for Parents</h1>
 
               <p className="text-shblue">
@@ -127,7 +123,7 @@ export default function ParentFAQ() {
         <div className="is-shblue shblue-container py-5 mt-5">
           <Container>
             <Row data-aos="fade-right">
-              <Col>
+              <Col lg={6}>
                 <video
                   className="w-100 p-3 is-white rounded-more"
                   src="../student-videos/kampus.mp4"
@@ -135,7 +131,7 @@ export default function ParentFAQ() {
                   loop
                 />
               </Col>
-              <Col>
+              <Col lg={6}>
                 <h1 className="text-white mt-4">
                   {" "}
                   Is STEM Right For Your Child?{" "}
@@ -151,14 +147,14 @@ export default function ParentFAQ() {
           </Container>
         </div>
 
-        <Container className="mt-5">
+        <Container className="my-5">
           <Row data-aos="fade-left">
-            <Col>
-              <h1 className="mt-3 text-shblue">
+            <Col lg={6}>
+              <h1 className="mt-3 text-shblue ">
                 {" "}
                 Tired Of Answering Your Child's Continous 'Why' Questions?{" "}
               </h1>
-              <p className="text-shblue">
+              <p className="text-shblue mb-5">
                 {" "}
                 We got you. Your child's curiosity is what makes our world
                 continously improve. We would never let that valuable curiosity
@@ -166,7 +162,7 @@ export default function ParentFAQ() {
                 questions together.
               </p>
             </Col>
-            <Col>
+            <Col lg={6}>
               <video
                 className="w-100 p-3 is-shblue rounded-more"
                 src="../student-videos/alena.mp4"
@@ -180,7 +176,7 @@ export default function ParentFAQ() {
         <div className="is-shblue shblue-container py-5 mt-5">
           <Container>
             <Row data-aos="fade-right">
-              <Col>
+              <Col lg={6}>
                 <video
                   className="w-100 p-3 is-white rounded-more"
                   src="../student-videos/pavel.mp4"
@@ -188,7 +184,7 @@ export default function ParentFAQ() {
                   loop
                 />
               </Col>
-              <Col>
+              <Col lg={6}>
                 <h1 className="text-white mt-4">
                   A Better Way to Learn Online
                 </h1>
@@ -204,19 +200,19 @@ export default function ParentFAQ() {
           </Container>
         </div>
 
-        <Container className="mt-5">
+        <Container className="my-5">
           <Row data-aos="fade-left">
-            <Col>
+            <Col lg={6}>
               <h1 className="mt-3 text-shblue">
                 Supporting Your Child's STEM Interests
               </h1>
-              <p className="text-shblue">
+              <p className="text-shblue mb-5">
                 {" "}
                 Smart Hub allows your child to explore how things work through
                 easy-to-understand learning materials.
               </p>
             </Col>
-            <Col>
+            <Col lg={6}>
               <video
                 className="w-100 p-3 is-shblue rounded-more"
                 src="../student-videos/tablet.mp4"
@@ -228,8 +224,8 @@ export default function ParentFAQ() {
         </Container>
       </section>
 
-      <div className="is-white py-5">
-        <Container style={{ maxWidth: "65%" }}>
+      <div className="is-white py-5  d-flex justify-content-center">
+        <div className="faq-container">
           <h1 className="text-shblue text-center mb-5"> Parent FAQ </h1>
           <Accordion defaultActiveKey="0">
             <div className="accordion-container is-shblue">
@@ -246,11 +242,10 @@ export default function ParentFAQ() {
                         className="w-100 text-start"
                       >
                         <Arrow90degDown
-                          className="d-inline float-end"
+                          className="d-inline float-end ms-4"
                           color="white"
                           size={20}
                         />
-
                         <h2
                           className="text-white"
                           style={{ fontSize: "1.3rem", fontWeight: "600" }}
@@ -258,12 +253,11 @@ export default function ParentFAQ() {
                           {content.question}
                         </h2>
                       </Accordion.Toggle>
-
                       {/* {clicked[0] ? (
-                        <ArrowUpSquareFill size={30} />
-                      ) : (
-                        <ArrowDownSquareFill size={30} />
-                      )} */}
+                          <ArrowUpSquareFill size={30} />
+                        ) : (
+                          <ArrowDownSquareFill size={30} />
+                        )} */}
                     </Card.Header>
                     <Accordion.Collapse eventKey={index + 1}>
                       <Card.Body className="text-white">
@@ -276,7 +270,7 @@ export default function ParentFAQ() {
               })}
             </div>
           </Accordion>
-        </Container>
+        </div>
       </div>
     </div>
   );

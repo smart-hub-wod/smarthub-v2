@@ -61,7 +61,8 @@ function MeetTeam() {
     },
     {
       name: "Anila Shawkat",
-      intro: "Coming Soon",
+      intro:
+        "Hello there, I am Anila! For as long as I can remember, science, nature, and the human body have fascinated me. To follow my passion, I will begin a Bachelor of Science degree this fall at the University of Manitoba, with the goal of pursuing a career in medicine. I want to do something where I can pursue research, preferably in an interdisciplinary field, and where I find passion and joy. I am curious to see where my scientific career will lead me in the coming years, and I hope that one day I will contribute positively to society.",
       profileImg: "../instructors/anila.png",
     },
   ]);

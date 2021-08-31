@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Container } from "react-bootstrap";
+import { Button, Modal, Carousel, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function StudentZone() {
@@ -58,90 +58,132 @@ export default function StudentZone() {
           </div>
         </div>
 
-        <Container>
-          {/* make a class for below div */}
-          <div
-            className="d-flex text-center mb-5 px-5 pb-5 is-white"
-            style={{ flexDirection: "column", borderRadius: "4rem 0 0 0" }}
-          >
-            <h1 className="heading-text my-5 text-shblue" data-aos="fade-in">
-              {" "}
-              Hey! Do You Know What STEM is?{" "}
-            </h1>
-            <p className="text-shblue mb-5" style={{ fontSize: "1.3rem" }}>
-              {/* STEM is our future. Without STEM, our world would look like{" "}
-                <Button prePrefix="button-sh" onClick={handlePicture}>
-                  {" "}
-                  This{" "}
-                </Button>
-                Back to our point, STEM stands for Science Technology Engineering
-                Mathematics. We have ideas of how things around us work. Whenever,
-                we have ideas, we use it. We use those ideas to solve real-world
-                problems. Click "Yes" button See the examples of where we apply the
-                ideas in our world! */}
-              STEM is the way of the future. Without STEM, our world would be
-              lacking in innovation and creativity! Many of the technologies you
-              use today and the things you do are possible because of STEM. So
-              what is STEM? STEM stands for Science, Technology, Engineering,
-              Mathematics. These subjects help us to explore and learn about how
-              things around us work. We use what we learn to solve real-world
-              problems. Click the "YES" button below to see examples of how we
-              apply STEM in our world!
-            </p>
-            {/* <img src="../old-city.jpg" className={} /> */}
-            <h4 className="mb-4 text-shblue"> Do You Know What STEM is?</h4>
-            {/* <video
-              muted
-              autoPlay
-              loop
-              src="https://www.youtube.com/watch?v=5GWhwUN9iaY"
-            /> */}
-            <div>
-              <Link
-                to="/student-zone/awesome-stem"
-                style={{ textDecoration: "none" }}
-              >
-                <Button bsPrefix="button-sh d-inline mx-5 px-5">Yes!</Button>
-              </Link>
-              <Button
-                bsPrefix="button-sh d-inline mx-5 px-5"
-                onClick={handleShow}
-              >
-                No
-              </Button>
-              <Modal
-                show={show}
-                onHide={handleClose}
-                animation={true}
-                backdrop="static"
-                size="lg"
-              >
-                <Modal.Header className="is-shblue">
-                  <Modal.Title className="text-white">
+        <div className="d-flex justify-content-center mb-5">
+          <div className="d-flex student-container justify-content-center">
+            {/* make a class for below div */}
+            <div
+              className="d-flex text-center mb-5 px-5 pb-5 is-white"
+              style={{ flexDirection: "column", borderRadius: "4rem 0 0 0" }}
+            >
+              <h1 className="heading-text my-5 text-shblue" data-aos="fade-in">
+                {" "}
+                Hey! Do You Know What STEM is?{" "}
+              </h1>
+              <p className="text-shblue mb-5" style={{ fontSize: "1.3rem" }}>
+                {/* STEM is our future. Without STEM, our world would look like{" "}
+                  <Button prePrefix="button-sh" onClick={handlePicture}>
                     {" "}
-                    <strong>Don't worry. Watch Below Video!</strong>{" "}
-                  </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <iframe
-                    className="w-100"
-                    height="400"
-                    src={`https://www.youtube.com/embed/5GWhwUN9iaY`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button bsPrefix="button-sh" onClick={handleClose}>
-                    Close
+                    This{" "}
                   </Button>
-                </Modal.Footer>
-              </Modal>
+                  Back to our point, STEM stands for Science Technology Engineering
+                  Mathematics. We have ideas of how things around us work. Whenever,
+                  we have ideas, we use it. We use those ideas to solve real-world
+                  problems. Click "Yes" button See the examples of where we apply the
+                  ideas in our world! */}
+                STEM is the way of the future. Without STEM, our world would be
+                lacking in innovation and creativity! Many of the technologies
+                you use today and the things you do are possible because of
+                STEM. So what is STEM? STEM stands for Science, Technology,
+                Engineering, Mathematics. These subjects help us to explore and
+                learn about how things around us work. We use what we learn to
+                solve real-world problems. Click the "YES" button below to see
+                examples of how we apply STEM in our world!
+              </p>
+
+              <Carousel>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    src="../stem-fun-fact/1.png"
+                    alt="First slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    src="../stem-fun-fact/2.png"
+                    alt="Second slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    src="../stem-fun-fact/3.png"
+                    alt="Third slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100"
+                    src="../stem-fun-fact/4.png"
+                    alt="Fourth slide"
+                  />
+                </Carousel.Item>
+              </Carousel>
+              {/* <img src="../old-city.jpg" className={} /> */}
+              <h4 className="mb-4 mt-5 text-shblue">
+                {" "}
+                Do You Know What STEM is?
+              </h4>
+              {/* <video
+                muted
+                autoPlay
+                loop
+                src="https://www.youtube.com/watch?v=5GWhwUN9iaY"
+              /> */}
+              <div className="d-flex" style={{ flexDirection: "row" }}>
+                <Col xs={6}>
+                  <Link
+                    to="/student-zone/awesome-stem"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Button bsPrefix="button-sh d-inline mx-5 px-5">
+                      Yes!
+                    </Button>
+                  </Link>
+                </Col>
+                <Col xs={6}>
+                  <Button
+                    bsPrefix="button-sh d-inline mx-5 px-5"
+                    onClick={handleShow}
+                  >
+                    No
+                  </Button>
+                </Col>
+                <Modal
+                  show={show}
+                  onHide={handleClose}
+                  animation={true}
+                  backdrop="static"
+                  size="lg"
+                >
+                  <Modal.Header className="is-shblue">
+                    <Modal.Title className="text-white">
+                      {" "}
+                      <strong>Don't worry. Watch Below Video!</strong>{" "}
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <iframe
+                      className="w-100"
+                      height="400"
+                      src={`https://www.youtube.com/embed/5GWhwUN9iaY`}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button bsPrefix="button-sh" onClick={handleClose}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
             </div>
           </div>
-        </Container>
+        </div>
       </div>
     </div>
   );

@@ -19,6 +19,14 @@ export default function About() {
           className="top-catcher-container text-start"
           // style={{ backgroundImage: "url(../about-video.gif)" }}
         >
+          <div className="d-flex justify-content-center my-4">
+            <h1 className="ms-5 heading-text">
+              {" "}
+              ​​SmartHub offers STEM education to our youngest learners in
+              elementary school.
+            </h1>
+          </div>
+
           <video
             autoPlay={true}
             loop={true}
@@ -26,15 +34,6 @@ export default function About() {
             src="../about-video.mp4"
             className="top-catcher-video"
           />
-
-          <h1
-            className="ms-5"
-            style={{ marginTop: "3rem", fontSize: "3rem", width: "70%" }}
-          >
-            {" "}
-            ​​SmartHub offers STEM education to our youngest learners in
-            elementary school.
-          </h1>
         </section>
 
         <div className="w-100 is-white">
@@ -62,6 +61,18 @@ export default function About() {
                     your child in learning complex STEM materials in a
                     simplified manner.{" "}
                   </p>
+
+                  <div
+                    data-aos="fade-up"
+                    className=" d-flex justify-content-center"
+                  >
+                    <Link to="/meet-the-team">
+                      <Button className="px-4 py-2" bsPrefix="button-sh">
+                        {" "}
+                        Meet Our Team{" "}
+                      </Button>
+                    </Link>
+                  </div>
                 </Col>
                 <Col md={6}>
                   <div
@@ -91,7 +102,7 @@ export default function About() {
               {" "}
               Our Focus{" "}
             </h2>
-            <Row>
+            <Row className="justify-content-center">
               <Col lg={4} md={6}>
                 <Card data-aos="fade-right">
                   <Card.Title> Engaging Content </Card.Title>
@@ -202,7 +213,7 @@ export default function About() {
           </h2>
         </section> */}
 
-        <div className="is-white py-3 d-flex justify-content-center">
+        <div className="badge-sh py-3 d-flex justify-content-center">
           <Link to="/meet-the-team">
             <Button
               style={{ padding: "0 5rem", fontSize: "3rem" }}

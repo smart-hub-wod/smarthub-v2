@@ -116,6 +116,12 @@ p {
   .rep-photo {
     height: 150;
   }
+  #student-page .student-container {
+    width: 85%!important;
+  }
+  #faq .faq-container {
+    width: 85%!important;
+  }
 }
 
 /* @media (min-width: 1200px ) {
@@ -181,7 +187,7 @@ p {
 
 #footer .nav-text {
   font-size: 0.9rem;
-  width: 20rem;
+  width: 100%;
   border-left-width: 0;
   border-right-width: 3px;
   /* max-height: auto; */
@@ -215,6 +221,11 @@ p {
 }
 
 /* FAQ */
+
+#faq .faq-container {
+  width: 65%;
+
+}
 
 #faq .card {
   background-color:transparent;
@@ -252,9 +263,11 @@ p {
   background-attachment: fixed;
   /* background-size: cover; */
   background-size: cover;
-  background-position: center;
+  background-position: top;
   justify-content: flex-start;
+  height: 125vh;
 }
+
 
 /* Teacher Page  */
 
@@ -295,7 +308,24 @@ p {
   font-weight: 600;
   font-size: 1.3rem
 }
+@media (max-width: 830px) {
+  #teacher-page .heading-text {
+    font-size: 1.7rem;
+  }
 
+  .teacher-sub {
+    font-size: 1rem;
+
+  }
+
+  #teacher-page .button-sh {
+    padding: 0.3rem !important;
+    font-size: 1rem!important;
+  }
+  
+
+  
+}
 
 /* Courses */
 .active {
@@ -469,7 +499,7 @@ p {
 
 .slide-top {
 
-  width: 80%;
+  width: 100%;
   
   
   /* width: 100%;
@@ -485,14 +515,10 @@ p {
   }
 } 
 
-.home-laptop {
+.slide-top video {
+  object-fit: cover;
   width: 100%;
   height: 400px;
-  display:flex;
-  justify-content: center;
-  background-repeat: no-repeat;
-  background-image: url("./laptop-bg.png");
-  position: relative;
   
 }
 
@@ -525,6 +551,13 @@ p {
   }
   .mission-res {
     padding: 1rem 9rem 0 9rem;
+  }
+}
+
+@media (max-width: 700px) {
+  
+  .mission-res {
+    padding: 0 1rem;
   }
 }
 
@@ -627,7 +660,6 @@ p {
     width: 50%;
   }
 }
-/* Parent Faq start */
 
 /* About us page begins  */
 
@@ -662,12 +694,18 @@ p {
   z-index: -9999;
 }
 
+#about-us .heading-text {
+  width: 70%;
+  font-size: 3rem;
+
+}
+
 #about-us .card {
   background-color: #0b3f84;
   color: white;
   border: none;
   display: flex;
-  margin: 0 4.5rem;
+  margin: 0 2rem;
 }
 
 #about-us .card-title {
@@ -699,6 +737,34 @@ p {
   margin: 0 5rem !important;
 }
 
+@media (max-width: 1300px) {
+  #about-us .heading-text {
+    font-size: 2.5rem;
+    width: 90%!important;
+  }
+}
+
+@media (max-width: 900px) {
+  #about-us .heading-text {
+    color: #0b3f84;
+    margin: 0;
+    padding-left: 1rem;
+    
+  }
+  .top-catcher-container {
+    height: auto;
+    display: block;
+    
+  }
+  #about-us .top-catcher-video {
+    display: block;
+    position: static;
+    z-index: 0;
+    
+  }
+  
+}
+
 /* Student page starts */
 
 #student-page .background-video {
@@ -714,7 +780,7 @@ p {
   overflow-y: visible;
 }
 
-#student-page .container {
+#student-page .student-container {
   width: 65%;
   padding: 0;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -741,6 +807,19 @@ p {
   
 }
 
+/* #student-page .carousel-control-next-icon {
+  background-color: #ffffff00;
+} */
+
+#stem-carousel .carousel-control-prev-icon {
+  background-color: #0b3f84;
+  
+}
+
+#stem-carousel .carousel-control-next-icon {
+  background-color: #0b3f84;
+}
+
 #stem-carousel .carousel {
   width: 100%;
   height: 100vh;
@@ -749,6 +828,15 @@ p {
 
 h1#student-zone-header {
   animation: student-header-ani 1s ease-in 3s forwards;
+}
+
+@media (max-width: 700px ) {
+  #student-page .student-container {
+    width: 100%!important;
+  }
+  #faq .faq-container {
+    width: 100%!important;
+  }
 }
 
 @keyframes student-header-ani {
@@ -776,15 +864,6 @@ h1#student-zone-header {
 
 .sr-only {
   display: none;  
-}
-
-.carousel-control-prev-icon {
-  background-color: #0b3f84;
-  
-}
-
-.carousel-control-next-icon {
-  background-color: #0b3f84;
 }
 
 .carousel-caption {

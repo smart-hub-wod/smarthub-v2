@@ -156,12 +156,12 @@ export default function ParentFAQ() {
           </div>
         </section>
 
-        <div className="is-white py-5">
-          <Container style={{ maxWidth: "65%" }}>
-            <h1 className="text-shblue text-center mb-5"> Teacher FAQ </h1>
+        <div className="is-white py-5  d-flex justify-content-center">
+          <div className="faq-container">
+            <h1 className="text-shblue text-center mb-5"> Parent FAQ </h1>
             <Accordion defaultActiveKey="0">
               <div className="accordion-container is-shblue">
-                <h1 className="text-white"> Coming Soon! </h1>
+                <h1 className="text-white"> Comming Soon! </h1>
                 {faq.map((content, index) => {
                   return (
                     <Card style={{ backgroundColor: "none" }} className="my-3">
@@ -175,7 +175,7 @@ export default function ParentFAQ() {
                           className="w-100 text-start"
                         >
                           <Arrow90degDown
-                            className="d-inline float-end"
+                            className="d-inline float-end ms-4"
                             color="white"
                             size={20}
                           />
@@ -203,7 +203,7 @@ export default function ParentFAQ() {
                 })}
               </div>
             </Accordion>
-          </Container>
+          </div>
         </div>
       </div>
     </div>

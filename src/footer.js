@@ -33,14 +33,14 @@ export default function Footer() {
         className="is-shblue text-white position-sticky bottom-0 end-0 pt-5"
       >
         <Row className="" style={{ margin: "0 5rem" }}>
-          <Col sm={4}>
+          <Col md={4}>
             <img className="logo" src={logo} alt="logo" />
 
             <h2 className="mt-3"> Site Links: </h2>
             {/* <div className="d-flex justify-content-center"> */}
-            <Row className="mt-3 ms-1">
-              <Col xs={12} sm={4}>
-                {/* <Nav.Link className="nav-text mx-3">
+            {/* <Row className="mt-3 ms-1"> */}
+            {/* <Col className="mt-3 ms-1" md={6}> */}
+            {/* <Nav.Link className="nav-text mx-3">
                   <Link className="link" to="/">
                     <div>Home</div>
                   </Link>
@@ -62,23 +62,28 @@ export default function Footer() {
                     <div>Parent </div>
                   </Link>
                 </Nav.Link> */}
-                <Nav.Link className="nav-text mx-3">
-                  <Link className="link" to="/meet-the-team">
-                    <div> Meet The Team </div>
-                  </Link>
-                </Nav.Link>
-                <Nav.Link className="nav-text mx-3">
-                  <Link className="link" to="/contact-us">
-                    <div>Contact Us</div>
-                  </Link>
-                </Nav.Link>
-                <Nav.Link className="nav-text mx-3">
-                  <Link className="link" to="/terms-and-conditions">
-                    <div>Terms and Conditions</div>
-                  </Link>
-                </Nav.Link>
-              </Col>
-            </Row>
+            <div
+              className="d-flex  mt-3 ms-1"
+              style={{ flexDirection: "column" }}
+            >
+              <Nav.Link className="nav-text mx-3">
+                <Link className="link" to="/meet-the-team">
+                  <div> Meet The Team </div>
+                </Link>
+              </Nav.Link>
+              <Nav.Link className="nav-text mx-3">
+                <Link className="link" to="/contact-us">
+                  <div>Contact Us</div>
+                </Link>
+              </Nav.Link>
+              <Nav.Link className="nav-text mx-3">
+                <Link className="link" to="/terms-and-conditions">
+                  <div>Terms and Conditions</div>
+                </Link>
+              </Nav.Link>
+            </div>
+            {/* </Col> */}
+            {/* </Row> */}
             {/* {currentUser && (
               <>
                 <h2 className="mt-4">Enjoying Smart Hub so far?</h2>
@@ -96,7 +101,7 @@ export default function Footer() {
               </>
             )} */}
           </Col>
-          <Col xs={4} style={{ marginTop: "6.8rem" }}>
+          <Col md={4} style={{ marginTop: "6.8rem" }}>
             <h2 className="text-white"> Follow Us: </h2>
             <div className="d-flex justify-content-start ms-3 mt-3 mb-5">
               <div className=" px-2">
@@ -122,7 +127,7 @@ export default function Footer() {
               <Button className="button-sh mt-3"> Evaluate Smarthub</Button> */}
           </Col>
           {/* https://www.instagram.com/p/CSz1MWtppXR/?utm_source=ig_web_copy_link */}
-          <Col xs={4} style={{ marginTop: "0" }}>
+          <Col md={4} style={{ marginTop: "0" }}>
             <h2 style={{ marginTop: "6.8rem" }}>
               {" "}
               Please Give Us Your Feedback!{" "}
