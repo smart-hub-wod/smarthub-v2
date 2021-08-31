@@ -220,6 +220,7 @@ export default function EditCourse() {
         gradesArr.push(gradeid);
       }
     });
+    console.log(grades);
     setGrades(gradesArr);
   };
 
@@ -347,13 +348,13 @@ export default function EditCourse() {
               <Form.Group id="starttime" className="mb-3 form-floating">
                 <Form.Control type="time" ref={StartTimeRef} className="form-control" placeholder="Start Time" id="InputStartTime" aria-describedby="id" />
                 <Form.Label for="InputStartTime" className="form-label floatingInput">
-                  Start Date
+                  Start Time
                 </Form.Label>
               </Form.Group>
               <Form.Group id="endtime" className="mb-3 form-floating">
                 <Form.Control type="time" ref={EndTimeRef} className="form-control" placeholder="End Time" id="InputEndTime" aria-describedby="id" />
                 <Form.Label for="InputEndTime" className="form-label floatingInput">
-                  End Date
+                  End Time
                 </Form.Label>
               </Form.Group>
               <Form.Group id="zoomlink" className="mb-3 form-floating">
@@ -365,7 +366,7 @@ export default function EditCourse() {
               <p>
                 <strong>Grade Level</strong>
               </p>
-              <Form.Group id="gradelevel" className="mb-3 form-floating" onChange={handleCheck} ref={GradeRef}>
+              <Form.Group id="gradelevel" className="mb-3 form-floating" onClick={handleCheck} ref={GradeRef}>
                 <div className="mb-3">
                   {checkBoxes.map((grade) => {
                     return <Form.Check key={grade} inline label={titleMaker(grade)} name="group1" type="checkbox" id={grade} defaultChecked={course?.grades?.includes(grade)} />;
