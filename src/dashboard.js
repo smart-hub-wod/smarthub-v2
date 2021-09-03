@@ -56,7 +56,8 @@ export default function Dashboard() {
     let finished = title.split("-");
     finished.pop();
     finished.map((word, index) => {
-      finished[index] = word.charAt(0).toUpperCase() + word.slice(1, word.length);
+      finished[index] =
+        word.charAt(0).toUpperCase() + word.slice(1, word.length);
     });
     return finished.join(" ");
   }
@@ -92,7 +93,11 @@ export default function Dashboard() {
             cartTotal: 0,
             promos: [],
           });
-          setDisplayName(currentUser.displayName ? currentUser.displayName : currentUser.email);
+          setDisplayName(
+            currentUser.displayName
+              ? currentUser.displayName
+              : currentUser.email
+          );
           getUser();
           setLoading(false);
         }
@@ -149,14 +154,21 @@ export default function Dashboard() {
               <h6>Welcome!</h6>
               <h1 className="text-shblue">{currentUser.displayName}</h1>
               <p>Tip: Change your display name in settings!</p>
-              <p>Welcome! Here is your dashboard to manage your students! Here you can manage and access each student’s account. </p>
+              <p>
+                Welcome! Here is your dashboard to manage your students! Here
+                you can manage and access each student’s account.{" "}
+              </p>
               <br />
               <div className="row justify-content-between">
                 <div className="col-md-4 col-sm-12">
                   <h3 className="text-shblue">My Students</h3>
                 </div>
                 <div className="col-md-4 col-sm-12">
-                  <Button bsPrefix="button-sh" className="float-end" onClick={handleShow}>
+                  <Button
+                    bsPrefix="button-sh"
+                    className="float-end"
+                    onClick={handleShow}
+                  >
                     Add New Student
                   </Button>
                 </div>
@@ -171,13 +183,16 @@ export default function Dashboard() {
               <Button bsPrefix="button-sh" onClick={viewCourse}>
                 View Course
               </Button>
-              <span className="ml-5"> </span>
+              {/* <span className="ml-5"> </span>
               <Link to="add-profile">
                 <Button bsPrefix="button-sh">Add Profile</Button>
-              </Link>
+              </Link> */}
               <span className="ml-5"> </span>
 
-              <Button bsPrefix="button-sh" href="https://www.notion.so/Adding-a-Course-e3cda0b54b4d49b8bd1dbd56f3a6d18a">
+              <Button
+                bsPrefix="button-sh"
+                href="https://www.notion.so/Adding-a-Course-e3cda0b54b4d49b8bd1dbd56f3a6d18a"
+              >
                 Adding/Editing Course Guide
               </Button>
               <span className="ml-5"> </span>
@@ -192,12 +207,19 @@ export default function Dashboard() {
                   </Link>
                   <br />
                   <br />
-                  <p>To edit courses you have not created, copy the course-id from the listing page and change the edit-course url to have that course-id instead. For example to edit medical-science-wMi0wN visit gosmarthub.com/edit-course/medical-science-wMi0wN</p>
+                  <p>
+                    To edit courses you have not created, copy the course-id
+                    from the listing page and change the edit-course url to have
+                    that course-id instead. For example to edit
+                    medical-science-wMi0wN visit
+                    gosmarthub.com/edit-course/medical-science-wMi0wN
+                  </p>
                 </>
               )}
               <h3 className="text-shblue mt-5">My Courses</h3>
               <p>
-                Click <strong>View Courses</strong> above to render courses below!
+                Click <strong>View Courses</strong> above to render courses
+                below!
               </p>
               {courses &&
                 courses.map((c) => {
@@ -251,9 +273,20 @@ export default function Dashboard() {
           <Modal.Title>Add New Student</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>The student's name entered will be displayed on future certificates and can not be changed after this point.</p>
+          <p>
+            The student's name entered will be displayed on future certificates
+            and can not be changed after this point.
+          </p>
           <Form.Group id="name" className="mb-3 form-floating">
-            <Form.Control type="text" ref={nameRef} className="form-control" placeholder="name" id="InputName" aria-describedby="name" required />
+            <Form.Control
+              type="text"
+              ref={nameRef}
+              className="form-control"
+              placeholder="name"
+              id="InputName"
+              aria-describedby="name"
+              required
+            />
             <Form.Label for="InputName" className="form-label floatingInput">
               New Student Name
             </Form.Label>

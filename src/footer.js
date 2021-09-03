@@ -1,7 +1,8 @@
 import React from "react";
 import { Nav, Container, Row, Col, Button } from "react-bootstrap";
 import {
-  Facebook,
+  Youtube,
+  MusicNote,
   Instagram,
   Linkedin,
   EmojiSmileFill,
@@ -103,20 +104,25 @@ export default function Footer() {
           </Col>
           <Col md={4} style={{ marginTop: "6.8rem" }}>
             <h2 className="text-white"> Follow Us: </h2>
-            <div className="d-flex justify-content-start ms-3 mt-3 mb-5">
-              <div className=" px-2">
+            <div className="d-flex justify-content-start mt-3 mb-5">
+              <div className=" px-2 mx-2">
                 <a href="https://www.facebook.com/">
-                  <Facebook color="white" size={30} />
+                  <Youtube color="white" size={40} />
                 </a>
               </div>
-              <div className="px-2">
-                <a href="https://www.instagram.com/gosmarthub">
-                  <Instagram color="white" size={30} />
+              <div className="px-2 mx-1">
+                <a href="https://www.instagram.com/gosmarthub" target="_blank">
+                  <Instagram color="white" size={40} />
                 </a>
               </div>
-              <div className="px-2">
+              <div className="px-2 mx-1">
                 <a href="https://www.linkedin.com/">
-                  <Linkedin color="white" size={30} />
+                  <Linkedin color="white" size={40} />
+                </a>
+              </div>
+              <div className="px-2 mx-1">
+                <a href="https://www.linkedin.com/">
+                  <MusicNote color="white" size={40} />
                 </a>
               </div>
             </div>
@@ -132,7 +138,15 @@ export default function Footer() {
               {" "}
               Please Give Us Your Feedback!{" "}
             </h2>
-            <Button className="button-sh mt-3"> Evaluate Smarthub</Button>
+            <Button
+              as="a"
+              className="button-sh mt-3"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSee2cAFIDLC1imcwFBu4Ib7WuZqSGjzVhaycXzfnGVk6MmnGQ/viewform?usp=pp_url"
+              target="_blank"
+            >
+              {" "}
+              Evaluate Smarthub
+            </Button>
 
             {/* <InstagramEmbed
                 url="https://instagr.am/p/Zw9o4/"

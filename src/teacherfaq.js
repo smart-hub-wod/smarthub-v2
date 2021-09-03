@@ -66,7 +66,7 @@ export default function ParentFAQ() {
         }}
       >
         <div className="text-center teacher-title py-3">
-          <h1 className="heading-text  text-white mb-5">Welcome, Teachers</h1>
+          <h1 className="heading-text  text-white mb-5">Welcome Teachers</h1>
           <h3>
             {" "}
             SmartHub provides lots of great opportunities for teachers to share,
@@ -158,7 +158,7 @@ export default function ParentFAQ() {
 
         <div className="is-white py-5  d-flex justify-content-center">
           <div className="faq-container">
-            <h1 className="text-shblue text-center mb-5"> Parent FAQ </h1>
+            <h1 className="text-shblue text-center mb-5"> Teacher FAQ </h1>
             <Accordion defaultActiveKey="0">
               <div className="accordion-container is-shblue">
                 <h1 className="text-white"> Comming Soon! </h1>

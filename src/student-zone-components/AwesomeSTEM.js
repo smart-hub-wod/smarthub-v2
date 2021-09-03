@@ -80,16 +80,16 @@ export default function AwesomeSTEM() {
           <video
             className="stem-video"
             controls
-            src="../stem-videos/system-eng.mp4"
+            src="../stem-videos/ai.mp4"
             autoPlay
           />
 
           <Carousel.Caption>
-            <h3> Systematic Engineering </h3>
+            <h3> Altificial Intelligence </h3>
             <p>
               {" "}
-              This type of engineers contruct a system in a way that robots
-              automatically produce all the products we need!
+              Computer can think, move, and be completely like a human. Don't
+              you want to learn more about it?
             </p>
             <div className="" style={{ margin: "" }}>
               <Link to="/courses">

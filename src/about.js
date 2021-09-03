@@ -67,7 +67,7 @@ export default function About() {
                     className=" d-flex justify-content-center"
                   >
                     <Link to="/meet-the-team">
-                      <Button className="px-4 py-2" bsPrefix="button-sh">
+                      <Button className="px-4 py-2 mb-5" bsPrefix="button-sh">
                         {" "}
                         Meet Our Team{" "}
                       </Button>
@@ -213,10 +213,15 @@ export default function About() {
           </h2>
         </section> */}
 
-        <div className="badge-sh py-3 d-flex justify-content-center">
+        <div className="d-flex justify-content-evenly align-items-end is-white">
+          <img className="meet-us-img ms-5" src="../members/nayaab.png" />
+          <img className="meet-us-img me-5" src="../members/aaliyah.png" />
+        </div>
+
+        <div className=" py-3 d-flex justify-content-center is-white">
           <Link to="/meet-the-team">
             <Button
-              style={{ padding: "0 5rem", fontSize: "3rem" }}
+              style={{ padding: "0 15rem", fontSize: "3rem" }}
               bsPrefix="button-sh"
             >
               {" "}

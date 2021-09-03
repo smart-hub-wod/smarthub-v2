@@ -700,6 +700,14 @@ p {
 
 }
 
+.meet-us-img {
+  width: 250px;
+  object-fit: fit;
+  border-radius: 50%;
+  
+
+}
+
 #about-us .card {
   background-color: #0b3f84;
   color: white;
